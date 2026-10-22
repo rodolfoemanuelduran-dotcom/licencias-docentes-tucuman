@@ -1,0 +1,111 @@
+import { describe, expect, it } from 'vitest';
+import { PDFDocument } from 'pdf-lib';
+import { calcularDias } from '../../src/lib/dias';
+import { advertencias, validarDocente, validarLicencia } from '../../src/lib/validacion';
+import { cifrar, derivarClave, descifrar, ITERACIONES, nuevaSal } from '../../src/lib/cripto';
+import { generarPDF } from '../../src/lib/pdf/generarPDF';
+import { inicialApellido, nombreArchivo } from '../../src/lib/archivo';
+import { LICENCIAS, buscarTipo } from '../../src/lib/catalogo';
+import { activarCifrado, bloquear, desbloquear, guardarRegistro, listarRegistros } from '../../src/lib/db';
+import { licenciaNueva, type Licencia } from '../../src/types';
+
+const docente = { apellido: 'Gómez', nombres: 'Juan Pablo', dni: '30123456', domicilio: 'Calle 1', escuela: 'Esc. 1', cargo: 'Maestro' };
+const base = (): Licencia => ({ ...licenciaNueva(docente), tipoId: 'corto-tratamiento', desde: '2026-10-05', hasta: '2026-10-09', dias: 5 });
+
+describe('calcularDias', () => {
+  it('cuenta ambos extremos', () => {
+    expect(calcularDias('2026-10-05', '2026-10-05')).toBe(1);
+    expect(calcularDias('2026-10-05', '2026-10-09')).toBe(5);
+  });
+  it('cruza meses y años bisiestos', () => {
+    expect(calcularDias('2028-02-28', '2028-03-01')).toBe(3);
+    expect(calcularDias('2026-12-30', '2027-01-02')).toBe(4);
+  });
+  it('devuelve null si falta, es inválida o el fin es anterior', () => {
+    expect(calcularDias('', '2026-10-09')).toBeNull();
+    expect(calcularDias('2026-02-30', '2026-03-02')).toBeNull();
+    expect(calcularDias('2026-10-09', '2026-10-05')).toBeNull();
+  });
+});
+
+describe('validación', () => {
+  it('solo apellido, nombre y DNI son obligatorios del docente', () => {
+    expect(Object.keys(validarDocente({ ...docente, domicilio: '', escuela: '', cargo: '' }))).toEqual([]);
+    expect(Object.keys(validarDocente({ ...docente, apellido: '', dni: '12' })).sort()).toEqual(['apellido', 'dni']);
+  });
+  it('exige tipo y fechas', () => {
+    const e = validarLicencia({ ...base(), tipoId: '', desde: '' }, undefined);
+    expect(e.tipoId).toBeTruthy();
+    expect(e.desde).toBeTruthy();
+  });
+  it('advierte documentación faltante y registro no verificado', () => {
+    const tipo = buscarTipo('corto-tratamiento')!;
+    const a = advertencias(base(), tipo);
+    expect(a.some((x) => x.includes('documentación'))).toBe(true);
+    expect(a).toContain('Verificar en Mesa de Entradas antes de presentar.');
+  });
+  it('no advierte documentación en tipos que no la piden', () => {
+    const a = advertencias(base(), buscarTipo('anual-ordinaria')!);
+    expect(a.some((x) => x.includes('documentación'))).toBe(false);
+  });
+});
+
+describe('catálogo', () => {
+  it('todos los registros tienen la forma pedida', () => {
+    for (const l of LICENCIAS) {
+      expect(typeof l.verificado).toBe('boolean');
+      expect(Array.isArray(l.requisitos)).toBe(true);
+      expect(Array.isArray(l.documentacion)).toBe(true);
+      expect(l.fuente).toBeTruthy();
+    }
+    expect(new Set(LICENCIAS.map((l) => l.id)).size).toBe(LICENCIAS.length);
+  });
+});
+
+describe('cifrado', () => {
+  it('usa al menos 600.000 iteraciones', () => expect(ITERACIONES).toBeGreaterThanOrEqual(600_000));
+  it('cifra y descifra; falla con clave incorrecta', async () => {
+    const sal = nuevaSal();
+    const k = await derivarClave('clave-correcta', sal);
+    const sobre = await cifrar(k, { a: 'ñandú', n: 1 });
+    expect(sobre.data).not.toContain('andú');
+    expect(await descifrar(k, sobre)).toEqual({ a: 'ñandú', n: 1 });
+    await expect(descifrar(await derivarClave('otra', sal), sobre)).rejects.toThrow();
+  });
+  it('la base guarda en claro por defecto y cifra al activar la contraseña', async () => {
+    await guardarRegistro('licencia', 'x1', { dni: '111' });
+    expect(await listarRegistros('licencia')).toEqual([{ dni: '111' }]);
+    await activarCifrado('mi-clave-segura');
+    const { bd } = await import('../../src/lib/db');
+    expect(JSON.stringify(await bd.registros.toArray())).not.toContain('111');
+    bloquear();
+    await expect(desbloquear('mala')).rejects.toThrow('Contraseña incorrecta');
+    await desbloquear('mi-clave-segura');
+    expect(await listarRegistros('licencia')).toEqual([{ dni: '111' }]);
+  });
+});
+
+describe('archivo y PDF', () => {
+  it('el nombre empieza con la inicial del apellido', () => {
+    expect(inicialApellido('Ñañez')).toBe('N');
+    expect(inicialApellido('')).toBe('_');
+    expect(nombreArchivo(base()).startsWith('G_Gomez_Juan-Pablo_')).toBe(true);
+  });
+  it('genera un PDF válido con el parte y respeta el orden de los adjuntos', async () => {
+    const png = Uint8Array.from(atob('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='), (c) => c.charCodeAt(0));
+    const sub = await PDFDocument.create();
+    sub.addPage();
+    sub.addPage();
+    const pdfB64 = Buffer.from(await sub.save()).toString('base64');
+    const l = base();
+    l.motivo = 'Motivo con ñ y emoji 😀';
+    l.adjuntos = [
+      { id: '1', nombre: 'foto.png', tipo: 'imagen', mime: 'image/png', datos: Buffer.from(png).toString('base64') },
+      { id: '2', nombre: 'doc.pdf', tipo: 'pdf', mime: 'application/pdf', datos: pdfB64 },
+    ];
+    const bytes = await generarPDF(l);
+    expect(bytes).toBeInstanceOf(Uint8Array);
+    expect(new TextDecoder().decode(bytes.slice(0, 5))).toBe('%PDF-');
+    expect((await PDFDocument.load(bytes)).getPageCount()).toBe(1 + 1 + 2);
+  });
+});

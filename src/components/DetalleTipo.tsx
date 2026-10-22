@@ -1,0 +1,56 @@
+import type { LicenciaCatalogo } from '../types';
+import { AvisoVerificar } from './ui';
+
+const Lista = ({ items, vacio }: { items: string[]; vacio: string }) =>
+  items.length ? (
+    <ul className="list-disc space-y-1 pl-5">
+      {items.map((i) => (
+        <li key={i}>{i}</li>
+      ))}
+    </ul>
+  ) : (
+    <p className="text-slate-600">{vacio}</p>
+  );
+
+export const refTipo = (t: LicenciaCatalogo) => `Art. ${t.articulo}${t.inciso ? ` inc. ${t.inciso}` : ''}`;
+
+export default function DetalleTipo({ tipo }: { tipo: LicenciaCatalogo }) {
+  return (
+    <div className="space-y-4 text-base">
+      {!tipo.verificado && <AvisoVerificar />}
+      <dl className="space-y-3">
+        <div>
+          <dt className="font-bold">Referencia</dt>
+          <dd>{refTipo(tipo)}</dd>
+        </div>
+        <div>
+          <dt className="font-bold">Duración</dt>
+          <dd>{tipo.duracion}</dd>
+        </div>
+        <div>
+          <dt className="font-bold">Goce de haberes</dt>
+          <dd>{tipo.goce}</dd>
+        </div>
+        <div>
+          <dt className="font-bold">Plazo de presentación</dt>
+          <dd>{tipo.plazoPresentacion || 'No consta en la fuente.'}</dd>
+        </div>
+      </dl>
+      <div>
+        <h3 className="font-bold">Requisitos</h3>
+        <Lista items={tipo.requisitos} vacio="La fuente no indica requisitos particulares." />
+      </div>
+      <div>
+        <h3 className="font-bold">Documentación necesaria</h3>
+        <Lista items={tipo.documentacion} vacio="La fuente no indica documentación particular." />
+      </div>
+      {tipo.notas && (
+        <div>
+          <h3 className="font-bold">Notas</h3>
+          <p>{tipo.notas}</p>
+        </div>
+      )}
+      <p className="text-sm text-slate-600">Fuente: {tipo.fuente}</p>
+    </div>
+  );
+}

@@ -1,0 +1,487 @@
+[
+  {
+    "id": "anual-ordinaria",
+    "articulo": "6",
+    "inciso": "",
+    "nombre": "Licencia anual ordinaria",
+    "duracion": "30 días corridos con 6 meses de servicio ininterrumpido en el año; proporcional si no llegó (1 día por cada 20 trabajados)",
+    "goce": "Con goce íntegro",
+    "requisitos": [
+      "Se toma en el receso escolar. Una copia dice enero (escuelas de período común) y julio (período especial); la otra repite “julio” en ambos casos: confirmar el mes que corresponde a tu escuela"
+    ],
+    "documentacion": [],
+    "plazoPresentacion": "Según indique la Dirección",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Dos copias no oficiales coinciden en este punto; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "Es obligatoria. Al cese se cobran las vacaciones no gozadas (art. 7)."
+  },
+  {
+    "id": "corto-tratamiento",
+    "articulo": "10",
+    "inciso": "a",
+    "nombre": "Enfermedad o lesión de corto tratamiento",
+    "duracion": "Hasta 30 días corridos por año",
+    "goce": "Con goce íntegro; luego sin goce",
+    "requisitos": [
+      "Certificado de aptitud psicofísica en el legajo (art. 8)",
+      "Control de Inspección Médica; el alta solo la otorga Inspección Médica (art. 9)"
+    ],
+    "documentacion": [
+      "Certificación que respalde la licencia (Guía de Trámites de Tucumán)"
+    ],
+    "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "Incompatible con otra función pública o privada durante la licencia (art. 9)."
+  },
+  {
+    "id": "largo-tratamiento",
+    "articulo": "10",
+    "inciso": "c",
+    "nombre": "Enfermedad de largo tratamiento",
+    "duracion": "Hasta 365 días; prórroga de hasta 180 días",
+    "goce": "Con goce íntegro; la prórroga al 50 %",
+    "requisitos": [
+      "Criterio del Servicio de Salud Ocupacional",
+      "Los períodos discontinuos se suman si no hay más de dos años entre ellos"
+    ],
+    "documentacion": [
+      "Certificación que respalde la licencia (Guía de Trámites de Tucumán)"
+    ],
+    "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "La concede la Secretaría (art. 57)."
+  },
+  {
+    "id": "accidente-trabajo",
+    "articulo": "10",
+    "inciso": "d",
+    "nombre": "Accidente de trabajo (incluye in itinere)",
+    "duracion": "Según la Ley 24.028; para suplentes y contratados hasta 180 días corridos",
+    "goce": "Con goce íntegro",
+    "requisitos": [
+      "Si ocurre en la vía pública, denunciarlo ante la policía"
+    ],
+    "documentacion": [
+      "Certificación correspondiente (art. 56)"
+    ],
+    "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "Se inicia además el trámite ante la Secretaría de Trabajo."
+  },
+  {
+    "id": "maternidad",
+    "articulo": "19",
+    "inciso": "",
+    "nombre": "Maternidad",
+    "duracion": "180 días corridos para quien gestó el embarazo (Decreto 1.441/5 MEd, 13-8-2020, según comunicado oficial reproducido por la prensa). Si ambos progenitores son docentes, hasta 60 días pueden transferirse al otro",
+    "goce": "Con goce íntegro",
+    "requisitos": [
+      "Comunicar el embarazo con certificado médico"
+    ],
+    "documentacion": [
+      "Certificado médico"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "El texto original de 1996 preveía 90 días (45 antes y 45 después del parto, con +10 días por hijo en nacimientos múltiples y la opción de reducir el descanso previo hasta un mínimo de 30 días). El Decreto 1.441/5 (2020) lo amplió; no pude leer su texto, así que los detalles (nacimiento múltiple, pretérmino, parto previo) deben confirmarse."
+  },
+  {
+    "id": "lactancia",
+    "articulo": "20",
+    "inciso": "",
+    "nombre": "Lactancia",
+    "duracion": "Media hora de descanso en jornadas de más de cuatro horas continuas, hasta 240 días desde el parto",
+    "goce": "Con goce",
+    "requisitos": [
+      "Prescripción médica para extender el plazo"
+    ],
+    "documentacion": [
+      "Prescripción médica"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "Pudo haber sido modificada por el Decreto 1.441/5 (2020). Confirmar."
+  },
+  {
+    "id": "excedencia-maternidad",
+    "articulo": "21",
+    "inciso": "",
+    "nombre": "Excedencia por maternidad",
+    "duracion": "Entre 3 y 6 meses al finalizar la licencia por maternidad",
+    "goce": "Sin goce",
+    "requisitos": [],
+    "documentacion": [],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "Pudo haber sido modificada por el Decreto 1.441/5 (2020). Confirmar."
+  },
+  {
+    "id": "adopcion",
+    "articulo": "22",
+    "inciso": "",
+    "nombre": "Adopción o tenencia con fines de adopción",
+    "duracion": "El texto original preveía 60 días (hijo de hasta 2 años), 30 días (2 a 15 años), 60 si tiene discapacidad y 90 en adopción múltiple. El Decreto 1.441/5 (2020) aumentó los días (más aún si hay discapacidad): confirmar la cantidad vigente",
+    "goce": "Con goce",
+    "requisitos": [
+      "El docente varón soltero y adoptante único tiene el mismo derecho"
+    ],
+    "documentacion": [
+      "Documentación de la adopción o tenencia"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "matrimonio",
+    "articulo": "23",
+    "inciso": "a",
+    "nombre": "Matrimonio",
+    "duracion": "10 días corridos",
+    "goce": "Con goce íntegro",
+    "requisitos": [],
+    "documentacion": [
+      "Constancia de matrimonio"
+    ],
+    "plazoPresentacion": "Solicitud con 5 días de anticipación",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "Personal suplente o contratado: 2 días hábiles (art. 38)."
+  },
+  {
+    "id": "nacimiento-hijo",
+    "articulo": "23",
+    "inciso": "b",
+    "nombre": "Nacimiento de hijo (docente varón u otro progenitor)",
+    "duracion": "El texto original preveía 2 días hábiles corridos; el Decreto 1.441/5 (2020) aumentó en 100 % los días para quienes no gestaron. Confirmar la cantidad vigente",
+    "goce": "Con goce íntegro",
+    "requisitos": [],
+    "documentacion": [
+      "Certificación al reintegrarse"
+    ],
+    "plazoPresentacion": "Al reintegrarse",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": "Personal suplente o contratado: en el texto original, 1 día hábil (art. 38). Cantidad vigente sin confirmar."
+  },
+  {
+    "id": "duelo",
+    "articulo": "23",
+    "inciso": "c",
+    "nombre": "Duelo (fallecimiento de familiar)",
+    "duracion": "5 días corridos (cónyuge, hijos o padres); 2 días (hermanos, suegros o hijos políticos); 1 día (abuelos, nietos o hermanos políticos); +2 días si hay que viajar fuera de la provincia",
+    "goce": "Con goce íntegro",
+    "requisitos": [],
+    "documentacion": [
+      "Documentación del fallecimiento"
+    ],
+    "plazoPresentacion": "Documentación dentro de las 48 horas",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "familiar-enfermo",
+    "articulo": "24",
+    "inciso": "",
+    "nombre": "Atención de familiar a cargo enfermo",
+    "duracion": "Hasta 10 días hábiles por año; prorrogables hasta 30 días hábiles más",
+    "goce": "Con goce los primeros 10 días; la prórroga sin goce",
+    "requisitos": [
+      "Atención personal y directa",
+      "Solo cuenta el grupo familiar declarado y parientes que convivan y dependan del docente"
+    ],
+    "documentacion": [
+      "Certificación de Inspección Médica"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "familiar-discapacitado",
+    "articulo": "25",
+    "inciso": "",
+    "nombre": "Atención de familiar discapacitado (Ley 5.806)",
+    "duracion": "Dentro de la provincia: 90 días corridos y luego hasta 60 sin goce. Fuera de la provincia por derivación médica: 180 días y luego hasta 120 sin goce",
+    "goce": "Con goce en el primer tramo; asignación especial (art. 2 Ley 5.806)",
+    "requisitos": [
+      "Hijo o cónyuge discapacitado",
+      "Tratamiento que requiere atención personal permanente"
+    ],
+    "documentacion": [
+      "Certificación médica del tratamiento"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "donacion-organos",
+    "articulo": "26",
+    "inciso": "",
+    "nombre": "Donación de órganos o piel",
+    "duracion": "De 2 a 180 días corridos según la Junta Médica",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [
+      "Certificación de la autoridad competente"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "examen-final",
+    "articulo": "27",
+    "inciso": "",
+    "nombre": "Examen final (enseñanza superior o universitaria)",
+    "duracion": "3 días hábiles corridos por examen; máximo 12 días hábiles por año",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [
+      "Comprobante del examen"
+    ],
+    "plazoPresentacion": "Solicitud con 5 días de anticipación; comprobante dentro de los 5 días hábiles posteriores",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "mesa-examinadora",
+    "articulo": "28",
+    "inciso": "",
+    "nombre": "Integración de mesas examinadoras o jurados en otros establecimientos",
+    "duracion": "Hasta 10 días por año, si hay superposición horaria",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [
+      "Certificación de la integración de la mesa o jurado"
+    ],
+    "plazoPresentacion": "Solicitud con 5 días de anticipación; certificación dentro de las 48 horas posteriores",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "congreso-pedagogico",
+    "articulo": "29",
+    "inciso": "",
+    "nombre": "Congresos, simposios o cursillos pedagógicos",
+    "duracion": "Hasta 5 días corridos",
+    "goce": "Con goce",
+    "requisitos": [
+      "Informe posterior sobre la actividad"
+    ],
+    "documentacion": [
+      "Informe de la actividad"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "cargo-electivo",
+    "articulo": "30",
+    "inciso": "",
+    "nombre": "Cargo electivo o de representación política",
+    "duracion": "Durante el mandato; reintegro dentro de los 10 días de finalizado",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "gremial",
+    "articulo": "31",
+    "inciso": "",
+    "nombre": "Licencia gremial",
+    "duracion": "Según Ley Nacional 23.551 y Ley Provincial 6.107",
+    "goce": "Según la normativa",
+    "requisitos": [
+      "Docentes titulares que ocupen cargos sindicales"
+    ],
+    "documentacion": [],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "perfeccionamiento",
+    "articulo": "32",
+    "inciso": "",
+    "nombre": "Perfeccionamiento docente",
+    "duracion": "Hasta 360 días corridos continuos cada seis años",
+    "goce": "Con goce",
+    "requisitos": [
+      "Solo titulares",
+      "5 años de antigüedad previos",
+      "Resolución favorable",
+      "Informe al término y permanencia en el cargo por un período igual a la licencia"
+    ],
+    "documentacion": [],
+    "plazoPresentacion": "Solicitud con 10 días de anticipación",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "cargo-mayor-jerarquia",
+    "articulo": "33",
+    "inciso": "",
+    "nombre": "Cargo de mayor jerarquía sin estabilidad",
+    "duracion": "Mientras dure la incompatibilidad",
+    "goce": "Sin goce en el cargo que se deja",
+    "requisitos": [],
+    "documentacion": [],
+    "plazoPresentacion": "Solicitud con 5 días hábiles de anticipación",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "conyuge-mision-oficial",
+    "articulo": "34",
+    "inciso": "",
+    "nombre": "Cónyuge en misión oficial",
+    "duracion": "Misiones de más de 60 días, en el extranjero o a más de 100 km",
+    "goce": "Sin goce",
+    "requisitos": [
+      "No aplica a traslados o cambios de asiento habitual"
+    ],
+    "documentacion": [
+      "Constancia de la misión oficial"
+    ],
+    "plazoPresentacion": "Solicitud con 5 días de anticipación",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "razones-particulares",
+    "articulo": "35",
+    "inciso": "",
+    "nombre": "Razones particulares",
+    "duracion": "Hasta 6 meses por quinquenio, continuos o fraccionados",
+    "goce": "Sin goce",
+    "requisitos": [
+      "Titulares con 2 años de antigüedad",
+      "Debe haber 2 años entre usos en distintos quinquenios",
+      "No se suma a las de los arts. 32 y 33"
+    ],
+    "documentacion": [],
+    "plazoPresentacion": "Solicitud con 5 días de anticipación",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "deportiva",
+    "articulo": "36",
+    "inciso": "",
+    "nombre": "Actividades deportivas no rentadas",
+    "duracion": "Según el Decreto 646/83",
+    "goce": "Según la normativa",
+    "requisitos": [
+      "Solo titulares"
+    ],
+    "documentacion": [],
+    "plazoPresentacion": "Solicitud con 5 días de anticipación",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "franq-meteorologico",
+    "articulo": "51",
+    "inciso": "",
+    "nombre": "Inasistencia justificada: fenómeno meteorológico o fuerza mayor",
+    "duracion": "Según el caso",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "franq-sangre",
+    "articulo": "51",
+    "inciso": "",
+    "nombre": "Inasistencia justificada: donación de sangre",
+    "duracion": "Según el caso (mínimo 90 días entre extracciones)",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [
+      "Constancia de donación"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "franq-prematrimonial",
+    "articulo": "51",
+    "inciso": "",
+    "nombre": "Inasistencia justificada: examen prematrimonial",
+    "duracion": "Una inasistencia",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [
+      "Constancia del examen"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "franq-citacion",
+    "articulo": "51",
+    "inciso": "",
+    "nombre": "Inasistencia justificada: citación de autoridad judicial o administrativa",
+    "duracion": "Según el caso",
+    "goce": "Con goce",
+    "requisitos": [],
+    "documentacion": [
+      "Constancia de la citación"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  },
+  {
+    "id": "franq-particular",
+    "articulo": "51",
+    "inciso": "",
+    "nombre": "Inasistencia justificada: asuntos particulares",
+    "duracion": "Máximo una por mes y cinco por año",
+    "goce": "Con goce",
+    "requisitos": [
+      "A criterio de la superioridad"
+    ],
+    "documentacion": [],
+    "plazoPresentacion": "Con 2 días de anticipación si es previsible",
+    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "verificado": false,
+    "notas": ""
+  }
+]
