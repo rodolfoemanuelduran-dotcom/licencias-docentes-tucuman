@@ -19,6 +19,8 @@ export interface LicenciaCatalogo {
   verificado: boolean;
   notas: string;
   sesop?: GuiaSesop;
+  /** Quién concede la licencia (art. 57). */
+  concede?: string;
 }
 
 export interface Plaza {
@@ -30,19 +32,28 @@ export interface Plaza {
 export const DIAS_SEMANA = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'] as const;
 export type DiaSemana = (typeof DIAS_SEMANA)[number];
 
+export interface Escuela {
+  id: string;
+  nombre: string;
+  cue: string;
+  legajo: string;
+  cargo: string;
+  /** Plazas afectadas en esta escuela (el parte admite hasta 16). */
+  plazas: Plaza[];
+  /** Horas de obligaciones a cumplir por día en esta escuela. */
+  horas: Record<DiaSemana, string>;
+  /** Escuela de mayor antigüedad: ahí se presenta el pedido (art. 54 inc. e). */
+  principal: boolean;
+}
+
 export interface Docente {
   apellido: string;
   nombres: string;
   dni: string;
   domicilio: string;
-  escuela: string;
-  cargo: string;
-  cue: string;
-  legajo: string;
-  /** Plazas afectadas del establecimiento (el parte admite hasta 16). */
-  plazas: Plaza[];
-  /** Horas de obligaciones a cumplir por día. */
-  horas: Record<DiaSemana, string>;
+  escuelas: Escuela[];
+  /** Firma dibujada, PNG en base64 (sin prefijo). Vacío si no hay. */
+  firma: string;
 }
 
 export interface Adjunto {
@@ -68,6 +79,8 @@ export interface Licencia {
   paso: number;
   tipoId: string;
   docente: Docente;
+  /** Escuelas afectadas por esta licencia: se imprime un parte por cada una. */
+  escuelasIds: string[];
   desde: string;
   hasta: string;
   dias: number | null;
@@ -77,39 +90,67 @@ export interface Licencia {
   /** Código de inasistencia del SESOP. */
   codigoSesop: string;
   sesop: SeguimientoSesop;
-  /** Cantidad de originales del parte a imprimir. */
+  /** Cantidad de originales del parte a imprimir (por escuela). */
   copias: number;
 }
 
 export const MAX_PLAZAS = 16;
+export const MAX_ESCUELAS = 5;
 
-export const DOCENTE_VACIO: Docente = {
-  apellido: '',
-  nombres: '',
-  dni: '',
-  domicilio: '',
-  escuela: '',
-  cargo: '',
-  cue: '',
-  legajo: '',
-  plazas: [],
-  horas: { lunes: '', martes: '', miercoles: '', jueves: '', viernes: '' },
-};
+const HORAS_VACIAS: Record<DiaSemana, string> = { lunes: '', martes: '', miercoles: '', jueves: '', viernes: '' };
 
-/** Completa con valores por defecto los datos guardados por versiones anteriores de la app. */
-export function normalizarDocente(d: Partial<Docente> | undefined): Docente {
+export function escuelaNueva(principal = false): Escuela {
+  return { id: crypto.randomUUID(), nombre: '', cue: '', legajo: '', cargo: '', plazas: [], horas: { ...HORAS_VACIAS }, principal };
+}
+
+export const DOCENTE_VACIO: Docente = { apellido: '', nombres: '', dni: '', domicilio: '', escuelas: [], firma: '' };
+
+function normalizarEscuela(e: Partial<Escuela>, i: number): Escuela {
   return {
-    ...DOCENTE_VACIO,
-    ...d,
-    plazas: Array.isArray(d?.plazas) ? d.plazas : [],
-    horas: { ...DOCENTE_VACIO.horas, ...(d?.horas ?? {}) },
+    id: e.id || `escuela-${i + 1}`,
+    nombre: e.nombre ?? '',
+    cue: e.cue ?? '',
+    legajo: e.legajo ?? '',
+    cargo: e.cargo ?? '',
+    plazas: Array.isArray(e.plazas) ? e.plazas : [],
+    horas: { ...HORAS_VACIAS, ...(e.horas ?? {}) },
+    principal: !!e.principal,
   };
 }
 
+type DocenteAnterior = Partial<Docente> & Partial<{ escuela: string; cargo: string; cue: string; legajo: string; plazas: Plaza[]; horas: Record<DiaSemana, string> }>;
+
+/** Completa los datos guardados por versiones anteriores (una sola escuela en campos sueltos). */
+export function normalizarDocente(d: DocenteAnterior | undefined): Docente {
+  let escuelas: Escuela[];
+  if (Array.isArray(d?.escuelas)) escuelas = d.escuelas.map(normalizarEscuela);
+  else if (d && (d.escuela || d.cue || d.legajo || d.cargo || d.plazas?.length)) {
+    escuelas = [normalizarEscuela({ id: 'escuela-1', nombre: d.escuela, cue: d.cue, legajo: d.legajo, cargo: d.cargo, plazas: d.plazas, horas: d.horas, principal: true }, 0)];
+  } else escuelas = [];
+  if (escuelas.length && !escuelas.some((e) => e.principal)) escuelas[0].principal = true;
+  return {
+    apellido: d?.apellido ?? '',
+    nombres: d?.nombres ?? '',
+    dni: d?.dni ?? '',
+    domicilio: d?.domicilio ?? '',
+    escuelas,
+    firma: d?.firma ?? '',
+  };
+}
+
+/** Por defecto, la licencia afecta a la escuela principal (o a la única que haya). */
+export function escuelasPorDefecto(d: Docente): string[] {
+  const p = d.escuelas.find((e) => e.principal) ?? d.escuelas[0];
+  return p ? [p.id] : [];
+}
+
 export function normalizarLicencia(l: Licencia): Licencia {
+  const docente = normalizarDocente(l.docente as DocenteAnterior);
+  const ids = Array.isArray(l.escuelasIds) ? l.escuelasIds.filter((id) => docente.escuelas.some((e) => e.id === id)) : escuelasPorDefecto(docente);
   return {
     ...l,
-    docente: normalizarDocente(l.docente),
+    docente,
+    escuelasIds: ids,
     codigoSesop: l.codigoSesop ?? '',
     sesop: Object.assign({ avisoEscuela: false, concurrioPrimerDia: false, certificadoOk: false }, l.sesop),
     copias: l.copias ?? 1,
@@ -118,6 +159,7 @@ export function normalizarLicencia(l: Licencia): Licencia {
 
 export function licenciaNueva(docente: Docente = DOCENTE_VACIO): Licencia {
   const ahora = new Date().toISOString();
+  const d = normalizarDocente(structuredClone(docente));
   return {
     id: crypto.randomUUID(),
     creadaEn: ahora,
@@ -125,7 +167,8 @@ export function licenciaNueva(docente: Docente = DOCENTE_VACIO): Licencia {
     estado: 'borrador',
     paso: 1,
     tipoId: '',
-    docente: normalizarDocente(structuredClone(docente)),
+    docente: d,
+    escuelasIds: escuelasPorDefecto(d),
     desde: '',
     hasta: '',
     dias: null,
@@ -136,4 +179,9 @@ export function licenciaNueva(docente: Docente = DOCENTE_VACIO): Licencia {
     sesop: { avisoEscuela: false, concurrioPrimerDia: false, certificadoOk: false },
     copias: 1,
   };
+}
+
+/** Escuelas seleccionadas en la licencia, en el orden en que están cargadas. */
+export function escuelasDeLicencia(l: Licencia): Escuela[] {
+  return l.docente.escuelas.filter((e) => l.escuelasIds.includes(e.id));
 }
