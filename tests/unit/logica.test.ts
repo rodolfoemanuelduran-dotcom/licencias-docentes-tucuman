@@ -7,7 +7,7 @@ import { articuloCorto, datosDelParte, generarPDF } from '../../src/lib/pdf/gene
 import { inicialApellido, nombreArchivo } from '../../src/lib/archivo';
 import { LICENCIAS, buscarTipo } from '../../src/lib/catalogo';
 import { activarCifrado, bloquear, desbloquear, guardarRegistro, listarRegistros } from '../../src/lib/db';
-import { licenciaNueva, normalizarDocente, normalizarLicencia, type Licencia } from '../../src/types';
+import { escuelaNueva, escuelasPorDefecto, licenciaNueva, normalizarDocente, normalizarLicencia, type Licencia } from '../../src/types';
 
 const docente = normalizarDocente({ apellido: 'Gómez', nombres: 'Juan Pablo', dni: '30123456', domicilio: 'Calle 1', escuela: 'Esc. 1', cargo: 'Maestro' });
 const base = (): Licencia => ({ ...licenciaNueva(docente), tipoId: 'corto-tratamiento', desde: '2026-10-05', hasta: '2026-10-09', dias: 5 });
@@ -30,7 +30,7 @@ describe('calcularDias', () => {
 
 describe('validación', () => {
   it('solo apellido, nombre y DNI son obligatorios del docente', () => {
-    expect(Object.keys(validarDocente({ ...docente, domicilio: '', escuela: '', cargo: '' }))).toEqual([]);
+    expect(Object.keys(validarDocente({ ...docente, domicilio: '', escuelas: [] }))).toEqual([]);
     expect(Object.keys(validarDocente({ ...docente, apellido: '', dni: '12' })).sort()).toEqual(['apellido', 'dni']);
   });
   it('exige tipo y fechas', () => {
@@ -42,7 +42,8 @@ describe('validación', () => {
     const tipo = buscarTipo('corto-tratamiento')!;
     const a = advertencias(base(), tipo);
     expect(a.some((x) => x.includes('documentación'))).toBe(true);
-    expect(a).toContain('Verificar en Mesa de Entradas antes de presentar.');
+    expect(a).not.toContain('Verificar en Mesa de Entradas antes de presentar.');
+    expect(advertencias(base(), buscarTipo('perfeccionamiento')!)).toContain('Verificar en Mesa de Entradas antes de presentar.');
   });
   it('no advierte documentación en tipos que no la piden', () => {
     const a = advertencias(base(), buscarTipo('anual-ordinaria')!);
@@ -138,13 +139,63 @@ describe('Parte de Licencias y SESOP', () => {
     const n = normalizarLicencia({ ...vieja, docente: { apellido: 'X' } } as unknown as Licencia);
     expect(n.copias).toBe(1);
     expect(n.codigoSesop).toBe('');
-    expect(n.docente.plazas).toEqual([]);
-    expect(n.docente.horas.lunes).toBe('');
+    expect(n.docente.escuelas).toEqual([]);
+    expect(n.escuelasIds).toEqual([]);
   });
   it('la Ley 9254 reemplaza a la 5.806 y está verificada', () => {
     const t = buscarTipo('familiar-discapacitado')!;
     expect(t.articulo).toBe('Ley 9254');
     expect(t.verificado).toBe(true);
     expect(LICENCIAS.filter((l) => l.sesop).length).toBeGreaterThanOrEqual(7);
+  });
+});
+
+describe('Varias escuelas, firma y art. 38', () => {
+  const dosEscuelas = () => {
+    const l = base();
+    const a = { ...escuelaNueva(true), nombre: 'Escuela A', cue: '111', plazas: [{ idPlaza: '1', turno: 'M', cursoDiv: '1A' }] };
+    const b = { ...escuelaNueva(), nombre: 'Escuela B', cue: '222' };
+    l.docente = { ...l.docente, escuelas: [a, b] };
+    l.escuelasIds = [a.id, b.id];
+    return l;
+  };
+  it('arma un parte por escuela y por original, y después los adjuntos', async () => {
+    const l = { ...dosEscuelas(), copias: 2 };
+    expect((await PDFDocument.load(await generarPDF(l))).getPageCount()).toBe(4);
+    const d = datosDelParte(l, l.docente.escuelas[1]);
+    expect(d.establecimiento).toBe('Escuela B');
+    expect(d.cue).toBe('222');
+  });
+  it('sin escuelas elegidas sale un parte con el sector en blanco', async () => {
+    const l = { ...dosEscuelas(), escuelasIds: [] };
+    expect((await PDFDocument.load(await generarPDF(l))).getPageCount()).toBe(1);
+    expect(advertencias(l, buscarTipo('duelo')!).some((a) => a.startsWith('No elegiste'))).toBe(true);
+  });
+  it('convierte la escuela única de versiones anteriores en la lista de escuelas', () => {
+    const d = normalizarDocente({ apellido: 'X', escuela: 'Esc. 5', cue: '9', plazas: [{ idPlaza: '7', turno: 'T', cursoDiv: '' }] } as never);
+    expect(d.escuelas).toHaveLength(1);
+    expect(d.escuelas[0]).toMatchObject({ nombre: 'Esc. 5', cue: '9', principal: true });
+    expect(escuelasPorDefecto(d)).toEqual([d.escuelas[0].id]);
+  });
+  it('inserta la firma dibujada en el parte', async () => {
+    const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+    const l = base();
+    l.docente = { ...l.docente, firma: png };
+    const bytes = await generarPDF(l);
+    expect(new TextDecoder('latin1').decode(bytes)).toContain('/Image');
+    expect(advertencias(l, buscarTipo('duelo')!).some((a) => a.startsWith('Todavía no firmaste'))).toBe(false);
+  });
+  it('art. 38 b: 30 días con goce para suplentes, según el Decreto 500/5-2009', () => {
+    const t = buscarTipo('corto-tratamiento-suplentes')!;
+    expect(`${t.articulo}${t.inciso}`).toBe('38b');
+    expect(t.verificado).toBe(true);
+    expect(t.duracion).toContain('30 días');
+    expect(t.fuente).toContain('500/5');
+    expect(articuloCorto(t.articulo, t.inciso)).toBe('38 b');
+    expect(t.sesop?.codigo).toBe(true);
+  });
+  it('art. 30 (cargo electivo) es sin goce, como dice el texto oficial', () => {
+    expect(buscarTipo('cargo-electivo')!.goce).toMatch(/^Sin goce/);
+    expect(LICENCIAS.filter((l) => l.verificado).length).toBeGreaterThanOrEqual(30);
   });
 });
