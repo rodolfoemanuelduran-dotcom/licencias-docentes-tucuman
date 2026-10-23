@@ -18,7 +18,8 @@ export async function flujoCompleto(page: Page, escritorio: boolean) {
   await page.getByLabel('Buscar licencia').fill('duelo');
   await page.getByRole('button', { name: /Duelo/ }).click();
   await expect(page.getByRole('dialog')).toContainText('5 días corridos');
-  await expect(page.getByRole('dialog')).toContainText('Verificar en Mesa de Entradas antes de presentar');
+  await expect(page.getByRole('dialog')).toContainText('Quién la concede');
+  await expect(page.getByRole('dialog')).not.toContainText('Verificar en Mesa de Entradas');
   await page.getByRole('button', { name: 'Elegir esta licencia' }).click();
 
   // Paso 2
