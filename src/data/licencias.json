@@ -7,32 +7,36 @@
     "duracion": "30 días corridos con 6 meses de servicio ininterrumpido en el año; proporcional si no llegó (1 día por cada 20 trabajados)",
     "goce": "Con goce íntegro",
     "requisitos": [
-      "Se toma en el receso escolar. Una copia dice enero (escuelas de período común) y julio (período especial); la otra repite “julio” en ambos casos: confirmar el mes que corresponde a tu escuela"
+      "Se toma en enero si la escuela es de período común, o en julio si es de período especial",
+      "Proporcional: 1 día por cada 20 días trabajados si no llegaste a 6 meses o trabajaste en forma discontinua"
     ],
     "documentacion": [],
     "plazoPresentacion": "Según indique la Dirección",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "Es obligatoria. Al cese se cobran las vacaciones no gozadas (art. 7)."
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este artículo",
+    "verificado": true,
+    "notas": "Es obligatoria. Si no la tomaste por razones de servicio, maternidad, largo tratamiento o accidente, se toma el mes siguiente o se acumula al año siguiente. Al cese se cobran las vacaciones no gozadas (art. 7).",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "corto-tratamiento",
     "articulo": "10",
     "inciso": "a",
-    "nombre": "Enfermedad o lesión de corto tratamiento",
+    "nombre": "Enfermedad o lesión de corto tratamiento (titulares e interinos)",
     "duracion": "Hasta 30 días corridos por año",
     "goce": "Con goce íntegro; luego sin goce",
     "requisitos": [
+      "Personal titular o interino (el interino la tiene en las mismas condiciones, art. 37). Suplentes y contratados: art. 38 inc. b",
+      "Incluye operaciones menores que impidan trabajar",
       "Certificado de aptitud psicofísica en el legajo (art. 8)",
-      "Control de Inspección Médica; el alta solo la otorga Inspección Médica (art. 9)"
+      "Control de Inspección Médica (SESOP); el alta solo la da Inspección Médica (art. 9)"
     ],
     "documentacion": [
       "Constancia del SESOP, o certificado médico original con código de inasistencia del SESOP"
     ],
     "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "Incompatible con otra función pública o privada durante la licencia (art. 9).",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 10 inc. a, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "Agotados los 30 días, las siguientes se conceden sin goce, elevando la solicitud y los certificados a Mesa de Entradas de la Secretaría. Se otorga en todos tus cargos a la vez y es incompatible con otra función pública o privada (art. 9).",
     "sesop": {
       "codigo": true,
       "pasos": [
@@ -44,27 +48,62 @@
         "Al terminar no hay trámite en el SESOP: volvés a trabajar el primer día hábil después del último día de licencia."
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
-    }
+    },
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+  },
+  {
+    "id": "corto-tratamiento-suplentes",
+    "articulo": "38",
+    "inciso": "b",
+    "nombre": "Enfermedad de corto tratamiento (suplentes y contratados)",
+    "duracion": "Hasta 30 días por año calendario con goce de haberes. Agotados, las inasistencias por enfermedad se justifican pero sin goce",
+    "goce": "Con goce los primeros 30 días del año; después, justificadas sin goce",
+    "requisitos": [
+      "Personal suplente o contratado",
+      "La licencia caduca con el cese de la función (presentación del titular, fin del contrato o sanción), salvo el pago proporcional de vacaciones (art. 39)",
+      "Si usás licencias no previstas o excedés los plazos, cesás automáticamente en el cargo (art. 40)"
+    ],
+    "documentacion": [
+      "Constancia del SESOP, o certificado médico original con código de inasistencia del SESOP"
+    ],
+    "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
+    "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 38 inc. b, sustituido por el Decreto 500/5 (MEd) del 11-3-2009 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
+    "verificado": true,
+    "notas": "En el texto original de 1996 eran 15 días; el Decreto 500/5-2009 los llevó a 30. El largo tratamiento también rige para suplentes y contratados (art. 38 inc. i).",
+    "sesop": {
+      "codigo": true,
+      "pasos": [
+        "Avisá a la escuela dentro de las dos primeras horas del primer día de inasistencia (Decreto 505/14, art. 54).",
+        "El primer día de inasistencia presentate en la unidad operativa del SESOP que corresponde a tu domicilio, con DNI y la última boleta de sueldo.",
+        "Si no podés ir ese día, pedí el código de inasistencia en www.sesop.gov.ar o por teléfono (0800 444 2580 · 0381 421-6009), o pedí visita médica a domicilio. Sin código, la inasistencia se toma como injustificada (Dcto. 1543/1, art. 3 inc. a).",
+        "Si no fuiste el primer día, llevá el certificado del médico tratante: original (no fotocopia), con membrete, lugar y fecha, tu nombre y DNI, diagnóstico, días de reposo, firma, sello y matrícula. Debe ser del centro asistencial más cercano a tu domicilio y llevar su sello (Dcto. 1543/1, art. 3 inc. b).",
+        "Presentá en la escuela el Parte de Licencias con el código y la constancia del SESOP o el certificado, dentro del plazo (art. 54). Muchas escuelas piden varios originales del parte.",
+        "Al terminar no hay trámite en el SESOP: volvés a trabajar el primer día hábil después del último día de licencia."
+      ],
+      "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
+    },
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "largo-tratamiento",
     "articulo": "10",
     "inciso": "c",
     "nombre": "Enfermedad de largo tratamiento",
-    "duracion": "Hasta 365 días; prórroga de hasta 180 días",
+    "duracion": "Hasta 365 días con goce íntegro; prórroga de hasta 180 días con el 50 % de los haberes. Los períodos discontinuos se suman si entre ellos no pasan más de 2 años",
     "goce": "Con goce íntegro; la prórroga al 50 %",
     "requisitos": [
-      "Criterio del Servicio de Salud Ocupacional",
-      "Los períodos discontinuos se suman si no hay más de dos años entre ellos"
+      "Cualquier situación de revista: titular, interino, suplente o contratado (para estos dos últimos, art. 38 inc. i)",
+      "Que el SESOP la considere una afección de larga evolución que impide trabajar",
+      "No hace falta agotar antes los 30 días de corto tratamiento"
     ],
     "documentacion": [
       "Constancia del SESOP, o certificado médico original con código de inasistencia del SESOP",
       "Estudios médicos relacionados (original y copia), si los tenés"
     ],
     "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "La concede la Secretaría (art. 57).",
+    "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 10 inc. c, apartado 1, sustituido por el Decreto 500/5 (MEd) del 11-3-2009 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
+    "verificado": true,
+    "notas": "Para volver a trabajar necesitás el alta del SESOP.",
     "sesop": {
       "codigo": true,
       "pasos": [
@@ -76,7 +115,37 @@
         "No podés volver a trabajar sin el ALTA MÉDICA, que se gestiona personalmente en el SESOP el último día de la licencia. No se da el alta fuera de término."
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
-    }
+    },
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+  },
+  {
+    "id": "enfermedad-critica",
+    "articulo": "10",
+    "inciso": "c ap. 2",
+    "nombre": "Afección crítica o irreversible",
+    "duracion": "Con goce íntegro hasta obtener la jubilación por invalidez, con un máximo de 2 años (contados desde el inicio del largo tratamiento, si lo hubo). Prórroga única de 180 días al 50 % si la demora en la jubilación no es tuya",
+    "goce": "Con goce íntegro",
+    "requisitos": [
+      "Cualquier situación de revista",
+      "El SESOP determina que es una enfermedad crítica o irreversible encuadrada en la jubilación por invalidez, y lo notifica a vos y a la escuela",
+      "Tenés que iniciar de inmediato el trámite de jubilación por invalidez"
+    ],
+    "documentacion": [
+      "Notificación del SESOP"
+    ],
+    "plazoPresentacion": "Desde la notificación del SESOP",
+    "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 10 inc. c, apartado 2, sustituido por el Decreto 500/5 (MEd) del 11-3-2009 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
+    "verificado": true,
+    "notas": "No hace falta agotar antes los plazos de corto tratamiento (apartado 3).",
+    "sesop": {
+      "codigo": false,
+      "pasos": [
+        "El SESOP determina el carácter crítico o irreversible y lo notifica a vos y a la escuela.",
+        "Iniciá enseguida el trámite de jubilación por invalidez."
+      ],
+      "fuente": "Decreto 500/5 (MEd)-2009, art. 1"
+    },
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
   },
   {
     "id": "accidente-trabajo",
@@ -94,8 +163,8 @@
       "Certificado del médico prestador de la ART"
     ],
     "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 10 inc. d, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
     "notas": "Se inicia además el trámite ante la Secretaría de Trabajo.",
     "sesop": {
       "codigo": true,
@@ -108,26 +177,65 @@
         "No podés volver sin el ALTA MÉDICA en el SESOP el último día, con el formulario de alta de la ART. Si el alta es con incapacidad, presentá el dictamen de la Comisión Médica dentro de los 5 días hábiles."
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales; Ley 24.557 (riesgos del trabajo)"
-    }
+    },
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+  },
+  {
+    "id": "accidente-trabajo-suplentes",
+    "articulo": "38",
+    "inciso": "c",
+    "nombre": "Accidente de trabajo (suplentes y contratados)",
+    "duracion": "Hasta 180 días corridos con goce íntegro, sin requisito de antigüedad",
+    "goce": "Con goce íntegro",
+    "requisitos": [
+      "Personal suplente o contratado",
+      "No la afecta la presentación o designación del titular, ni el fin del contrato o del ciclo lectivo"
+    ],
+    "documentacion": [
+      "Formulario de denuncia ante la ART con sello de ingreso (original y copia)",
+      "Denuncia policial si fue in itinere (original y copia)",
+      "Certificado del médico prestador de la ART"
+    ],
+    "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 38 inc. c, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este inciso",
+    "verificado": true,
+    "notas": "",
+    "sesop": {
+      "codigo": true,
+      "pasos": [
+        "Avisá a la escuela dentro de las dos primeras horas del primer día de inasistencia (Decreto 505/14, art. 54).",
+        "El primer día presentate en la unidad operativa del SESOP de tu domicilio con DNI, última boleta de sueldo y el formulario de denuncia de accidente de trabajo o enfermedad profesional con sello de ingreso a la ART (original y copia, con todos los datos completos).",
+        "Si fue en el trayecto entre tu casa y el trabajo (in itinere), sumá la denuncia policial (original y copia) con tus datos, domicilio, lugar de trabajo, lugar y hora del accidente.",
+        "Llevá el certificado del médico tratante prestador de la ART (nombre, DNI, diagnóstico y días de reposo).",
+        "Si no podés ir ese día, pedí el código de inasistencia en www.sesop.gov.ar o por teléfono (0800 444 2580 · 0381 421-6009), o pedí visita médica a domicilio. Sin código, la inasistencia se toma como injustificada (Dcto. 1543/1, art. 3 inc. a).",
+        "No podés volver sin el ALTA MÉDICA en el SESOP el último día, con el formulario de alta de la ART. Si el alta es con incapacidad, presentá el dictamen de la Comisión Médica dentro de los 5 días hábiles."
+      ],
+      "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales; Ley 24.557 (riesgos del trabajo)"
+    },
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
   },
   {
     "id": "maternidad",
     "articulo": "19",
     "inciso": "",
-    "nombre": "Maternidad",
-    "duracion": "180 días corridos para quien gestó el embarazo (Decreto 1.441/5 MEd, 13-8-2020, según comunicado oficial reproducido por la prensa). Si ambos progenitores son docentes, hasta 60 días pueden transferirse al otro",
+    "nombre": "Maternidad (nacimiento de hijo o hija, agente gestante)",
+    "duracion": "180 días corridos con goce íntegro: 30 días antes de la fecha probable de parto (preparto) y 150 después del nacimiento (posparto). Nacimiento múltiple: 10 días más por cada hijo o hija nacido con vida",
     "goce": "Con goce íntegro",
     "requisitos": [
-      "Comunicar el embarazo con certificado médico"
+      "Es obligatoria: no se puede postergar ni interrumpir",
+      "Si el parto se adelanta, los días de preparto no gozados se suman al posparto; si se atrasa, ese período queda justificado con goce",
+      "Si se pierde el embarazo o fallece el recién nacido, cesa y empieza una licencia de 45 días corridos",
+      "Responsabilidad parental compartida: los últimos 60 días pueden pasar al otro responsable parental no gestante, con opción por escrito ante el superior dentro de los 30 días del nacimiento",
+      "Interinas y suplentes: el fin del interinato o la suplencia no corta la licencia y se cobra hasta el final"
     ],
     "documentacion": [
-      "Certificado del especialista con la fecha probable de parto",
-      "Certificado de nacimiento (para el posparto)"
+      "Preparto: certificado del SESOP con la fecha probable de parto",
+      "Posparto: certificado de nacimiento, ante el superior jerárquico"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "El texto original de 1996 preveía 90 días (45 antes y 45 después del parto, con +10 días por hijo en nacimientos múltiples y la opción de reducir el descanso previo hasta un mínimo de 30 días). El Decreto 1.441/5 (2020) lo amplió; no pude leer su texto, así que los detalles (nacimiento múltiple, pretérmino, parto previo) deben confirmarse.",
+    "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 19, modificado por el Decreto 1.441/5 (MEd) del 13-8-2020 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
+    "verificado": true,
+    "notas": "",
     "sesop": {
       "codigo": false,
       "pasos": [
@@ -136,25 +244,26 @@
         "La licencia POSPARTO (empieza el día del nacimiento) se gestiona ante tu superior jerárquico con el certificado de nacimiento."
       ],
       "fuente": "SESOP, “Licencia por maternidad” (sesop.gov.ar, versión archivada de agosto de 2025)"
-    }
+    },
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
   },
   {
     "id": "lactancia",
     "articulo": "20",
     "inciso": "",
     "nombre": "Lactancia",
-    "duracion": "Media hora de descanso en jornadas de más de cuatro horas continuas, hasta 240 días desde el parto",
+    "duracion": "Media hora diaria para amamantar, hasta 240 días desde el parto (más, si una prescripción médica lo indica)",
     "goce": "Con goce",
     "requisitos": [
-      "Prescripción médica para extender el plazo"
+      "Docente por cargo con jornada de más de 4 horas reloj continuas"
     ],
     "documentacion": [
-      "Prescripción médica"
+      "Prescripción médica, solo si necesitás más de 240 días"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "Pudo haber sido modificada por el Decreto 1.441/5 (2020). Confirmar."
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 20, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": ""
   },
   {
     "id": "excedencia-maternidad",
@@ -166,27 +275,30 @@
     "requisitos": [],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "Pudo haber sido modificada por el Decreto 1.441/5 (2020). Confirmar."
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 21, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
   },
   {
     "id": "adopcion",
     "articulo": "22",
     "inciso": "",
-    "nombre": "Adopción o tenencia con fines de adopción",
-    "duracion": "El texto original preveía 60 días (hijo de hasta 2 años), 30 días (2 a 15 años), 60 si tiene discapacidad y 90 en adopción múltiple. El Decreto 1.441/5 (2020) aumentó los días (más aún si hay discapacidad): confirmar la cantidad vigente",
+    "nombre": "Guarda con fines de adopción",
+    "duracion": "60 días corridos desde que se otorga la guarda; 75 si el niño, niña o adolescente tiene discapacidad; 90 en guarda múltiple, más 15 días por cada hijo con discapacidad",
     "goce": "Con goce",
     "requisitos": [
-      "El docente varón soltero y adoptante único tiene el mismo derecho"
+      "Acreditar la guarda con fines de adopción",
+      "Si ambos integrantes de la pareja son docentes de la provincia, uno usa este régimen y al otro le corresponden 30 días corridos"
     ],
     "documentacion": [
-      "Documentación de la adopción o tenencia"
+      "Resolución o constancia de la guarda con fines de adopción"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 22, modificado por el Decreto 1.441/5 (MEd) del 13-8-2020 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
+    "verificado": true,
+    "notas": "Suplentes y contratados: el art. 38 inc. e fija 30 días corridos.",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
   },
   {
     "id": "matrimonio",
@@ -197,28 +309,32 @@
     "goce": "Con goce íntegro",
     "requisitos": [],
     "documentacion": [
-      "Constancia de matrimonio"
+      "Constancia de matrimonio (al reintegrarte)"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "Personal suplente o contratado: 2 días hábiles (art. 38)."
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 23 inc. a, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "Personal suplente o contratado: 2 días hábiles (art. 38).",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "nacimiento-hijo",
     "articulo": "23",
     "inciso": "b",
-    "nombre": "Nacimiento de hijo (docente varón u otro progenitor)",
-    "duracion": "El texto original preveía 2 días hábiles corridos; el Decreto 1.441/5 (2020) aumentó en 100 % los días para quienes no gestaron. Confirmar la cantidad vigente",
+    "nombre": "Nacimiento de hijo o hija (responsable no gestante)",
+    "duracion": "30 días corridos",
     "goce": "Con goce íntegro",
-    "requisitos": [],
-    "documentacion": [
-      "Certificación al reintegrarse"
+    "requisitos": [
+      "Se suman los días que ceda la gestante por responsabilidad parental compartida (art. 19)"
     ],
-    "plazoPresentacion": "Al reintegrarse",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "Personal suplente o contratado: en el texto original, 1 día hábil (art. 38). Cantidad vigente sin confirmar."
+    "documentacion": [
+      "Certificado de nacimiento, ante el superior jerárquico"
+    ],
+    "plazoPresentacion": "Con el certificado de nacimiento",
+    "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 23 inc. b, modificado por el Decreto 1.441/5 (MEd) del 13-8-2020 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
+    "verificado": true,
+    "notas": "Suplentes y contratados: el texto de 1996 (art. 38 inc. h) fija 1 día hábil; confirmá en la escuela si se aplica el régimen nuevo.",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "duelo",
@@ -232,9 +348,10 @@
       "Documentación del fallecimiento"
     ],
     "plazoPresentacion": "Documentación dentro de las 48 horas",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 23 inc. c, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "familiar-enfermo",
@@ -244,15 +361,17 @@
     "duracion": "Hasta 10 días hábiles por año; prorrogables hasta 30 días hábiles más",
     "goce": "Con goce los primeros 10 días; la prórroga sin goce",
     "requisitos": [
-      "Atención personal y directa",
-      "Solo cuenta el grupo familiar declarado y parientes que convivan y dependan del docente"
+      "Certificar ante Inspección Médica (SESOP) la gravedad del enfermo y la necesidad de tu atención personal y directa",
+      "El certificado debe identificar al paciente para establecer el parentesco",
+      "Solo cuenta el grupo familiar declarado: cónyuge y parientes consanguíneos o afines hasta segundo grado que vivan con vos y dependan de tu cuidado",
+      "Pedila solo en los cargos en que sea imprescindible"
     ],
     "documentacion": [
       "Certificación de Inspección Médica"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 24, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
     "notas": "",
     "sesop": {
       "codigo": false,
@@ -334,9 +453,10 @@
       "Certificación de la autoridad competente"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 26, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
   },
   {
     "id": "examen-final",
@@ -350,9 +470,9 @@
       "Comprobante del examen"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación; comprobante dentro de los 5 días hábiles posteriores",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 27, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "Si la mesa se posterga, certificá la nueva fecha; la justificación queda en suspenso. Si no rendís por causa tuya, los días quedan injustificados."
   },
   {
     "id": "mesa-examinadora",
@@ -366,8 +486,8 @@
       "Certificación de la integración de la mesa o jurado"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación; certificación dentro de las 48 horas posteriores",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 28, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
     "notas": ""
   },
   {
@@ -375,7 +495,7 @@
     "articulo": "29",
     "inciso": "",
     "nombre": "Congresos, simposios o cursillos pedagógicos",
-    "duracion": "Hasta 5 días corridos",
+    "duracion": "Hasta 5 días, continuos o no",
     "goce": "Con goce",
     "requisitos": [
       "Informe posterior sobre la actividad"
@@ -383,9 +503,9 @@
     "documentacion": [
       "Informe de la actividad"
     ],
-    "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
+    "plazoPresentacion": "Solicitud con 5 días de antelación; informe sobre la actividad hasta 10 días después",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 29, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
     "notas": ""
   },
   {
@@ -394,13 +514,18 @@
     "inciso": "",
     "nombre": "Cargo electivo o de representación política",
     "duracion": "Durante el mandato; reintegro dentro de los 10 días de finalizado",
-    "goce": "Con goce",
-    "requisitos": [],
+    "goce": "Sin goce de haberes",
+    "requisitos": [
+      "Docente titular",
+      "Adjuntar las constancias que acrediten la causal",
+      "Reintegrarte dentro de los 10 días de terminado el mandato"
+    ],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 30, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "La copia no oficial que usaba antes la app decía “con goce”: el texto oficial dice sin goce.",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
     "id": "gremial",
@@ -412,11 +537,14 @@
     "requisitos": [
       "Docentes titulares que ocupen cargos sindicales"
     ],
-    "documentacion": [],
+    "documentacion": [
+      "Constancias que acrediten la causal"
+    ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 31, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
     "id": "perfeccionamiento",
@@ -427,15 +555,16 @@
     "goce": "Con goce",
     "requisitos": [
       "Solo titulares",
-      "5 años de antigüedad previos",
-      "Resolución favorable",
-      "Informe al término y permanencia en el cargo por un período igual a la licencia"
+      "Resolución favorable de la Secretaría de Estado de Educación",
+      "Informe al terminar",
+      "Quedarte en el cargo el doble del tiempo de la licencia; si no, devolvés los sueldos con intereses"
     ],
     "documentacion": [],
     "plazoPresentacion": "Solicitud con 10 días de anticipación",
     "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": ""
+    "notas": "El texto oficial escaneado no se lee bien en la duración y la antigüedad exigida: confirmalas en la escuela.",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
     "id": "cargo-mayor-jerarquia",
@@ -449,7 +578,8 @@
     "plazoPresentacion": "Solicitud con 5 días hábiles de anticipación",
     "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": ""
+    "notas": "",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
     "id": "conyuge-mision-oficial",
@@ -465,9 +595,10 @@
       "Constancia de la misión oficial"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 34, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
     "id": "razones-particulares",
@@ -483,9 +614,10 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 35, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
     "id": "deportiva",
@@ -499,9 +631,10 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 36, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
     "id": "franq-meteorologico",
@@ -513,9 +646,10 @@
     "requisitos": [],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "franq-sangre",
@@ -529,9 +663,10 @@
       "Constancia de donación"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "franq-prematrimonial",
@@ -545,9 +680,10 @@
       "Constancia del examen"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "franq-citacion",
@@ -561,9 +697,10 @@
       "Constancia de la citación"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
     "id": "franq-particular",
@@ -573,12 +710,13 @@
     "duracion": "Máximo una por mes y cinco por año",
     "goce": "Con goce",
     "requisitos": [
-      "A criterio de la superioridad"
+      "A criterio de la superioridad: razones atendibles y debidamente fundadas"
     ],
     "documentacion": [],
     "plazoPresentacion": "Con 2 días de anticipación si es previsible",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   }
 ]
