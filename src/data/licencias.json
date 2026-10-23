@@ -11,7 +11,7 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Según indique la Dirección",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Dos copias no oficiales coinciden en este punto; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": "Es obligatoria. Al cese se cobran las vacaciones no gozadas (art. 7)."
   },
@@ -27,12 +27,24 @@
       "Control de Inspección Médica; el alta solo la otorga Inspección Médica (art. 9)"
     ],
     "documentacion": [
-      "Certificación que respalde la licencia (Guía de Trámites de Tucumán)"
+      "Constancia del SESOP, o certificado médico original con código de inasistencia del SESOP"
     ],
     "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": "Incompatible con otra función pública o privada durante la licencia (art. 9)."
+    "notas": "Incompatible con otra función pública o privada durante la licencia (art. 9).",
+    "sesop": {
+      "codigo": true,
+      "pasos": [
+        "Avisá a la escuela dentro de las dos primeras horas del primer día de inasistencia (Decreto 505/14, art. 54).",
+        "El primer día de inasistencia presentate en la unidad operativa del SESOP que corresponde a tu domicilio, con DNI y la última boleta de sueldo.",
+        "Si no podés ir ese día, pedí el código de inasistencia en www.sesop.gov.ar o por teléfono (0800 444 2580 · 0381 421-6009), o pedí visita médica a domicilio. Sin código, la inasistencia se toma como injustificada (Dcto. 1543/1, art. 3 inc. a).",
+        "Si no fuiste el primer día, llevá el certificado del médico tratante: original (no fotocopia), con membrete, lugar y fecha, tu nombre y DNI, diagnóstico, días de reposo, firma, sello y matrícula. Debe ser del centro asistencial más cercano a tu domicilio y llevar su sello (Dcto. 1543/1, art. 3 inc. b).",
+        "Presentá en la escuela el Parte de Licencias con el código y la constancia del SESOP o el certificado, dentro del plazo (art. 54). Muchas escuelas piden varios originales del parte.",
+        "Al terminar no hay trámite en el SESOP: volvés a trabajar el primer día hábil después del último día de licencia."
+      ],
+      "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
+    }
   },
   {
     "id": "largo-tratamiento",
@@ -46,12 +58,25 @@
       "Los períodos discontinuos se suman si no hay más de dos años entre ellos"
     ],
     "documentacion": [
-      "Certificación que respalde la licencia (Guía de Trámites de Tucumán)"
+      "Constancia del SESOP, o certificado médico original con código de inasistencia del SESOP",
+      "Estudios médicos relacionados (original y copia), si los tenés"
     ],
     "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": "La concede la Secretaría (art. 57)."
+    "notas": "La concede la Secretaría (art. 57).",
+    "sesop": {
+      "codigo": true,
+      "pasos": [
+        "Avisá a la escuela dentro de las dos primeras horas del primer día de inasistencia (Decreto 505/14, art. 54).",
+        "El primer día de inasistencia presentate en la unidad operativa del SESOP que corresponde a tu domicilio, con DNI y la última boleta de sueldo.",
+        "Si no podés ir ese día, pedí el código de inasistencia en www.sesop.gov.ar o por teléfono (0800 444 2580 · 0381 421-6009), o pedí visita médica a domicilio. Sin código, la inasistencia se toma como injustificada (Dcto. 1543/1, art. 3 inc. a).",
+        "Si no fuiste el primer día, llevá el certificado del médico tratante: original (no fotocopia), con membrete, lugar y fecha, tu nombre y DNI, diagnóstico, días de reposo, firma, sello y matrícula. Debe ser del centro asistencial más cercano a tu domicilio y llevar su sello (Dcto. 1543/1, art. 3 inc. b).",
+        "Presentá en la escuela el Parte de Licencias con el código y la constancia del SESOP o el certificado, dentro del plazo (art. 54). Muchas escuelas piden varios originales del parte.",
+        "No podés volver a trabajar sin el ALTA MÉDICA, que se gestiona personalmente en el SESOP el último día de la licencia. No se da el alta fuera de término."
+      ],
+      "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
+    }
   },
   {
     "id": "accidente-trabajo",
@@ -64,12 +89,26 @@
       "Si ocurre en la vía pública, denunciarlo ante la policía"
     ],
     "documentacion": [
-      "Certificación correspondiente (art. 56)"
+      "Formulario de denuncia ante la ART con sello de ingreso (original y copia)",
+      "Denuncia policial si fue in itinere (original y copia)",
+      "Certificado del médico prestador de la ART"
     ],
     "plazoPresentacion": "Si es imprevisible: dentro de las 24 horas del primer día de inasistencia, con aviso al superior dentro de las dos primeras horas (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": "Se inicia además el trámite ante la Secretaría de Trabajo."
+    "notas": "Se inicia además el trámite ante la Secretaría de Trabajo.",
+    "sesop": {
+      "codigo": true,
+      "pasos": [
+        "Avisá a la escuela dentro de las dos primeras horas del primer día de inasistencia (Decreto 505/14, art. 54).",
+        "El primer día presentate en la unidad operativa del SESOP de tu domicilio con DNI, última boleta de sueldo y el formulario de denuncia de accidente de trabajo o enfermedad profesional con sello de ingreso a la ART (original y copia, con todos los datos completos).",
+        "Si fue en el trayecto entre tu casa y el trabajo (in itinere), sumá la denuncia policial (original y copia) con tus datos, domicilio, lugar de trabajo, lugar y hora del accidente.",
+        "Llevá el certificado del médico tratante prestador de la ART (nombre, DNI, diagnóstico y días de reposo).",
+        "Si no podés ir ese día, pedí el código de inasistencia en www.sesop.gov.ar o por teléfono (0800 444 2580 · 0381 421-6009), o pedí visita médica a domicilio. Sin código, la inasistencia se toma como injustificada (Dcto. 1543/1, art. 3 inc. a).",
+        "No podés volver sin el ALTA MÉDICA en el SESOP el último día, con el formulario de alta de la ART. Si el alta es con incapacidad, presentá el dictamen de la Comisión Médica dentro de los 5 días hábiles."
+      ],
+      "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales; Ley 24.557 (riesgos del trabajo)"
+    }
   },
   {
     "id": "maternidad",
@@ -82,12 +121,22 @@
       "Comunicar el embarazo con certificado médico"
     ],
     "documentacion": [
-      "Certificado médico"
+      "Certificado del especialista con la fecha probable de parto",
+      "Certificado de nacimiento (para el posparto)"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": "El texto original de 1996 preveía 90 días (45 antes y 45 después del parto, con +10 días por hijo en nacimientos múltiples y la opción de reducir el descanso previo hasta un mínimo de 30 días). El Decreto 1.441/5 (2020) lo amplió; no pude leer su texto, así que los detalles (nacimiento múltiple, pretérmino, parto previo) deben confirmarse."
+    "notas": "El texto original de 1996 preveía 90 días (45 antes y 45 después del parto, con +10 días por hijo en nacimientos múltiples y la opción de reducir el descanso previo hasta un mínimo de 30 días). El Decreto 1.441/5 (2020) lo amplió; no pude leer su texto, así que los detalles (nacimiento múltiple, pretérmino, parto previo) deben confirmarse.",
+    "sesop": {
+      "codigo": false,
+      "pasos": [
+        "A las 12 semanas de embarazo gestioná el PRENATAL en el SESOP: ahí queda la fecha probable de parto (FPP).",
+        "Unos 30 días antes de la FPP presentate en la unidad operativa del SESOP de tu domicilio con DNI, última boleta de sueldo y certificado del especialista con la FPP. Te otorgan la licencia PREPARTO. Si estás en reposo absoluto, podés pedir visita a domicilio.",
+        "La licencia POSPARTO (empieza el día del nacimiento) se gestiona ante tu superior jerárquico con el certificado de nacimiento."
+      ],
+      "fuente": "SESOP, “Licencia por maternidad” (sesop.gov.ar, versión archivada de agosto de 2025)"
+    }
   },
   {
     "id": "lactancia",
@@ -103,7 +152,7 @@
       "Prescripción médica"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": "Pudo haber sido modificada por el Decreto 1.441/5 (2020). Confirmar."
   },
@@ -117,7 +166,7 @@
     "requisitos": [],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": "Pudo haber sido modificada por el Decreto 1.441/5 (2020). Confirmar."
   },
@@ -135,7 +184,7 @@
       "Documentación de la adopción o tenencia"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -151,7 +200,7 @@
       "Constancia de matrimonio"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": "Personal suplente o contratado: 2 días hábiles (art. 38)."
   },
@@ -167,7 +216,7 @@
       "Certificación al reintegrarse"
     ],
     "plazoPresentacion": "Al reintegrarse",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": "Personal suplente o contratado: en el texto original, 1 día hábil (art. 38). Cantidad vigente sin confirmar."
   },
@@ -183,7 +232,7 @@
       "Documentación del fallecimiento"
     ],
     "plazoPresentacion": "Documentación dentro de las 48 horas",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -202,28 +251,76 @@
       "Certificación de Inspección Médica"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": ""
+    "notas": "",
+    "sesop": {
+      "codigo": false,
+      "pasos": [
+        "Avisá a la escuela dentro de las dos primeras horas del primer día de inasistencia (Decreto 505/14, art. 54).",
+        "Tenés que certificar ante Inspección Médica (SESOP) la gravedad del familiar y que necesita tu atención personal (Decreto 505/14, art. 24).",
+        "Avisá al SESOP la inasistencia indicando nombre y apellido del familiar, que debe figurar en tu declaración jurada de grupo familiar.",
+        "Presentá en la escuela el Parte de Licencias con el certificado del SESOP que justifica los días."
+      ],
+      "fuente": "Decreto 505/14, art. 24; Guía de Trámites de Tucumán, “Atención de familiar enfermo” (Administración Pública)"
+    }
   },
   {
     "id": "familiar-discapacitado",
-    "articulo": "25",
+    "articulo": "Ley 9254",
     "inciso": "",
-    "nombre": "Atención de familiar discapacitado (Ley 5.806)",
-    "duracion": "Dentro de la provincia: 90 días corridos y luego hasta 60 sin goce. Fuera de la provincia por derivación médica: 180 días y luego hasta 120 sin goce",
-    "goce": "Con goce en el primer tramo; asignación especial (art. 2 Ley 5.806)",
+    "nombre": "Licencia por familiar con discapacidad (Ley 9254)",
+    "duracion": "Tratamiento en la provincia: 90 días corridos por año (continuos o discontinuos) con goce, y hasta 60 más sin goce. Fuera de la provincia por derivación médica: 180 días por año con goce, prorrogables 120 sin goce",
+    "goce": "Con goce en el primer tramo; además, asignación especial anual (50 % de los haberes por 90 días en la provincia; 100 % por 180 días fuera de la provincia)",
     "requisitos": [
-      "Hijo o cónyuge discapacitado",
-      "Tratamiento que requiere atención personal permanente"
+      "Hijos, cónyuge o conviviente, o familiar bajo tutela, curatela o guarda con fines de adopción",
+      "Se pide ante el SESOP (ente de control médico laboral), que autoriza, controla y justifica las inasistencias",
+      "La firma del médico debe estar certificada por Registros y Matrículas del SIPROSA u organismo habilitado"
     ],
     "documentacion": [
-      "Certificación médica del tratamiento"
+      "Certificado de Discapacidad de la Junta de Evaluación de Discapacidad",
+      "Documentación que acredite el vínculo con el familiar",
+      "Historia clínica y pedido de estudios, internación o tratamiento, con profesional firmante y duración aproximada"
     ],
-    "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": ""
+    "plazoPresentacion": "El beneficio rige desde la solicitud ante el SESOP",
+    "fuente": "Ley 9254 (B.O. junio de 2020), texto oficial publicado por el Ministerio de Salud Pública de Tucumán. Derogó la Ley 5.806",
+    "verificado": true,
+    "notas": "El cobro de la asignación especial se tramita en Dirección de Personal (SIME, “Pago Ley 9254”). Si ambos padres son agentes públicos pueden alternarse la licencia.",
+    "sesop": {
+      "codigo": false,
+      "pasos": [
+        "Pedí la licencia ante el SESOP con el Certificado de Discapacidad, la documentación del vínculo y la historia clínica con el pedido de tratamiento.",
+        "Verificá que la firma del médico esté certificada por Registros y Matrículas del SIPROSA.",
+        "Presentá en la escuela el Parte de Licencias con la constancia del SESOP."
+      ],
+      "fuente": "Ley 9254, arts. 3 y 8; SESOP, listado de trámites (sesop.gov.ar)"
+    }
+  },
+  {
+    "id": "permiso-ley-9254",
+    "articulo": "Ley 9254",
+    "inciso": "art. 6",
+    "nombre": "Permiso horario por familiar con discapacidad (Ley 9254)",
+    "duracion": "Hasta 2 horas diarias no acumulables si tu jornada es de 6 horas o más; 1 hora diaria si es de hasta 5 horas. Máximo 180 días por año",
+    "goce": "Con goce",
+    "requisitos": [
+      "Mismos requisitos de acreditación que la licencia de la Ley 9254 (art. 3)"
+    ],
+    "documentacion": [
+      "Certificado de Discapacidad de la Junta de Evaluación de Discapacidad",
+      "Documentación que acredite el vínculo con el familiar"
+    ],
+    "plazoPresentacion": "El beneficio rige desde la solicitud ante el SESOP",
+    "fuente": "Ley 9254, art. 6 (texto oficial publicado por el Ministerio de Salud Pública de Tucumán)",
+    "verificado": true,
+    "notas": "Es independiente de la licencia por tratamiento: se pueden usar las dos.",
+    "sesop": {
+      "codigo": false,
+      "pasos": [
+        "Pedí el permiso ante el SESOP con la misma documentación que la licencia de la Ley 9254."
+      ],
+      "fuente": "Ley 9254, art. 8; SESOP, listado de trámites"
+    }
   },
   {
     "id": "donacion-organos",
@@ -237,7 +334,7 @@
       "Certificación de la autoridad competente"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -253,7 +350,7 @@
       "Comprobante del examen"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación; comprobante dentro de los 5 días hábiles posteriores",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -269,7 +366,7 @@
       "Certificación de la integración de la mesa o jurado"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación; certificación dentro de las 48 horas posteriores",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -287,7 +384,7 @@
       "Informe de la actividad"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -301,7 +398,7 @@
     "requisitos": [],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -317,7 +414,7 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -336,7 +433,7 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Solicitud con 10 días de anticipación",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -350,7 +447,7 @@
     "requisitos": [],
     "documentacion": [],
     "plazoPresentacion": "Solicitud con 5 días hábiles de anticipación",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -368,7 +465,7 @@
       "Constancia de la misión oficial"
     ],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -386,7 +483,7 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -402,7 +499,7 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -416,7 +513,7 @@
     "requisitos": [],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -432,7 +529,7 @@
       "Constancia de donación"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -448,7 +545,7 @@
       "Constancia del examen"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -464,7 +561,7 @@
       "Constancia de la citación"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   },
@@ -480,7 +577,7 @@
     ],
     "documentacion": [],
     "plazoPresentacion": "Con 2 días de anticipación si es previsible",
-    "fuente": "Decreto 505/1 (MEd) del 26-3-1996, BO 12-4-1996, régimen de licencias, justificaciones y franquicias docentes, y modificatorias (Decretos 200/5-1999, 500/5-2009 y 1.441/5-2020). Copias no oficiales; no contrastado con el texto oficial vigente",
+    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": ""
   }
