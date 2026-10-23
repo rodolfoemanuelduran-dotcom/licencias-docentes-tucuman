@@ -33,6 +33,12 @@ export default function DetalleTipo({ tipo }: { tipo: LicenciaCatalogo }) {
           <dt className="font-bold">Goce de haberes</dt>
           <dd>{tipo.goce}</dd>
         </div>
+        {tipo.concede && (
+          <div>
+            <dt className="font-bold">Quién la concede</dt>
+            <dd>{tipo.concede}</dd>
+          </div>
+        )}
         <div>
           <dt className="font-bold">Plazo de presentación</dt>
           <dd>{tipo.plazoPresentacion || 'No consta en la fuente.'}</dd>
