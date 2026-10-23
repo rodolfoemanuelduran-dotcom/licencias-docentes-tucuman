@@ -17,7 +17,7 @@ La app funciona en el navegador, pero conviene instalarla para tenerla como una 
 ### Cómo se usa
 
 1. La primera vez leés y aceptás cómo se guardan los datos. **No hace falta registrarse.**
-2. **Nueva licencia** → seis pasos con guardado automático: tipo, datos, detalles, documentación, revisión y descarga.
+2. **Nueva licencia** → seis pasos con guardado automático: tipo, datos, detalles (con la guía del SESOP en las licencias de salud), documentación, revisión y descarga del **Parte de Licencias**.
 3. **Mis licencias** → descargar de nuevo, duplicar o eliminar.
 4. **Cuenta** → tus datos, contraseña opcional, carpeta “Mis licencias”, copia de seguridad y borrado total.
 
@@ -60,7 +60,7 @@ src/lib/cripto.ts           AES-GCM + PBKDF2
 src/lib/db.ts               Dexie; cifrado opcional, copias de seguridad
 src/lib/archivo.ts          nombre de archivo y carpeta “Mis licencias”
 src/lib/pdf/generarPDF.ts   generarPDF(licencia) → Uint8Array
-src/lib/pdf/plantillaParte.ts  plantilla del parte (lo único a cambiar por el formulario oficial)
+src/lib/pdf/plantillaParte.ts  Parte de Licencias (estructura del formulario de Novedades Salariales)
 src/lib/pdf/adjuntos.ts     adjuntos como páginas siguientes, en orden de carga
 src/screens/               pantallas; nueva/ tiene los seis pasos y la vista previa
 ```
