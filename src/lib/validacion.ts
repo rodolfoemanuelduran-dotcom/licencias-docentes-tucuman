@@ -32,8 +32,16 @@ export function validarLicencia(l: Licencia, tipo: LicenciaCatalogo | undefined)
 export function advertencias(l: Licencia, tipo: LicenciaCatalogo | undefined): string[] {
   const a: string[] = [];
   if (!tipo) return a;
+  if (tipo.sesop?.codigo && !(l.codigoSesop ?? '').trim() && !l.sesop?.concurrioPrimerDia) {
+    a.push(
+      'Falta el código de inasistencia del SESOP. Sin código (y sin haber ido al SESOP el primer día) la inasistencia puede tomarse como injustificada (Dcto. 1543/1, art. 3 inc. a).',
+    );
+  }
   if (tipo.documentacion.length > 0 && l.adjuntos.length === 0) {
     a.push(`Este tipo de licencia pide documentación (${tipo.documentacion.join('; ')}) y todavía no adjuntaste nada.`);
+  }
+  if (!l.docente.cue?.trim() || !l.docente.plazas?.length) {
+    a.push('El parte lleva CUE, número de legajo y plazas. Si no los cargás, quedan en blanco para que los complete la escuela.');
   }
   if (!tipo.verificado) a.push('Verificar en Mesa de Entradas antes de presentar.');
   return a;
