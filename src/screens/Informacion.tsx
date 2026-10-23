@@ -24,10 +24,50 @@ export default function Informacion() {
     <div className="mx-auto max-w-3xl space-y-4">
       <h2 className="text-2xl font-bold">Información</h2>
       <Aviso tipo="alerta">
-        <strong>Sobre las fuentes:</strong> los datos salen del Decreto 505/14 (régimen de licencias docentes) tomado de copias no oficiales, con maternidad, adopción y nacimiento
-        ampliados por el Decreto 1.441/5 del 13-8-2020. La licencia por familiar con discapacidad sale del texto oficial de la Ley 9254 (verificada el 22/10/2026), y los pasos del
-        SESOP, de su web. <strong>El resto todavía no se verificó contra el texto oficial.</strong> Verificá en Mesa de Entradas antes de presentar.
+        <strong>Sobre las fuentes:</strong> los datos salen de los textos oficiales del Decreto 505/14 (MGEyJ) de 1996 y de sus modificatorias 500/5-2009
+        y 1.441/5-2020, y de la Ley 9254, todos del repositorio de leyes y decretos de Tucumán (verificados el 22/10/2026). Dos tipos todavía no se pudieron
+        verificar (están marcados). Los pasos del SESOP salen de su web. Ante cualquier duda, consultá en la escuela o en Mesa de Entradas.
       </Aviso>
+      <details className="tarjeta">
+        <summary className="min-h-[48px] cursor-pointer py-2 text-lg font-bold">¿Cómo se presenta una licencia?</summary>
+        <div className="space-y-3 pt-2 text-base">
+          <p>
+            <strong>Sí: toda licencia o inasistencia se pide por escrito en el formulario reglamentario</strong>, que hoy es el <strong>Parte de Licencias</strong>,
+            y se presenta al superior inmediato (la dirección de tu escuela). Así lo fija el art. 54 del Decreto 505/14.
+          </p>
+          <ul className="list-disc space-y-2 pl-5">
+            <li>
+              <strong>Si es previsible</strong> (matrimonio, examen, congreso, razones particulares…): presentá el parte antes, con la anticipación que pide cada
+              licencia.
+            </li>
+            <li>
+              <strong>Si es imprevisible</strong> (enfermedad, duelo, accidente): avisá a la escuela dentro de las 2 primeras horas y presentá el parte dentro de las
+              24 horas del primer día. El atraso cuenta como inasistencia injustificada, salvo que no sea culpa tuya.
+            </li>
+            <li>
+              <strong>Junto con la documentación</strong> que corresponda (constancia o código del SESOP, certificado, acta, etc.). La dirección no da curso a un parte
+              incompleto y lo envía a Mesa de Entradas dentro de las 24 horas.
+            </li>
+            <li>
+              <strong>Si trabajás en dos o más escuelas</strong>, presentás el pedido en la de mayor antigüedad, que avisa a las demás (art. 54 inc. e). La app arma un
+              parte por escuela, con sus plazas, para que tengas uno para cada dirección.
+            </li>
+            <li>
+              <strong>Quién la concede</strong> (art. 57): la dirección concede la licencia anual, corto tratamiento, matrimonio, nacimiento, duelo y franquicias. El
+              área administrativa de la Secretaría concede largo tratamiento, accidente, maternidad, adopción, excedencia y donación de órganos, según el informe del
+              SESOP. Las extraordinarias también las concede la Secretaría, y no podés usarlas hasta que te notifiquen.
+            </li>
+            <li>
+              Algunos trámites llevan además una nota o un formulario propio (por ejemplo, cargo de mayor jerarquía o cobro de la asignación de la Ley 9254). Están en la
+              Guía de Trámites del SIME.
+            </li>
+          </ul>
+          <p className="text-sm text-slate-600">
+            Fuentes: Decreto 505/14 (MGEyJ), arts. 54 a 57 (texto oficial); ATEP, “Nuevo parte de licencia para presentar en la escuela en caso de inasistencia”
+            (2017).
+          </p>
+        </div>
+      </details>
       <details className="tarjeta">
         <summary className="min-h-[48px] cursor-pointer py-2 text-lg font-bold">Licencias de salud y el SESOP</summary>
         <div className="space-y-3 pt-2 text-base">

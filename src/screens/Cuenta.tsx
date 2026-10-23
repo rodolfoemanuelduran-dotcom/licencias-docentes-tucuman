@@ -13,6 +13,7 @@ import {
 } from '../lib/db';
 import { carpetaElegida, carpetaSoportada, elegirCarpeta } from '../lib/archivo';
 import FormDocente from '../components/FormDocente';
+import FirmaPad from '../components/FirmaPad';
 import { Aviso, Campo, Confirmar, Modal } from '../components/ui';
 
 function Seccion({ titulo, children }: { titulo: string; children: React.ReactNode }) {
@@ -65,8 +66,11 @@ export default function Cuenta({ ctx, onDocente, onBloquear }: { ctx: Contexto; 
 
   const guardarDatos = () =>
     correr(async () => {
-      await guardarRegistro('docente', 'perfil', d);
-      onDocente(d);
+      const perfil = ctx.config.recordarFirma ? d : { ...d, firma: '' };
+      await guardarRegistro('docente', 'perfil', perfil);
+      if (!ctx.config.recordarDatos) await guardarConfig({ recordarDatos: true });
+      await ctx.recargar();
+      onDocente(perfil);
       ok('Datos guardados en este dispositivo.');
     });
 
@@ -138,11 +142,37 @@ export default function Cuenta({ ctx, onDocente, onBloquear }: { ctx: Contexto; 
       {msg && <Aviso>{msg}</Aviso>}
       {error && <Aviso tipo="error">{error}</Aviso>}
 
-      <Seccion titulo="Tus datos">
+      <Seccion titulo="Tus datos y tus escuelas">
         <FormDocente valor={d} onCambio={setD} />
+        <h4 className="text-lg font-bold">Mi firma</h4>
+        <FirmaPad valor={d.firma} onCambio={(firma) => setD({ ...d, firma })} />
         <button className="btn-primario w-full" onClick={guardarDatos} disabled={trabajando}>
           Guardar mis datos
         </button>
+        <label className="flex min-h-[48px] items-start gap-3 text-base">
+          <input
+            type="checkbox"
+            className="mt-1 h-6 w-6 shrink-0"
+            checked={ctx.config.recordarDatos}
+            onChange={(e) => correr(async () => {
+              await guardarConfig({ recordarDatos: e.target.checked });
+              await ctx.recargar();
+            })}
+          />
+          <span>Recordar mis datos y escuelas al crear una licencia nueva.</span>
+        </label>
+        <label className="flex min-h-[48px] items-start gap-3 text-base">
+          <input
+            type="checkbox"
+            className="mt-1 h-6 w-6 shrink-0"
+            checked={ctx.config.recordarFirma}
+            onChange={(e) => correr(async () => {
+              await guardarConfig({ recordarFirma: e.target.checked });
+              await ctx.recargar();
+            })}
+          />
+          <span>Recordar mi firma.</span>
+        </label>
       </Seccion>
 
       <Seccion titulo="Carpeta “Mis licencias”">
