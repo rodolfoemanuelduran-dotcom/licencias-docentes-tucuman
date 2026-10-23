@@ -40,9 +40,13 @@ export function advertencias(l: Licencia, tipo: LicenciaCatalogo | undefined): s
   if (tipo.documentacion.length > 0 && l.adjuntos.length === 0) {
     a.push(`Este tipo de licencia pide documentación (${tipo.documentacion.join('; ')}) y todavía no adjuntaste nada.`);
   }
-  if (!l.docente.cue?.trim() || !l.docente.plazas?.length) {
+  const escuelas = l.docente.escuelas.filter((e) => l.escuelasIds.includes(e.id));
+  if (!escuelas.length) {
+    a.push('No elegiste ninguna escuela: el parte sale con el sector del establecimiento en blanco para que lo complete la dirección.');
+  } else if (escuelas.some((e) => !e.cue.trim() || !e.plazas.length)) {
     a.push('El parte lleva CUE, número de legajo y plazas. Si no los cargás, quedan en blanco para que los complete la escuela.');
   }
+  if (!l.docente.firma) a.push('Todavía no firmaste. Podés firmar en el paso de revisión o a mano después de imprimir.');
   if (!tipo.verificado) a.push('Verificar en Mesa de Entradas antes de presentar.');
   return a;
 }

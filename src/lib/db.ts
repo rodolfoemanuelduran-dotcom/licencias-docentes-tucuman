@@ -22,9 +22,13 @@ export interface Config {
   iteraciones: number;
   verificador: Sobre | null;
   bloqueoMin: number;
+  /** Guardar datos personales y escuelas para precargarlos en la próxima licencia. */
+  recordarDatos: boolean;
+  /** Guardar la firma dibujada para reutilizarla. */
+  recordarFirma: boolean;
 }
 
-const CONFIG_INICIAL: Config = { consentimiento: false, cifrado: false, sal: '', iteraciones: ITERACIONES, verificador: null, bloqueoMin: 5 };
+const CONFIG_INICIAL: Config = { consentimiento: false, cifrado: false, sal: '', iteraciones: ITERACIONES, verificador: null, bloqueoMin: 5, recordarDatos: true, recordarFirma: true };
 
 class BD extends Dexie {
   meta!: Table<Meta, string>;
