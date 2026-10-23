@@ -19,7 +19,7 @@ La app funciona en el navegador, pero conviene instalarla para tenerla como una 
 1. La primera vez leés y aceptás cómo se guardan los datos. **No hace falta registrarse.**
 2. **Nueva licencia** → seis pasos con guardado automático: tipo, datos, detalles (con la guía del SESOP en las licencias de salud), documentación, revisión y descarga del **Parte de Licencias**.
 3. **Mis licencias** → descargar de nuevo, duplicar o eliminar.
-4. **Cuenta** → tus datos, contraseña opcional, carpeta “Mis licencias”, copia de seguridad y borrado total.
+4. **Cuenta** → tus datos, tus escuelas (podés cargar varias), tu firma, contraseña opcional, carpeta “Mis licencias”, copia de seguridad y borrado total.
 
 ### Carpeta “Mis licencias” y nombres de archivo
 
