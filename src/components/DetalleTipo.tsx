@@ -1,5 +1,6 @@
 import type { LicenciaCatalogo } from '../types';
 import { AvisoVerificar } from './ui';
+import GuiaSesop from './GuiaSesop';
 
 const Lista = ({ items, vacio }: { items: string[]; vacio: string }) =>
   items.length ? (
@@ -12,7 +13,8 @@ const Lista = ({ items, vacio }: { items: string[]; vacio: string }) =>
     <p className="text-slate-600">{vacio}</p>
   );
 
-export const refTipo = (t: LicenciaCatalogo) => `Art. ${t.articulo}${t.inciso ? ` inc. ${t.inciso}` : ''}`;
+export const refTipo = (t: LicenciaCatalogo) =>
+  t.articulo.startsWith('Ley') ? `${t.articulo}${t.inciso ? `, ${t.inciso}` : ''}` : `Art. ${t.articulo}${t.inciso ? ` inc. ${t.inciso}` : ''}`;
 
 export default function DetalleTipo({ tipo }: { tipo: LicenciaCatalogo }) {
   return (
@@ -44,6 +46,12 @@ export default function DetalleTipo({ tipo }: { tipo: LicenciaCatalogo }) {
         <h3 className="font-bold">Documentación necesaria</h3>
         <Lista items={tipo.documentacion} vacio="La fuente no indica documentación particular." />
       </div>
+      {tipo.sesop && (
+        <div className="rounded-xl border-2 border-marca-600/30 bg-marca-50 p-3">
+          <h3 className="mb-2 font-bold">Trámite en el SESOP</h3>
+          <GuiaSesop guia={tipo.sesop} contacto={false} />
+        </div>
+      )}
       {tipo.notas && (
         <div>
           <h3 className="font-bold">Notas</h3>
