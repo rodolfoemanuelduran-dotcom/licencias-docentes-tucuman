@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { bloquear, guardarConfig, leerConfig, leerRegistro, type Config } from './lib/db';
-import { DOCENTE_VACIO, type Docente } from './types';
+import { DOCENTE_VACIO, normalizarDocente, type Docente } from './types';
 import { useInactividad, useRuta } from './hooks/hooks';
 import Shell from './components/Shell';
 import Consentimiento from './screens/Consentimiento';
@@ -29,7 +29,7 @@ export default function App() {
     const c = await leerConfig();
     setConfig(c);
     if (!c.cifrado) {
-      setDocente((await leerRegistro<Docente>('docente', 'perfil')) ?? DOCENTE_VACIO);
+      setDocente(normalizarDocente(await leerRegistro<Docente>('docente', 'perfil')));
     }
   }, []);
 
@@ -64,7 +64,7 @@ export default function App() {
       <Desbloqueo
         onListo={async () => {
           setBloqueada(false);
-          setDocente((await leerRegistro<Docente>('docente', 'perfil')) ?? DOCENTE_VACIO);
+          setDocente(normalizarDocente(await leerRegistro<Docente>('docente', 'perfil')));
         }}
       />
     );
