@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { LICENCIAS } from '../lib/catalogo';
 import DetalleTipo, { refTipo } from '../components/DetalleTipo';
 import { Aviso, Insignia } from '../components/ui';
+import { ContactoSesop } from '../components/GuiaSesop';
 
 const sinTildes = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
@@ -23,10 +24,26 @@ export default function Informacion() {
     <div className="mx-auto max-w-3xl space-y-4">
       <h2 className="text-2xl font-bold">Información</h2>
       <Aviso tipo="alerta">
-        <strong>Sobre las fuentes:</strong> los datos salen del Decreto 505/1 del 26-3-1996 (régimen de licencias docentes) y la Ley 5.806, tomados de copias no oficiales, y
-        maternidad, adopción y nacimiento fueron ampliados por el Decreto 1.441/5 del 13-8-2020. <strong>Todavía no se verificaron contra el texto oficial</strong> (último intento:
-        22/10/2026; el portal oficial no estaba disponible). Verificá en Mesa de Entradas antes de presentar.
+        <strong>Sobre las fuentes:</strong> los datos salen del Decreto 505/14 (régimen de licencias docentes) tomado de copias no oficiales, con maternidad, adopción y nacimiento
+        ampliados por el Decreto 1.441/5 del 13-8-2020. La licencia por familiar con discapacidad sale del texto oficial de la Ley 9254 (verificada el 22/10/2026), y los pasos del
+        SESOP, de su web. <strong>El resto todavía no se verificó contra el texto oficial.</strong> Verificá en Mesa de Entradas antes de presentar.
       </Aviso>
+      <details className="tarjeta">
+        <summary className="min-h-[48px] cursor-pointer py-2 text-lg font-bold">Licencias de salud y el SESOP</summary>
+        <div className="space-y-3 pt-2 text-base">
+          <p>
+            El <strong>SESOP</strong> (Servicio de Salud Ocupacional Provincial) es quien justifica las licencias por enfermedad, accidente de trabajo, maternidad, familiar
+            enfermo y familiar con discapacidad. La escuela recibe el <strong>Parte de Licencias</strong> y lo eleva a Novedades Salariales, donde se controla:
+          </p>
+          <ul className="list-disc space-y-1 pl-5">
+            <li>que tenga el código de inasistencia del SESOP (o que hayas ido al SESOP el primer día);</li>
+            <li>que el certificado sea del centro asistencial más cercano a tu domicilio y tenga su sello;</li>
+            <li>que se presente en término (art. 54 del Decreto 505/14).</li>
+          </ul>
+          <p>Si falta algo de eso, la inasistencia puede quedar como injustificada. Cada licencia de salud tiene sus pasos en su ficha.</p>
+          <ContactoSesop />
+        </div>
+      </details>
       <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
         <input className="input" type="search" placeholder="Buscar licencia (ej.: duelo, examen)" aria-label="Buscar licencia" value={q} onChange={(e) => setQ(e.target.value)} />
         <select className="input sm:w-56" aria-label="Filtrar por goce de haberes" value={goce} onChange={(e) => setGoce(e.target.value as typeof goce)}>
@@ -50,7 +67,10 @@ export default function Informacion() {
                 <span className="block text-base font-bold">{l.nombre}</span>
                 <span className="block text-sm text-slate-600">{refTipo(l)}</span>
               </span>
-              {!l.verificado && <Insignia color="ambar">Sin verificar</Insignia>}
+              <span className="flex shrink-0 flex-col items-end gap-1">
+                {l.sesop && <Insignia>SESOP</Insignia>}
+                {l.verificado ? <Insignia color="verde">Verificada</Insignia> : <Insignia color="ambar">Sin verificar</Insignia>}
+              </span>
             </button>
             {abierta === l.id && (
               <div className="border-t border-slate-200 p-4">
