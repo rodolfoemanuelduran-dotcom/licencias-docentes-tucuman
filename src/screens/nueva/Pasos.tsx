@@ -1,5 +1,5 @@
 import { useRef, useState, type DragEvent } from 'react';
-import type { Adjunto, Licencia } from '../../types';
+import { escuelasDeLicencia, type Adjunto, type Docente, type Escuela, type Licencia } from '../../types';
 import { LICENCIAS, buscarTipo } from '../../lib/catalogo';
 import { calcularDias, formatearFecha } from '../../lib/dias';
 import { advertencias, validarLicencia, type Errores } from '../../lib/validacion';
@@ -7,7 +7,8 @@ import { procesarArchivo } from '../../lib/imagen';
 import { compartirLicencia, descargarLicencia, imprimirLicencia, puedeCompartir } from '../../lib/acciones';
 import { nombreArchivo } from '../../lib/archivo';
 import DetalleTipo, { refTipo } from '../../components/DetalleTipo';
-import FormDocente from '../../components/FormDocente';
+import { EscuelasEditor, FormPersonal } from '../../components/FormDocente';
+import FirmaPad from '../../components/FirmaPad';
 import GuiaSesop from '../../components/GuiaSesop';
 import { Aviso, AvisoVerificar, Campo, Insignia, Modal } from '../../components/ui';
 
@@ -73,11 +74,61 @@ export function Paso1({ lic, cambiar, errores, siguiente }: PasoProps & { siguie
   );
 }
 
-export function Paso2({ lic, cambiar, errores }: PasoProps) {
+export function Paso2({ lic, cambiar, errores, recordar, onRecordar }: PasoProps & { recordar: boolean; onRecordar: (v: boolean) => void }) {
+  const [editar, setEditar] = useState(lic.docente.escuelas.length === 0);
+  const escuelas = lic.docente.escuelas;
+  const alternar = (id: string, v: boolean) =>
+    cambiar({ escuelasIds: v ? escuelas.filter((e) => e.id === id || lic.escuelasIds.includes(e.id)).map((e) => e.id) : lic.escuelasIds.filter((x) => x !== id) });
+  const cambiarDocente = (docente: Docente) => {
+    const ids = lic.escuelasIds.filter((id) => docente.escuelas.some((e) => e.id === id));
+    const nuevas = docente.escuelas.filter((e) => !escuelas.some((x) => x.id === e.id)).map((e) => e.id);
+    cambiar({ docente, escuelasIds: [...ids, ...nuevas] });
+  };
+  const principal = escuelas.find((e) => e.principal);
   return (
-    <div className="space-y-3">
-      <p className="text-base text-slate-700">Se completan con los datos que guardaste. Solo apellido, nombre y DNI son obligatorios.</p>
-      <FormDocente valor={lic.docente} onCambio={(docente) => cambiar({ docente })} errores={errores} />
+    <div className="space-y-5">
+      <p className="text-base text-slate-700">Solo apellido, nombre y DNI son obligatorios.</p>
+      <FormPersonal valor={lic.docente} onCambio={cambiarDocente} errores={errores} />
+      <label className="flex min-h-[48px] items-start gap-3 rounded-xl bg-slate-100 p-3 text-base">
+        <input type="checkbox" className="mt-1 h-6 w-6 shrink-0" checked={recordar} onChange={(e) => onRecordar(e.target.checked)} />
+        <span>
+          <strong>Recordar mis datos y mis escuelas</strong> en este dispositivo para la próxima licencia.
+        </span>
+      </label>
+
+      <section className="space-y-3" aria-labelledby="titulo-escuelas">
+        <h3 id="titulo-escuelas" className="text-lg font-bold">
+          ¿En qué escuela es esta licencia?
+        </h3>
+        {escuelas.length > 0 ? (
+          <>
+            {escuelas.map((e, i) => (
+              <label key={e.id} className="flex min-h-[48px] items-start gap-3 rounded-xl border-2 border-slate-200 bg-white p-3 text-base">
+                <input type="checkbox" className="mt-1 h-6 w-6 shrink-0" checked={lic.escuelasIds.includes(e.id)} onChange={(ev) => alternar(e.id, ev.target.checked)} />
+                <span>
+                  <strong>{e.nombre || `Escuela ${i + 1} (sin nombre)`}</strong>
+                  {e.principal && <span className="ml-2 text-sm text-marca-700">mayor antigüedad</span>}
+                  <span className="block text-sm text-slate-600">
+                    {[e.cargo, e.cue && `CUE ${e.cue}`, e.plazas.length ? `${e.plazas.length} plaza(s)` : ''].filter(Boolean).join(' · ') || 'Sin datos del parte'}
+                  </span>
+                </span>
+              </label>
+            ))}
+            {lic.escuelasIds.length > 1 && (
+              <Aviso>
+                Se arma un parte por cada escuela, con sus plazas y horas. Según el art. 54 inc. e, el pedido se presenta en la escuela de mayor antigüedad
+                {principal ? ` (${principal.nombre || 'la marcada'})` : ''}, que avisa a las demás.
+              </Aviso>
+            )}
+          </>
+        ) : (
+          <p className="text-base text-slate-700">Todavía no cargaste escuelas. Podés seguir sin ellas: el parte sale con ese sector en blanco.</p>
+        )}
+        <button type="button" className="btn-sec w-full" aria-expanded={editar} onClick={() => setEditar(!editar)}>
+          {editar ? 'Ocultar mis escuelas' : escuelas.length ? 'Editar mis escuelas' : 'Cargar mis escuelas'}
+        </button>
+        {editar && <EscuelasEditor valor={lic.docente} onCambio={cambiarDocente} />}
+      </section>
     </div>
   );
 }
@@ -99,6 +150,16 @@ export function Paso3({ lic, cambiar, errores }: PasoProps) {
           Total: {lic.dias} {lic.dias === 1 ? 'día' : 'días'} corridos
         </p>
       )}
+      <Campo
+        etiqueta="Código de inasistencia del SESOP"
+        ayuda={
+          tipo?.sesop?.codigo
+            ? 'Se imprime en la casilla “Código” del parte. Si fuiste al SESOP el primer día, no hace falta.'
+            : 'Opcional: completalo solo si el SESOP te dio un código. Se imprime en la casilla “Código” del parte.'
+        }
+      >
+        {(p) => <input {...p} autoComplete="off" value={lic.codigoSesop} onChange={(e) => cambiar({ codigoSesop: e.target.value.toUpperCase() })} />}
+      </Campo>
       {tipo?.sesop && <BloqueSesop lic={lic} cambiar={cambiar} errores={errores} />}
       <Campo etiqueta="Motivo (opcional)" ayuda="No hace falta que escribas diagnósticos. Queda solo en tu dispositivo y no se imprime en el parte.">
         {(p) => <textarea {...p} rows={3} value={lic.motivo} onChange={(e) => cambiar({ motivo: e.target.value })} />}
@@ -126,11 +187,6 @@ function BloqueSesop({ lic, cambiar }: PasoProps) {
       </h3>
       <p className="text-base">Esta licencia la justifica el Servicio de Salud Ocupacional Provincial. Seguí estos pasos:</p>
       <GuiaSesop guia={guia} />
-      {guia.codigo && (
-        <Campo etiqueta="Código de inasistencia del SESOP" ayuda="Se imprime en la casilla “Código” del parte. Si fuiste al SESOP el primer día, no hace falta.">
-          {(p) => <input {...p} autoComplete="off" value={lic.codigoSesop} onChange={(e) => cambiar({ codigoSesop: e.target.value.toUpperCase() })} />}
-        </Campo>
-      )}
       <div className="space-y-1">
         {check('avisoEscuela', 'Avisé a la escuela dentro de las dos primeras horas.')}
         {guia.codigo && check('concurrioPrimerDia', 'Fui al SESOP el primer día (tengo la constancia).')}
@@ -222,16 +278,41 @@ export function Paso4({ lic, cambiar }: PasoProps) {
   );
 }
 
-export function Paso5({ lic, irAPaso }: { lic: Licencia; irAPaso: (n: number) => void }) {
+/** Hacia qué paso lleva cada aviso de la revisión. */
+function destinoAviso(a: string): { paso?: number; texto: string } {
+  if (a.startsWith('Falta el código')) return { paso: 3, texto: 'Cargar el código' };
+  if (a.startsWith('Este tipo de licencia pide')) return { paso: 4, texto: 'Adjuntar' };
+  if (a.startsWith('No elegiste') || a.startsWith('El parte lleva')) return { paso: 2, texto: 'Completar escuelas' };
+  return { texto: '' };
+}
+
+export function Paso5({
+  lic,
+  irAPaso,
+  cambiar,
+  recordarFirma,
+  onRecordarFirma,
+}: {
+  lic: Licencia;
+  irAPaso: (n: number) => void;
+  cambiar: (p: Partial<Licencia>) => void;
+  recordarFirma: boolean;
+  onRecordarFirma: (v: boolean) => void;
+}) {
   const tipo = buscarTipo(lic.tipoId);
   const errores = validarLicencia(lic, tipo);
   const avisos = advertencias(lic, tipo).filter((a) => a !== 'Verificar en Mesa de Entradas antes de presentar.');
+  const escuelas = escuelasDeLicencia(lic);
   const fila = (k: string, v: string) => (
-    <div className="flex flex-col border-b border-slate-100 py-2 sm:flex-row sm:gap-4">
+    <div key={k} className="flex flex-col border-b border-slate-100 py-2 sm:flex-row sm:gap-4">
       <dt className="w-40 shrink-0 text-sm font-semibold text-slate-600">{k}</dt>
       <dd className="text-base">{v || '—'}</dd>
     </div>
   );
+  const horas = (e: Escuela) =>
+    Object.values(e.horas).some(Boolean)
+      ? `Lun ${e.horas.lunes || '—'} · Mar ${e.horas.martes || '—'} · Mié ${e.horas.miercoles || '—'} · Jue ${e.horas.jueves || '—'} · Vie ${e.horas.viernes || '—'}`
+      : '';
   return (
     <div className="space-y-4">
       {Object.keys(errores).length > 0 && (
@@ -242,36 +323,54 @@ export function Paso5({ lic, irAPaso }: { lic: Licencia; irAPaso: (n: number) =>
           </button>
         </Aviso>
       )}
-      {avisos.map((a) => (
-        <Aviso key={a} tipo="alerta">
-          {a}{' '}
-          <button className="font-bold underline" onClick={() => irAPaso(4)}>
-            Adjuntar
-          </button>
-        </Aviso>
-      ))}
+      {avisos.map((a) => {
+        const d = destinoAviso(a);
+        return (
+          <Aviso key={a} tipo="alerta">
+            {a}{' '}
+            {d.paso && (
+              <button className="font-bold underline" onClick={() => irAPaso(d.paso!)}>
+                {d.texto}
+              </button>
+            )}
+          </Aviso>
+        );
+      })}
       {tipo && !tipo.verificado && <AvisoVerificar />}
       <dl className="tarjeta">
         {fila('Licencia', tipo ? `${tipo.nombre} (${refTipo(tipo)})` : '')}
         {fila('Docente', `${lic.docente.apellido}, ${lic.docente.nombres}`)}
         {fila('DNI', lic.docente.dni)}
         {fila('Domicilio', lic.docente.domicilio)}
-        {fila('Escuela', lic.docente.escuela)}
-        {fila('Cargo', lic.docente.cargo)}
-        {fila('CUE / Legajo', [lic.docente.cue, lic.docente.legajo].filter(Boolean).join(' / '))}
-        {fila('Plazas', lic.docente.plazas.map((p) => [p.idPlaza, p.turno, p.cursoDiv].filter(Boolean).join(' · ')).join('; '))}
-        {fila(
-          'Horas por día',
-          Object.values(lic.docente.horas).some(Boolean)
-            ? `Lun ${lic.docente.horas.lunes || '—'} · Mar ${lic.docente.horas.martes || '—'} · Mié ${lic.docente.horas.miercoles || '—'} · Jue ${lic.docente.horas.jueves || '—'} · Vie ${lic.docente.horas.viernes || '—'}`
-            : '',
-        )}
         {fila('Período', lic.desde ? `${formatearFecha(lic.desde)} al ${formatearFecha(lic.hasta)} (${lic.dias ?? '—'} días)` : '')}
-        {tipo?.sesop?.codigo && fila('Código SESOP', lic.codigoSesop || (lic.sesop.concurrioPrimerDia ? 'Fui al SESOP el primer día' : ''))}
+        {fila('Código SESOP', lic.codigoSesop || (lic.sesop.concurrioPrimerDia ? 'Fui al SESOP el primer día' : ''))}
         {fila('Motivo', lic.motivo)}
         {fila('Observaciones', lic.observaciones)}
         {fila('Adjuntos', lic.adjuntos.map((a) => a.nombre).join(', '))}
       </dl>
+      {escuelas.map((e, i) => (
+        <dl key={e.id} className="tarjeta">
+          <p className="pb-1 text-base font-bold">
+            Parte {i + 1}: {e.nombre || 'Escuela sin nombre'}
+          </p>
+          {fila('Cargo', e.cargo)}
+          {fila('CUE / Legajo', [e.cue, e.legajo].filter(Boolean).join(' / '))}
+          {fila('Plazas', e.plazas.map((p) => [p.idPlaza, p.turno, p.cursoDiv].filter(Boolean).join(' · ')).join('; '))}
+          {fila('Horas por día', horas(e))}
+        </dl>
+      ))}
+
+      <section className="tarjeta space-y-3" aria-labelledby="titulo-firma">
+        <h3 id="titulo-firma" className="text-lg font-bold">
+          Tu firma (conformidad del agente)
+        </h3>
+        <p className="text-base text-slate-700">Se imprime en azul sobre la línea “Conformidad del Agente” de cada parte. Si preferís, firmá a mano después de imprimir.</p>
+        <FirmaPad valor={lic.docente.firma} onCambio={(firma) => cambiar({ docente: { ...lic.docente, firma } })} />
+        <label className="flex min-h-[48px] items-start gap-3 text-base">
+          <input type="checkbox" className="mt-1 h-6 w-6 shrink-0" checked={recordarFirma} onChange={(e) => onRecordarFirma(e.target.checked)} />
+          <span>Recordar mi firma en este dispositivo para las próximas licencias.</span>
+        </label>
+      </section>
     </div>
   );
 }

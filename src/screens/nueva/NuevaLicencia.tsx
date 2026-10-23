@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Contexto } from '../../App';
-import { licenciaNueva, normalizarDocente, normalizarLicencia, type Docente, type Licencia } from '../../types';
-import { guardarRegistro, leerRegistro } from '../../lib/db';
+import { DOCENTE_VACIO, licenciaNueva, normalizarDocente, normalizarLicencia, type Docente, type Licencia } from '../../types';
+import { borrarRegistro, guardarConfig, guardarRegistro, leerRegistro } from '../../lib/db';
 import { buscarTipo } from '../../lib/catalogo';
 import { imprimirLicencia } from '../../lib/acciones';
 import { validarDetalles, validarDocente, validarLicencia, type Errores } from '../../lib/validacion';
@@ -30,17 +30,38 @@ export default function NuevaLicencia({ ctx, id, onDocente }: { ctx: Contexto; i
     })();
   }, [id]);
 
+  const cfg = useRef(ctx.config);
+  cfg.current = ctx.config;
+
   const guardar = useCallback(
     async (l: Licencia) => {
       const g = { ...l, actualizadaEn: new Date().toISOString() };
       await guardarRegistro('licencia', g.id, g);
-      if (g.docente.dni.trim() && g.docente.apellido.trim()) {
-        await guardarRegistro('docente', 'perfil', g.docente);
-        onDocente(g.docente);
+      // El perfil (datos personales, escuelas y firma) solo se guarda si el docente eligió recordarlo.
+      if (cfg.current.recordarDatos && g.docente.dni.trim() && g.docente.apellido.trim()) {
+        const perfil = cfg.current.recordarFirma ? g.docente : { ...g.docente, firma: '' };
+        await guardarRegistro('docente', 'perfil', perfil);
+        onDocente(perfil);
       }
     },
     [onDocente],
   );
+
+  const recordarDatos = async (v: boolean) => {
+    await guardarConfig({ recordarDatos: v });
+    if (!v) {
+      await borrarRegistro('perfil');
+      onDocente(DOCENTE_VACIO);
+    }
+    await ctx.recargar();
+    tocado.current = true;
+    if (lic && v) void guardar(lic);
+  };
+  const recordarFirma = async (v: boolean) => {
+    await guardarConfig({ recordarFirma: v });
+    await ctx.recargar();
+    if (lic) void guardar(lic);
+  };
 
   const ultima = useRef<Licencia | null>(null);
   const pendiente = useRef(false);
@@ -140,10 +161,10 @@ export default function NuevaLicencia({ ctx, id, onDocente }: { ctx: Contexto; i
       {aviso && <Aviso>{aviso}</Aviso>}
 
       {paso === 1 && <Paso1 {...props} siguiente={() => setLic((l) => (l ? { ...l, paso: 2 } : l))} />}
-      {paso === 2 && <Paso2 {...props} />}
+      {paso === 2 && <Paso2 {...props} recordar={ctx.config.recordarDatos} onRecordar={recordarDatos} />}
       {paso === 3 && <Paso3 {...props} />}
       {paso === 4 && <Paso4 {...props} />}
-      {paso === 5 && <Paso5 lic={lic} irAPaso={irAPaso} />}
+      {paso === 5 && <Paso5 lic={lic} irAPaso={irAPaso} cambiar={cambiar} recordarFirma={ctx.config.recordarFirma} onRecordarFirma={recordarFirma} />}
       {paso === 6 && <Paso6 lic={lic} cambiar={cambiar} alFinal={() => lic.estado !== 'final' && cambiar({ estado: 'final' })} />}
 
       <div className="flex gap-3 pt-2">
