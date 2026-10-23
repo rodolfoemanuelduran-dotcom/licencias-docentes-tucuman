@@ -3,13 +3,13 @@ import { PDFDocument } from 'pdf-lib';
 import { calcularDias } from '../../src/lib/dias';
 import { advertencias, validarDocente, validarLicencia } from '../../src/lib/validacion';
 import { cifrar, derivarClave, descifrar, ITERACIONES, nuevaSal } from '../../src/lib/cripto';
-import { generarPDF } from '../../src/lib/pdf/generarPDF';
+import { articuloCorto, datosDelParte, generarPDF } from '../../src/lib/pdf/generarPDF';
 import { inicialApellido, nombreArchivo } from '../../src/lib/archivo';
 import { LICENCIAS, buscarTipo } from '../../src/lib/catalogo';
 import { activarCifrado, bloquear, desbloquear, guardarRegistro, listarRegistros } from '../../src/lib/db';
-import { licenciaNueva, type Licencia } from '../../src/types';
+import { licenciaNueva, normalizarDocente, normalizarLicencia, type Licencia } from '../../src/types';
 
-const docente = { apellido: 'Gómez', nombres: 'Juan Pablo', dni: '30123456', domicilio: 'Calle 1', escuela: 'Esc. 1', cargo: 'Maestro' };
+const docente = normalizarDocente({ apellido: 'Gómez', nombres: 'Juan Pablo', dni: '30123456', domicilio: 'Calle 1', escuela: 'Esc. 1', cargo: 'Maestro' });
 const base = (): Licencia => ({ ...licenciaNueva(docente), tipoId: 'corto-tratamiento', desde: '2026-10-05', hasta: '2026-10-09', dias: 5 });
 
 describe('calcularDias', () => {
@@ -107,5 +107,44 @@ describe('archivo y PDF', () => {
     expect(bytes).toBeInstanceOf(Uint8Array);
     expect(new TextDecoder().decode(bytes.slice(0, 5))).toBe('%PDF-');
     expect((await PDFDocument.load(bytes)).getPageCount()).toBe(1 + 1 + 2);
+  });
+});
+
+describe('Parte de Licencias y SESOP', () => {
+  it('imprime la cantidad de originales pedida y los adjuntos una sola vez', async () => {
+    const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+    const l = { ...base(), copias: 3, adjuntos: [{ id: '1', nombre: 'a.png', tipo: 'imagen' as const, mime: 'image/png', datos: png }] };
+    expect((await PDFDocument.load(await generarPDF(l))).getPageCount()).toBe(4);
+  });
+  it('arma la casilla "Art." y los datos del parte', () => {
+    expect(articuloCorto('10', 'a')).toBe('10 a');
+    expect(articuloCorto('Ley 9254', 'art. 6')).toBe('L9254');
+    const d = datosDelParte({ ...base(), codigoSesop: 'X123' });
+    expect(d.codigo).toBe('X123');
+    expect(d.articulo).toBe('10 a');
+    expect(d.inicio).toBe('05/10/2026');
+  });
+  it('avisa si falta el código SESOP, salvo que haya ido el primer día', () => {
+    const tipo = buscarTipo('corto-tratamiento')!;
+    expect(advertencias(base(), tipo).some((a) => a.startsWith('Falta el código'))).toBe(true);
+    const fue = { ...base(), sesop: { avisoEscuela: true, concurrioPrimerDia: true, certificadoOk: false } };
+    expect(advertencias(fue, tipo).some((a) => a.startsWith('Falta el código'))).toBe(false);
+    expect(advertencias(base(), buscarTipo('duelo')!).some((a) => a.startsWith('Falta el código'))).toBe(false);
+  });
+  it('completa los datos guardados por versiones anteriores', () => {
+    const vieja = { ...base() } as Partial<Licencia>;
+    delete vieja.codigoSesop;
+    delete vieja.copias;
+    const n = normalizarLicencia({ ...vieja, docente: { apellido: 'X' } } as unknown as Licencia);
+    expect(n.copias).toBe(1);
+    expect(n.codigoSesop).toBe('');
+    expect(n.docente.plazas).toEqual([]);
+    expect(n.docente.horas.lunes).toBe('');
+  });
+  it('la Ley 9254 reemplaza a la 5.806 y está verificada', () => {
+    const t = buscarTipo('familiar-discapacitado')!;
+    expect(t.articulo).toBe('Ley 9254');
+    expect(t.verificado).toBe(true);
+    expect(LICENCIAS.filter((l) => l.sesop).length).toBeGreaterThanOrEqual(7);
   });
 });
