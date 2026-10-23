@@ -8,6 +8,7 @@ import { compartirLicencia, descargarLicencia, imprimirLicencia, puedeCompartir 
 import { nombreArchivo } from '../../lib/archivo';
 import DetalleTipo, { refTipo } from '../../components/DetalleTipo';
 import FormDocente from '../../components/FormDocente';
+import GuiaSesop from '../../components/GuiaSesop';
 import { Aviso, AvisoVerificar, Campo, Insignia, Modal } from '../../components/ui';
 
 export interface PasoProps {
@@ -98,13 +99,44 @@ export function Paso3({ lic, cambiar, errores }: PasoProps) {
           Total: {lic.dias} {lic.dias === 1 ? 'día' : 'días'} corridos
         </p>
       )}
-      <Campo etiqueta="Motivo (opcional)" ayuda="No hace falta que escribas diagnósticos. Queda solo en tu dispositivo.">
+      {tipo?.sesop && <BloqueSesop lic={lic} cambiar={cambiar} errores={errores} />}
+      <Campo etiqueta="Motivo (opcional)" ayuda="No hace falta que escribas diagnósticos. Queda solo en tu dispositivo y no se imprime en el parte.">
         {(p) => <textarea {...p} rows={3} value={lic.motivo} onChange={(e) => cambiar({ motivo: e.target.value })} />}
       </Campo>
       <Campo etiqueta="Observaciones (opcional)">
         {(p) => <textarea {...p} rows={3} value={lic.observaciones} onChange={(e) => cambiar({ observaciones: e.target.value })} />}
       </Campo>
     </div>
+  );
+}
+
+function BloqueSesop({ lic, cambiar }: PasoProps) {
+  const guia = buscarTipo(lic.tipoId)!.sesop!;
+  const marca = (k: keyof Licencia['sesop'], v: boolean) => cambiar({ sesop: { ...lic.sesop, [k]: v } });
+  const check = (k: keyof Licencia['sesop'], texto: string) => (
+    <label className="flex min-h-[48px] items-start gap-3 text-base">
+      <input type="checkbox" className="mt-1 h-6 w-6 shrink-0" checked={lic.sesop[k]} onChange={(e) => marca(k, e.target.checked)} />
+      <span>{texto}</span>
+    </label>
+  );
+  return (
+    <section className="space-y-3 rounded-2xl border-2 border-marca-600/30 bg-marca-50 p-4" aria-labelledby="titulo-sesop">
+      <h3 id="titulo-sesop" className="text-lg font-bold text-marca-900">
+        Trámite en el SESOP
+      </h3>
+      <p className="text-base">Esta licencia la justifica el Servicio de Salud Ocupacional Provincial. Seguí estos pasos:</p>
+      <GuiaSesop guia={guia} />
+      {guia.codigo && (
+        <Campo etiqueta="Código de inasistencia del SESOP" ayuda="Se imprime en la casilla “Código” del parte. Si fuiste al SESOP el primer día, no hace falta.">
+          {(p) => <input {...p} autoComplete="off" value={lic.codigoSesop} onChange={(e) => cambiar({ codigoSesop: e.target.value.toUpperCase() })} />}
+        </Campo>
+      )}
+      <div className="space-y-1">
+        {check('avisoEscuela', 'Avisé a la escuela dentro de las dos primeras horas.')}
+        {guia.codigo && check('concurrioPrimerDia', 'Fui al SESOP el primer día (tengo la constancia).')}
+        {guia.codigo && check('certificadoOk', 'Mi certificado es original y tiene membrete, fecha, diagnóstico, días de reposo, firma, sello y matrícula.')}
+      </div>
+    </section>
   );
 }
 
@@ -226,7 +258,16 @@ export function Paso5({ lic, irAPaso }: { lic: Licencia; irAPaso: (n: number) =>
         {fila('Domicilio', lic.docente.domicilio)}
         {fila('Escuela', lic.docente.escuela)}
         {fila('Cargo', lic.docente.cargo)}
+        {fila('CUE / Legajo', [lic.docente.cue, lic.docente.legajo].filter(Boolean).join(' / '))}
+        {fila('Plazas', lic.docente.plazas.map((p) => [p.idPlaza, p.turno, p.cursoDiv].filter(Boolean).join(' · ')).join('; '))}
+        {fila(
+          'Horas por día',
+          Object.values(lic.docente.horas).some(Boolean)
+            ? `Lun ${lic.docente.horas.lunes || '—'} · Mar ${lic.docente.horas.martes || '—'} · Mié ${lic.docente.horas.miercoles || '—'} · Jue ${lic.docente.horas.jueves || '—'} · Vie ${lic.docente.horas.viernes || '—'}`
+            : '',
+        )}
         {fila('Período', lic.desde ? `${formatearFecha(lic.desde)} al ${formatearFecha(lic.hasta)} (${lic.dias ?? '—'} días)` : '')}
+        {tipo?.sesop?.codigo && fila('Código SESOP', lic.codigoSesop || (lic.sesop.concurrioPrimerDia ? 'Fui al SESOP el primer día' : ''))}
         {fila('Motivo', lic.motivo)}
         {fila('Observaciones', lic.observaciones)}
         {fila('Adjuntos', lic.adjuntos.map((a) => a.nombre).join(', '))}
@@ -235,7 +276,7 @@ export function Paso5({ lic, irAPaso }: { lic: Licencia; irAPaso: (n: number) =>
   );
 }
 
-export function Paso6({ lic, alFinal }: { lic: Licencia; alFinal: () => void }) {
+export function Paso6({ lic, alFinal, cambiar }: { lic: Licencia; alFinal: () => void; cambiar: (p: Partial<Licencia>) => void }) {
   const [msg, setMsg] = useState('');
   const [error, setError] = useState('');
   const [trabajando, setTrabajando] = useState(false);
@@ -258,6 +299,15 @@ export function Paso6({ lic, alFinal }: { lic: Licencia; alFinal: () => void }) 
       <Aviso>
         Tu parte está listo. Se llamará <strong className="break-all">{nombreArchivo(lic)}</strong>
       </Aviso>
+      <Campo etiqueta="Originales del parte" ayuda="Muchas escuelas piden más de un original. Los adjuntos van una sola vez, al final.">
+        {(p) => (
+          <select {...p} value={lic.copias} onChange={(e) => cambiar({ copias: Number(e.target.value) })}>
+            <option value={1}>1 original</option>
+            <option value={2}>2 originales</option>
+            <option value={3}>3 originales</option>
+          </select>
+        )}
+      </Campo>
       {msg && <Aviso>{msg}</Aviso>}
       {error && <Aviso tipo="error">{error}</Aviso>}
       <div className="grid gap-3">

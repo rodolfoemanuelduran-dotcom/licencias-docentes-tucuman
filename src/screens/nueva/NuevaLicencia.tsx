@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Contexto } from '../../App';
-import { DOCENTE_VACIO, licenciaNueva, type Docente, type Licencia } from '../../types';
+import { licenciaNueva, normalizarDocente, normalizarLicencia, type Docente, type Licencia } from '../../types';
 import { guardarRegistro, leerRegistro } from '../../lib/db';
 import { buscarTipo } from '../../lib/catalogo';
 import { imprimirLicencia } from '../../lib/acciones';
@@ -22,9 +22,9 @@ export default function NuevaLicencia({ ctx, id, onDocente }: { ctx: Contexto; i
   useEffect(() => {
     (async () => {
       const guardada = id ? await leerRegistro<Licencia>('licencia', id) : undefined;
-      if (guardada) setLic(guardada);
+      if (guardada) setLic(normalizarLicencia(guardada));
       else {
-        const perfil = (await leerRegistro<Docente>('docente', 'perfil')) ?? DOCENTE_VACIO;
+        const perfil = normalizarDocente(await leerRegistro<Docente>('docente', 'perfil'));
         setLic({ ...licenciaNueva(perfil), ...(id ? { id } : {}) });
       }
     })();
@@ -144,7 +144,7 @@ export default function NuevaLicencia({ ctx, id, onDocente }: { ctx: Contexto; i
       {paso === 3 && <Paso3 {...props} />}
       {paso === 4 && <Paso4 {...props} />}
       {paso === 5 && <Paso5 lic={lic} irAPaso={irAPaso} />}
-      {paso === 6 && <Paso6 lic={lic} alFinal={() => lic.estado !== 'final' && cambiar({ estado: 'final' })} />}
+      {paso === 6 && <Paso6 lic={lic} cambiar={cambiar} alFinal={() => lic.estado !== 'final' && cambiar({ estado: 'final' })} />}
 
       <div className="flex gap-3 pt-2">
         {paso > 1 && (
