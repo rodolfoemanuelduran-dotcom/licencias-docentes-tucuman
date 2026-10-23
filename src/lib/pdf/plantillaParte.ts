@@ -20,6 +20,8 @@ export interface DatosParte {
   articulo: string;
   horas: Record<DiaSemana, string>;
   tipo: string;
+  /** Firma del agente: PNG en base64 (sin prefijo) o vacío. */
+  firma: string;
 }
 
 const LEYENDA = 'Documento generado por herramienta independiente. Verificar con el formulario oficial.';
@@ -29,6 +31,8 @@ const ANCHO = A4[0] - M * 2;
 const NEGRO = rgb(0, 0, 0);
 const GRIS = rgb(0.35, 0.35, 0.35);
 const BANDA = rgb(0.85, 0.85, 0.85);
+/** Color de los datos que completa el docente, como si se escribieran con birome azul. */
+export const AZUL = rgb(0.07, 0.2, 0.62);
 
 /** Las fuentes estándar solo admiten Latin-1: se reemplaza lo demás para no romper la generación. */
 export function aLatin1(s: string): string {
@@ -39,6 +43,8 @@ interface Lienzo {
   page: PDFPage;
   font: PDFFont;
   bold: PDFFont;
+  /** Letra distinta para los datos cargados por el docente. */
+  dato: PDFFont;
 }
 
 /** Coordenadas desde arriba a la izquierda, como se lee el formulario. */
@@ -53,12 +59,12 @@ function texto(c: Lienzo, s: string, x: number, y: number, size = 7.5, negrita =
 /** Escribe `s` dentro de una caja, achicando la letra si no entra. */
 function valor(c: Lienzo, s: string, x: number, y: number, w: number, h: number) {
   if (!s) return;
-  let size = 9;
+  let size = 9.5;
   const limpio = aLatin1(s);
-  while (size > 5 && c.font.widthOfTextAtSize(limpio, size) > w - 4) size -= 0.5;
+  while (size > 5 && c.dato.widthOfTextAtSize(limpio, size) > w - 4) size -= 0.5;
   let t = limpio;
-  while (t.length > 1 && c.font.widthOfTextAtSize(t, size) > w - 4) t = t.slice(0, -1);
-  c.page.drawText(t, { x: x + 2, y: A4[1] - y - h + (h - size) / 2 + 1, size, font: c.font, color: NEGRO });
+  while (t.length > 1 && c.dato.widthOfTextAtSize(t, size) > w - 4) t = t.slice(0, -1);
+  c.page.drawText(t, { x: x + 2, y: A4[1] - y - h + (h - size) / 2 + 1, size, font: c.dato, color: AZUL });
 }
 
 function centrado(c: Lienzo, s: string, x: number, y: number, w: number, size = 7.5, negrita = false) {
@@ -78,7 +84,12 @@ function casilla(c: Lienzo, x: number, y: number) {
 
 export async function dibujarParte(doc: PDFDocument, d: DatosParte): Promise<PDFPage> {
   const page = doc.addPage(A4);
-  const c: Lienzo = { page, font: await doc.embedFont(StandardFonts.Helvetica), bold: await doc.embedFont(StandardFonts.HelveticaBold) };
+  const c: Lienzo = {
+    page,
+    font: await doc.embedFont(StandardFonts.Helvetica),
+    bold: await doc.embedFont(StandardFonts.HelveticaBold),
+    dato: await doc.embedFont(StandardFonts.CourierBold),
+  };
 
   // Encabezado
   caja(c, M, M, ANCHO, A4[1] - M * 2 - 26);
@@ -117,15 +128,15 @@ export async function dibujarParte(doc: PDFDocument, d: DatosParte): Promise<PDF
       const p = d.plazas[n];
       const x = M + 4 + k * col;
       const fy = y + i * 15;
-      texto(c, `IDPLAZA ${n + 1}`, x, fy + 3, 7);
-      caja(c, x + 42, fy, 86, 13);
-      valor(c, p?.idPlaza ?? '', x + 42, fy, 86, 13);
-      texto(c, 'TURNO', x + 132, fy + 3, 7);
-      caja(c, x + 156, fy, 26, 13);
-      valor(c, p?.turno ?? '', x + 156, fy, 26, 13);
-      texto(c, 'CURSO/DIV', x + 186, fy + 3, 7);
-      caja(c, x + 222, fy, 44, 13);
-      valor(c, p?.cursoDiv ?? '', x + 222, fy, 44, 13);
+      texto(c, `IDPLAZA ${n + 1}`, x, fy + 3, 6.8);
+      caja(c, x + 41, fy, 80, 13);
+      valor(c, p?.idPlaza ?? '', x + 41, fy, 80, 13);
+      texto(c, 'TURNO', x + 125, fy + 3, 6.8);
+      caja(c, x + 152, fy, 25, 13);
+      valor(c, p?.turno ?? '', x + 152, fy, 25, 13);
+      texto(c, 'CURSO/DIV', x + 180, fy + 3, 6.8);
+      caja(c, x + 221, fy, 47, 13);
+      valor(c, p?.cursoDiv ?? '', x + 221, fy, 47, 13);
     }
   }
   page.drawLine({ start: { x: M + col, y: A4[1] - y + 2 }, end: { x: M + col, y: A4[1] - y - 8 * 15 }, thickness: 0.6, color: NEGRO });
@@ -157,10 +168,23 @@ export async function dibujarParte(doc: PDFDocument, d: DatosParte): Promise<PDF
   valor(c, d.articulo, M + 144, by, 38, 14);
   by += 22;
   if (d.tipo) {
-    const lineas = partir(c.font, `(${d.tipo})`, 6.5, tercio - 12).slice(0, 3);
-    lineas.forEach((l, i) => texto(c, l, M + 6, by + i * 8, 6.5, false, GRIS));
+    const lineas = partir(c.dato, `(${d.tipo})`, 6.5, tercio - 12).slice(0, 3);
+    lineas.forEach((l, i) => c.page.drawText(l, { x: M + 6, y: A4[1] - by - i * 8 - 6.5, size: 6.5, font: c.dato, color: AZUL }));
   }
   const yFirma = y + altoBloque - 22;
+  if (d.firma) {
+    try {
+      const img = await doc.embedPng(Uint8Array.from(atob(d.firma), (ch) => ch.charCodeAt(0)));
+      const maxW = tercio - 44;
+      const maxH = 42;
+      const k = Math.min(maxW / img.width, maxH / img.height);
+      const w = img.width * k;
+      const h = img.height * k;
+      page.drawImage(img, { x: M + (tercio - w) / 2, y: A4[1] - yFirma + 1, width: w, height: h });
+    } catch {
+      /* si la imagen está dañada, el parte sale sin firma */
+    }
+  }
   page.drawLine({ start: { x: M + 20, y: A4[1] - yFirma }, end: { x: M + tercio - 20, y: A4[1] - yFirma }, thickness: 0.5, color: NEGRO });
   centrado(c, 'Conformidad del Agente', M, yFirma + 4, tercio, 7);
 
