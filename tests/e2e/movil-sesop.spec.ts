@@ -1,0 +1,34 @@
+import { expect, test } from '@playwright/test';
+
+test('licencia por enfermedad muestra el trámite SESOP y lleva el código al resumen', async ({ page }) => {
+  await page.goto('./');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Empezar' }).click();
+  await page.getByRole('button', { name: /Nueva licencia/ }).click();
+  await page.getByLabel('Buscar licencia').fill('corto');
+  await page.getByRole('button', { name: /corto tratamiento/ }).click();
+  await expect(page.getByRole('dialog')).toContainText('Trámite en el SESOP');
+  await page.getByRole('button', { name: 'Elegir esta licencia' }).click();
+  await page.getByLabel('Apellido (obligatorio)').fill('Pérez');
+  await page.getByLabel('Nombre (obligatorio)').fill('Ana');
+  await page.getByLabel('DNI (obligatorio)').fill('28123456');
+  await page.getByText('Datos para el Parte de Licencias').click();
+  await page.getByLabel('CUE de la escuela').fill('900123400');
+  await page.getByRole('button', { name: '+ Agregar plaza' }).click();
+  await page.getByLabel('IDPLAZA 1').fill('555111');
+  await page.getByRole('button', { name: /Siguiente/ }).click();
+  await expect(page.getByRole('heading', { name: 'Trámite en el SESOP' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /0800 444 2580/ })).toHaveAttribute('href', 'tel:08004442580');
+  await page.getByLabel('Fecha de inicio').fill('2026-10-05');
+  await page.getByLabel('Fecha de fin').fill('2026-10-06');
+  await page.getByLabel('Código de inasistencia del SESOP').fill('ab123');
+  await page.getByRole('button', { name: /Siguiente/ }).click();
+  await page.getByRole('button', { name: /Siguiente/ }).click();
+  await expect(page.getByText('AB123')).toBeVisible();
+  await expect(page.getByText('555111')).toBeVisible();
+  await page.getByRole('button', { name: /Generar PDF/ }).click();
+  await page.getByLabel('Originales del parte').selectOption('3');
+  const descarga = page.waitForEvent('download');
+  await page.getByRole('button', { name: /Descargar/ }).click();
+  expect((await descarga).suggestedFilename()).toMatch(/^P_Perez_Ana_art10a/);
+});
