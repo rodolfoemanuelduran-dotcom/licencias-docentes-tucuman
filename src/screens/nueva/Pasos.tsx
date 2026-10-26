@@ -1,6 +1,6 @@
 import { useRef, useState, type DragEvent } from 'react';
 import { escuelasDeLicencia, type Adjunto, type Docente, type Escuela, type Licencia } from '../../types';
-import { LICENCIAS, buscarTipo } from '../../lib/catalogo';
+import { LICENCIAS, buscarTipo, coincide } from '../../lib/catalogo';
 import { calcularDias, formatearFecha } from '../../lib/dias';
 import { advertencias, validarLicencia, type Errores } from '../../lib/validacion';
 import { procesarArchivo } from '../../lib/imagen';
@@ -10,6 +10,7 @@ import DetalleTipo, { refTipo } from '../../components/DetalleTipo';
 import { EscuelasEditor, FormPersonal } from '../../components/FormDocente';
 import FirmaPad from '../../components/FirmaPad';
 import GuiaSesop from '../../components/GuiaSesop';
+import Documentacion from '../../components/Documentacion';
 import { Aviso, AvisoVerificar, Campo, Insignia, Modal } from '../../components/ui';
 
 export interface PasoProps {
@@ -18,17 +19,15 @@ export interface PasoProps {
   errores: Errores;
 }
 
-const sinTildes = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
 export function Paso1({ lic, cambiar, errores, siguiente }: PasoProps & { siguiente: () => void }) {
   const [q, setQ] = useState('');
   const [detalle, setDetalle] = useState<string | null>(null);
-  const n = sinTildes(q);
-  const lista = LICENCIAS.filter((l) => !n || sinTildes(`${l.nombre} ${l.articulo}`).includes(n));
+  const lista = LICENCIAS.filter((l) => coincide(l, q));
   const tipo = detalle ? buscarTipo(detalle) : undefined;
   return (
     <div className="space-y-3">
-      <input className="input" type="search" aria-label="Buscar licencia" placeholder="Buscá: enfermedad, duelo, examen…" value={q} onChange={(e) => setQ(e.target.value)} />
+      <input className="input" type="search" aria-label="Buscar licencia" placeholder="Buscá: enfermedad, 38b, suplentes, duelo…" value={q} onChange={(e) => setQ(e.target.value)} />
       {errores.tipoId && <Aviso tipo="error">{errores.tipoId}</Aviso>}
       <ul className="space-y-2">
         {lista.map((l) => (
@@ -197,91 +196,13 @@ function BloqueSesop({ lic, cambiar }: PasoProps) {
 }
 
 export function Paso4({ lic, cambiar }: PasoProps) {
-  const [trabajando, setTrabajando] = useState(false);
-  const [error, setError] = useState('');
-  const [arrastrando, setArrastrando] = useState(false);
-  const input = useRef<HTMLInputElement>(null);
-  const tipo = buscarTipo(lic.tipoId);
-
-  async function agregar(files: FileList | File[]) {
-    setTrabajando(true);
-    setError('');
-    const nuevos: Adjunto[] = [];
-    for (const f of Array.from(files)) {
-      try {
-        nuevos.push(await procesarArchivo(f));
-      } catch (e) {
-        setError((e as Error).message);
-      }
-    }
-    cambiar({ adjuntos: [...lic.adjuntos, ...nuevos] });
-    setTrabajando(false);
-  }
-  const mover = (i: number, d: number) => {
-    const a = [...lic.adjuntos];
-    [a[i], a[i + d]] = [a[i + d], a[i]];
-    cambiar({ adjuntos: a });
-  };
-  const soltar = (e: DragEvent) => {
-    e.preventDefault();
-    setArrastrando(false);
-    if (e.dataTransfer.files.length) agregar(e.dataTransfer.files);
-  };
-
-  return (
-    <div className="space-y-4">
-      {tipo && tipo.documentacion.length > 0 && (
-        <Aviso>
-          Esta licencia pide: <strong>{tipo.documentacion.join('; ')}</strong>
-        </Aviso>
-      )}
-      <div
-        onDragOver={(e) => {
-          e.preventDefault();
-          setArrastrando(true);
-        }}
-        onDragLeave={() => setArrastrando(false)}
-        onDrop={soltar}
-        className={`rounded-2xl border-2 border-dashed p-5 text-center ${arrastrando ? 'border-marca-600 bg-marca-50' : 'border-slate-400 bg-white'}`}
-      >
-        <p className="mb-3 hidden text-base lg:block">Arrastrá acá las fotos o PDF de tus certificados</p>
-        <input ref={input} type="file" multiple accept="image/*,application/pdf" className="sr-only" aria-label="Adjuntar archivos" onChange={(e) => e.target.files && agregar(e.target.files)} />
-        <button className="btn-primario w-full sm:w-auto" onClick={() => input.current?.click()} disabled={trabajando}>
-          {trabajando ? 'Procesando…' : 'Sacar foto o elegir archivo'}
-        </button>
-        <p className="mt-3 text-sm text-slate-600">Las fotos se achican en tu dispositivo antes de guardarse.</p>
-      </div>
-      {error && <Aviso tipo="error">{error}</Aviso>}
-      {lic.adjuntos.length > 0 && (
-        <ol className="space-y-2">
-          {lic.adjuntos.map((a, i) => (
-            <li key={a.id} className="tarjeta flex items-center gap-3 !p-3">
-              {a.tipo === 'imagen' ? <img src={`data:${a.mime};base64,${a.datos}`} alt="" className="h-14 w-14 rounded-lg object-cover" /> : <span className="text-3xl" aria-hidden>📄</span>}
-              <span className="min-w-0 flex-1 truncate text-base">
-                {i + 1}. {a.nombre}
-              </span>
-              <button className="btn-sec !min-h-[48px] !px-3" disabled={i === 0} onClick={() => mover(i, -1)} aria-label={`Subir ${a.nombre}`}>
-                ↑
-              </button>
-              <button className="btn-sec !min-h-[48px] !px-3" disabled={i === lic.adjuntos.length - 1} onClick={() => mover(i, 1)} aria-label={`Bajar ${a.nombre}`}>
-                ↓
-              </button>
-              <button className="btn-sec !min-h-[48px] !px-3 !text-red-700" onClick={() => cambiar({ adjuntos: lic.adjuntos.filter((x) => x.id !== a.id) })} aria-label={`Quitar ${a.nombre}`}>
-                ✕
-              </button>
-            </li>
-          ))}
-        </ol>
-      )}
-      <p className="text-sm text-slate-600">Los adjuntos van al PDF como páginas siguientes, en este orden.</p>
-    </div>
-  );
+  return <Documentacion lic={lic} cambiar={cambiar} />;
 }
 
 /** Hacia qué paso lleva cada aviso de la revisión. */
 function destinoAviso(a: string): { paso?: number; texto: string } {
   if (a.startsWith('Falta el código')) return { paso: 3, texto: 'Cargar el código' };
-  if (a.startsWith('Este tipo de licencia pide')) return { paso: 4, texto: 'Adjuntar' };
+  if (a.startsWith('Este tipo de licencia pide') || a.startsWith('Falta adjuntar')) return { paso: 4, texto: 'Adjuntar' };
   if (a.startsWith('No elegiste') || a.startsWith('El parte lleva')) return { paso: 2, texto: 'Completar escuelas' };
   return { texto: '' };
 }
@@ -398,6 +319,15 @@ export function Paso6({ lic, alFinal, cambiar }: { lic: Licencia; alFinal: () =>
       <Aviso>
         Tu parte está listo. Se llamará <strong className="break-all">{nombreArchivo(lic)}</strong>
       </Aviso>
+      {buscarTipo(lic.tipoId)?.sesop?.codigo && (
+        <section className="space-y-3" aria-labelledby="titulo-adjuntos-salud">
+          <h3 id="titulo-adjuntos-salud" className="text-lg font-bold">
+            Certificado médico y código del SESOP
+          </h3>
+          <p className="text-base text-slate-700">Si todavía no los cargaste, sumalos acá: van en el mismo PDF, después de los partes.</p>
+          <Documentacion lic={lic} cambiar={cambiar} soloSalud />
+        </section>
+      )}
       <Campo etiqueta="Originales del parte" ayuda="Muchas escuelas piden más de un original. Los adjuntos van una sola vez, al final.">
         {(p) => (
           <select {...p} value={lic.copias} onChange={(e) => cambiar({ copias: Number(e.target.value) })}>
