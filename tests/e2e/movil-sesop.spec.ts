@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
 import { PDFDocument } from 'pdf-lib';
 
+const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+
 test('licencia de suplente (art. 38 b) con SESOP, dos escuelas y firma dibujada', async ({ page }) => {
   await page.goto('./');
   await page.getByRole('checkbox').check();
@@ -9,7 +11,8 @@ test('licencia de suplente (art. 38 b) con SESOP, dos escuelas y firma dibujada'
   await page.getByRole('button', { name: /Nueva licencia/ }).click();
 
   // Paso 1: art. 38 b
-  await page.getByLabel('Buscar licencia').fill('suplentes');
+  await page.getByLabel('Buscar licencia').fill('38b');
+  await expect(page.getByRole('button', { name: /corto tratamiento \(suplentes/ })).toHaveCount(1);
   await page.getByRole('button', { name: /corto tratamiento \(suplentes/ }).click();
   await expect(page.getByRole('dialog')).toContainText('Hasta 30 días por año calendario');
   await expect(page.getByRole('dialog')).not.toContainText('Verificar en Mesa de Entradas');
@@ -36,7 +39,13 @@ test('licencia de suplente (art. 38 b) con SESOP, dos escuelas y firma dibujada'
   await page.getByLabel('Fecha de fin').fill('2026-10-06');
   await page.getByLabel('Código de inasistencia del SESOP').fill('ab123');
   await page.getByRole('button', { name: /Siguiente/ }).click();
+
+  // Paso 4: dos casillas, certificado médico y código del SESOP
+  await page.getByLabel('Adjuntar: 1. Certificado médico').setInputFiles({ name: 'certificado.png', mimeType: 'image/png', buffer: PNG });
+  await expect(page.getByText('certificado.png')).toBeVisible();
   await page.getByRole('button', { name: /Siguiente/ }).click();
+  await expect(page.getByText('Falta adjuntar el código o la constancia del SESOP.')).toBeVisible();
+  await expect(page.getByText('Falta adjuntar el certificado médico.')).toHaveCount(0);
 
   // Paso 5: resumen por escuela y firma con el dedo
   await expect(page.getByText('AB123')).toBeVisible();
@@ -53,11 +62,14 @@ test('licencia de suplente (art. 38 b) con SESOP, dos escuelas y firma dibujada'
 
   // Paso 6: 3 originales por escuela
   await page.getByRole('button', { name: /Generar PDF/ }).click();
+  // Después de llenar el parte también se puede cargar el código del SESOP
+  await page.getByLabel('Adjuntar: 2. Código o constancia del SESOP').setInputFiles({ name: 'codigo-sesop.png', mimeType: 'image/png', buffer: PNG });
+  await expect(page.getByText('codigo-sesop.png')).toBeVisible();
   await page.getByLabel('Originales del parte').selectOption('3');
   const descarga = page.waitForEvent('download');
   await page.getByRole('button', { name: /Descargar/ }).click();
   const d = await descarga;
   expect(d.suggestedFilename()).toMatch(/^P_Perez_Ana_art38b/);
   const pdf = await PDFDocument.load(readFileSync((await d.path())!));
-  expect(pdf.getPageCount()).toBe(6);
+  expect(pdf.getPageCount()).toBe(6 + 2);
 });

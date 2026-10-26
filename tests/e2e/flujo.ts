@@ -39,7 +39,7 @@ export async function flujoCompleto(page: Page, escritorio: boolean) {
 
   // Paso 4
   await page.locator('input[type=file]').setInputFiles({ name: 'acta.png', mimeType: 'image/png', buffer: PNG });
-  await expect(page.getByText('1. acta.png')).toBeVisible();
+  await expect(page.getByText('acta.png')).toBeVisible();
   await page.getByRole('button', { name: /Siguiente/ }).click();
 
   // Paso 5
