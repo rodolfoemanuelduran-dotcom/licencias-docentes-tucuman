@@ -297,7 +297,27 @@
     "plazoPresentacion": "Según corresponda (art. 54)",
     "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 22, modificado por el Decreto 1.441/5 (MEd) del 13-8-2020 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
     "verificado": true,
-    "notas": "Suplentes y contratados: el art. 38 inc. e fija 30 días corridos.",
+    "notas": "Suplentes y contratados: ver art. 38 inc. e.",
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+  },
+  {
+    "id": "adopcion-suplentes",
+    "articulo": "38",
+    "inciso": "e",
+    "nombre": "Adopción (suplentes y contratados)",
+    "duracion": "30 días corridos",
+    "goce": "Con goce",
+    "requisitos": [
+      "Personal suplente o contratado",
+      "La licencia caduca con el cese de la función (art. 39)"
+    ],
+    "documentacion": [
+      "Resolución o constancia de la guarda con fines de adopción"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 38 inc. e, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este inciso",
+    "verificado": true,
+    "notas": "El Decreto 1.441/5-2020 amplió la adopción para el art. 22, pero no tocó este inciso.",
     "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
   },
   {
@@ -314,7 +334,27 @@
     "plazoPresentacion": "Solicitud con 5 días de anticipación",
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 23 inc. a, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
-    "notas": "Personal suplente o contratado: 2 días hábiles (art. 38).",
+    "notas": "Suplentes y contratados: ver art. 38 inc. f.",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+  },
+  {
+    "id": "matrimonio-suplentes",
+    "articulo": "38",
+    "inciso": "f",
+    "nombre": "Matrimonio (suplentes y contratados)",
+    "duracion": "2 días hábiles",
+    "goce": "Con goce",
+    "requisitos": [
+      "Personal suplente o contratado",
+      "La licencia caduca con el cese de la función (art. 39)"
+    ],
+    "documentacion": [
+      "Constancia de matrimonio"
+    ],
+    "plazoPresentacion": "Según corresponda (art. 54)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 38 inc. f, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este inciso",
+    "verificado": true,
+    "notas": "",
     "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
@@ -333,7 +373,27 @@
     "plazoPresentacion": "Con el certificado de nacimiento",
     "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 23 inc. b, modificado por el Decreto 1.441/5 (MEd) del 13-8-2020 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
     "verificado": true,
-    "notas": "Suplentes y contratados: el texto de 1996 (art. 38 inc. h) fija 1 día hábil; confirmá en la escuela si se aplica el régimen nuevo.",
+    "notas": "Suplentes y contratados: ver art. 38 inc. h.",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+  },
+  {
+    "id": "nacimiento-hijo-suplentes",
+    "articulo": "38",
+    "inciso": "h",
+    "nombre": "Nacimiento de hijo o hija (suplentes y contratados)",
+    "duracion": "1 día hábil",
+    "goce": "Con goce",
+    "requisitos": [
+      "Personal suplente o contratado",
+      "La licencia caduca con el cese de la función (art. 39)"
+    ],
+    "documentacion": [
+      "Certificado de nacimiento"
+    ],
+    "plazoPresentacion": "Con el certificado de nacimiento",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 38 inc. h, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este inciso",
+    "verificado": true,
+    "notas": "El texto de 1996 habla del “docente varón”. El Decreto 1.441/5-2020 amplió a 30 días la licencia del art. 23 inc. b, pero no modificó este inciso: si sos suplente, consultá en la escuela si te reconocen el régimen nuevo.",
     "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
   },
   {
@@ -551,19 +611,21 @@
     "articulo": "32",
     "inciso": "",
     "nombre": "Perfeccionamiento docente",
-    "duracion": "Hasta 360 días corridos continuos cada seis años",
-    "goce": "Con goce",
+    "duracion": "Hasta 360 días corridos continuos, cada 6 años calendario",
+    "goce": "Con goce de haberes",
     "requisitos": [
       "Solo titulares",
+      "Estudios, investigaciones, trabajos científicos, técnicos o artísticos, congresos o becas relacionados con tu especialidad",
       "Resolución favorable de la Secretaría de Estado de Educación",
-      "Informe al terminar",
-      "Quedarte en el cargo el doble del tiempo de la licencia; si no, devolvés los sueldos con intereses"
+      "Antigüedad ininterrumpida de al menos 5 años en el cargo u horas cátedra, inmediatamente antes del pedido",
+      "Al terminar, presentar un informe de lo realizado",
+      "Quedarte en el cargo el doble del tiempo de la licencia; si no, devolvés los sueldos con intereses (proporcional si cumplís en parte)"
     ],
     "documentacion": [],
-    "plazoPresentacion": "Solicitud con 10 días de anticipación",
-    "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
-    "verificado": false,
-    "notas": "El texto oficial escaneado no se lee bien en la duración y la antigüedad exigida: confirmalas en la escuela.",
+    "plazoPresentacion": "Solicitud con 10 días de antelación",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 32, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar) (leído sobre la imagen del escaneo). No se conocen modificaciones de este artículo",
+    "verificado": true,
+    "notas": "",
     "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
@@ -573,12 +635,18 @@
     "nombre": "Cargo de mayor jerarquía sin estabilidad",
     "duracion": "Mientras dure la incompatibilidad",
     "goce": "Sin goce en el cargo que se deja",
-    "requisitos": [],
-    "documentacion": [],
-    "plazoPresentacion": "Solicitud con 5 días hábiles de anticipación",
+    "requisitos": [
+      "Docente titular designado en un cargo de mayor jerarquía, sin estabilidad, que quede en incompatibilidad legal u horaria",
+      "Acreditar periódicamente que se mantienen las condiciones (el texto de 1996 dice cada semestre; las versiones consolidadas con el Decreto 200/99, cada año)",
+      "Si cambian las condiciones, reintegrarte al cargo original el día hábil siguiente"
+    ],
+    "documentacion": [
+      "Formulario F.530 y documentación de la designación (Guía de Trámites del Ministerio)"
+    ],
+    "plazoPresentacion": "Solicitud con 5 días de antelación",
     "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
-    "notas": "",
+    "notas": "El Decreto 200/5 del 17-2-1999 sustituyó este artículo (según las versiones consolidadas: también cargos nacionales, provinciales o municipales, y mayor jerarquía funcional o presupuestaria). Su texto oficial no está publicado en el repositorio, por eso sigue sin verificar.",
     "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
   },
   {
