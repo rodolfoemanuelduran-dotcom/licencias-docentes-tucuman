@@ -1,5 +1,5 @@
 import { PDFDocument } from 'pdf-lib';
-import { escuelaNueva, escuelasDeLicencia, normalizarLicencia, type Escuela, type Licencia } from '../../types';
+import { escuelaNueva, escuelasDeLicencia, normalizarLicencia, ordenarAdjuntos, type Escuela, type Licencia } from '../../types';
 import { buscarTipo } from '../catalogo';
 import { formatearFecha } from '../dias';
 import { agregarAdjuntos } from './adjuntos';
@@ -45,6 +45,6 @@ export async function generarPDF(licencia: Licencia): Promise<Uint8Array> {
     const datos = datosDelParte(l, e);
     for (let i = 0; i < copias; i++) await dibujarParte(doc, datos);
   }
-  await agregarAdjuntos(doc, l.adjuntos);
+  await agregarAdjuntos(doc, ordenarAdjuntos(l.adjuntos));
   return doc.save();
 }
