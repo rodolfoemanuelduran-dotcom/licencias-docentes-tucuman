@@ -1,10 +1,9 @@
 import { useMemo, useState } from 'react';
-import { LICENCIAS } from '../lib/catalogo';
+import { LICENCIAS, coincide } from '../lib/catalogo';
 import DetalleTipo, { refTipo } from '../components/DetalleTipo';
 import { Aviso, Insignia } from '../components/ui';
 import { ContactoSesop } from '../components/GuiaSesop';
 
-const sinTildes = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
 export default function Informacion() {
   const [q, setQ] = useState('');
@@ -12,11 +11,10 @@ export default function Informacion() {
   const [abierta, setAbierta] = useState<string | null>(null);
 
   const lista = useMemo(() => {
-    const n = sinTildes(q);
     return LICENCIAS.filter((l) => {
       if (goce === 'con' && !/^con goce/i.test(l.goce)) return false;
       if (goce === 'sin' && !/^sin goce/i.test(l.goce)) return false;
-      return !n || sinTildes([l.nombre, l.duracion, l.requisitos.join(' '), l.documentacion.join(' '), l.articulo].join(' ')).includes(n);
+      return coincide(l, q, true);
     });
   }, [q, goce]);
 
@@ -85,7 +83,7 @@ export default function Informacion() {
         </div>
       </details>
       <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
-        <input className="input" type="search" placeholder="Buscar licencia (ej.: duelo, examen)" aria-label="Buscar licencia" value={q} onChange={(e) => setQ(e.target.value)} />
+        <input className="input" type="search" placeholder="Buscar (ej.: 38b, enfermedad, duelo)" aria-label="Buscar licencia" value={q} onChange={(e) => setQ(e.target.value)} />
         <select className="input sm:w-56" aria-label="Filtrar por goce de haberes" value={goce} onChange={(e) => setGoce(e.target.value as typeof goce)}>
           <option value="todas">Todas</option>
           <option value="con">Con goce</option>
