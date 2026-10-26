@@ -12,20 +12,20 @@ Según el Decreto 505/14 (MGEyJ), arts. 54 a 57 (texto oficial): toda licencia s
 - **Pendiente:** algunas escuelas piden varios originales (una publica “3 partes”) y entregar “dentro de 2 días”; el decreto dice 24 horas.
 
 ## 3. Verificación del catálogo
-**31 de 33 tipos de licencia verificados** contra textos oficiales del repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar), guardados en `referencias-oficiales/`:
-- Decreto 505/14 (MGEyJ) del 26-3-1996 (texto original, escaneado con OCR).
-- Decreto 500/5 (MEd) del 11-3-2009: arts. 10 inc. c (largo tratamiento y afección crítica) y **38 inc. b** (suplentes: de 15 a 30 días con goce).
-- Decreto 1.441/5 (MEd) del 13-8-2020: maternidad (30 + 150 días), adopción (60/75/90) y nacimiento para no gestante (30 días).
+**35 de 36 tipos de licencia verificados** contra textos oficiales del repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar), guardados en `referencias-oficiales/`:
+- Decreto 505/14 (MGEyJ) del 26-3-1996 (texto original escaneado; el art. 32 se leyó sobre la imagen).
+- Decreto 500/5 (MEd) del 11-3-2009: arts. 10 inc. c y **38 inc. b** (suplentes: de 15 a 30 días con goce).
+- Decreto 1.441/5 (MEd) del 13-8-2020: maternidad, adopción y nacimiento para no gestante.
 - Ley 9254 (familiar con discapacidad; derogó la Ley 5.806).
 
-Correcciones que trajo la verificación: art. 30 (cargo electivo) es **sin goce**; art. 32 obliga a quedarse el **doble** del tiempo; licencia anual en **enero** (período común) o **julio** (período especial); lactancia hasta 240 días salvo prescripción.
+Personal suplente y contratado (art. 38): incisos b, c, e, f y h cargados y verificados. El inc. h (nacimiento: 1 día hábil) no fue modificado por el 1.441/5-2020; la app lo aclara.
 
-**Sin verificar (2):** perfeccionamiento (art. 32: la duración y la antigüedad no se leen bien en el escaneo) y cargo de mayor jerarquía (art. 33: lo modificó el Decreto 200/99, que no conseguí).
-- **Pendiente:** conseguir el Decreto 200/5-1999 y confirmar que no haya otras modificatorias posteriores.
-- **Pendiente:** el art. 38 inc. h (nacimiento para suplentes: 1 día hábil) no fue actualizado por el 1.441/5-2020; confirmar qué se aplica hoy.
+**Sin verificar (1):** cargo de mayor jerarquía (art. 33). Lo sustituyó el **Decreto 200/5 del 17-2-1999**, que no está publicado en el repositorio oficial (se probaron todas las variantes de dirección). La app muestra el texto de 1996 y lo que agregan las versiones consolidadas, con el aviso “Verificar en Mesa de Entradas”.
 
 ## 4. SESOP
-Pasos tomados de la web del SESOP (copias archivadas, porque sus páginas dan error 500) y del Parte de Licencias (Dcto. 1543/1, art. 3). **Pendiente:** conseguir el texto del Decreto 1543/1. La app no se conecta con el SESOP: el código se copia a mano.
+Pasos tomados de la web del SESOP (copias archivadas) y del Parte de Licencias. El **Decreto 1543/1** que cita el parte (código de inasistencia y certificado del centro más cercano, con sello) no está publicado en ningún lado accesible; el requisito queda respaldado por el propio formulario oficial. La app no se conecta con el SESOP.
+
+En las licencias de salud hay **dos casillas de adjuntos: certificado médico y código o constancia del SESOP** (en el paso 4 y después de llenar el parte). En el PDF van detrás de los partes, en ese orden.
 
 ## 5. Validación legal
 - Avisos “herramienta independiente, no oficial” y “Verificar en Mesa de Entradas”.
@@ -40,7 +40,11 @@ Pasos tomados de la web del SESOP (copias archivadas, porque sus páginas dan er
 ## 7. Publicación
 GitHub Pages desde `docs/` (compilado localmente, subido por la web). Para actualizar: `npm run build` y subir `dist/` a `docs/`.
 
-## 8. Verificación realizada (22/10/2026, local)
-- Vitest: 24 pruebas OK (incluye varias escuelas, firma en el PDF, migración de datos viejos, art. 38 b, art. 30).
-- Playwright: 4 flujos OK (390 px, 1280 px, sin conexión, y suplente con SESOP + 2 escuelas + firma, que controla 6 páginas en el PDF).
-- Falta probar la instalación real y la firma con el dedo en un celular físico.
+## 8. Verificación realizada (25/10/2026, local)
+- Vitest: 28 pruebas OK (búsqueda “38b”, orden de adjuntos, avisos de certificado y código SESOP, varias escuelas, firma, migración de datos, art. 38).
+- Playwright: 4 flujos OK; el de suplente busca “38b”, carga el certificado en el paso 4 y el código SESOP después del parte, y controla 8 páginas en el PDF.
+- Falta probar la instalación y la firma con el dedo en un celular físico.
+
+## 9. Lo que solo se puede cerrar fuera de la app
+- Confirmar en una escuela que el modelo del Parte de Licencias sigue vigente.
+- Validación legal de avisos y política de privacidad.
