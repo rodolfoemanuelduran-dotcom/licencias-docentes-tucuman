@@ -56,6 +56,8 @@ export interface Docente {
   firma: string;
 }
 
+export type CategoriaAdjunto = 'certificado' | 'sesop' | 'otro';
+
 export interface Adjunto {
   id: string;
   nombre: string;
@@ -63,6 +65,17 @@ export interface Adjunto {
   mime: string;
   /** Contenido en base64 (sin prefijo data:). */
   datos: string;
+  /** Casilla donde se cargó: certificado médico, código del SESOP u otro. */
+  categoria?: CategoriaAdjunto;
+}
+
+const ORDEN_CATEGORIA: Record<CategoriaAdjunto, number> = { certificado: 0, sesop: 1, otro: 2 };
+
+export const categoriaDe = (a: Adjunto): CategoriaAdjunto => a.categoria ?? 'otro';
+
+/** Orden de los adjuntos en el PDF: certificado, código del SESOP y otros; dentro de cada casilla, el orden de carga. */
+export function ordenarAdjuntos(adjuntos: Adjunto[]): Adjunto[] {
+  return adjuntos.map((a, i) => ({ a, i })).sort((x, y) => ORDEN_CATEGORIA[categoriaDe(x.a)] - ORDEN_CATEGORIA[categoriaDe(y.a)] || x.i - y.i).map((x) => x.a);
 }
 
 export interface SeguimientoSesop {
