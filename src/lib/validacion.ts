@@ -37,7 +37,11 @@ export function advertencias(l: Licencia, tipo: LicenciaCatalogo | undefined): s
       'Falta el código de inasistencia del SESOP. Sin código (y sin haber ido al SESOP el primer día) la inasistencia puede tomarse como injustificada (Dcto. 1543/1, art. 3 inc. a).',
     );
   }
-  if (tipo.documentacion.length > 0 && l.adjuntos.length === 0) {
+  if (tipo.sesop?.codigo) {
+    const hay = (c: string) => l.adjuntos.some((x) => (x.categoria ?? 'otro') === c);
+    if (!hay('certificado') && !l.sesop?.concurrioPrimerDia) a.push('Falta adjuntar el certificado médico.');
+    if (!hay('sesop')) a.push('Falta adjuntar el código o la constancia del SESOP.');
+  } else if (tipo.documentacion.length > 0 && l.adjuntos.length === 0) {
     a.push(`Este tipo de licencia pide documentación (${tipo.documentacion.join('; ')}) y todavía no adjuntaste nada.`);
   }
   const escuelas = l.docente.escuelas.filter((e) => l.escuelasIds.includes(e.id));
