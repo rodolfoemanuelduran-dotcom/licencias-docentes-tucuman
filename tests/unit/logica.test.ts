@@ -5,9 +5,9 @@ import { advertencias, validarDocente, validarLicencia } from '../../src/lib/val
 import { cifrar, derivarClave, descifrar, ITERACIONES, nuevaSal } from '../../src/lib/cripto';
 import { articuloCorto, datosDelParte, generarPDF } from '../../src/lib/pdf/generarPDF';
 import { inicialApellido, nombreArchivo } from '../../src/lib/archivo';
-import { LICENCIAS, buscarTipo } from '../../src/lib/catalogo';
+import { LICENCIAS, buscarTipo, coincide } from '../../src/lib/catalogo';
 import { activarCifrado, bloquear, desbloquear, guardarRegistro, listarRegistros } from '../../src/lib/db';
-import { escuelaNueva, escuelasPorDefecto, licenciaNueva, normalizarDocente, normalizarLicencia, type Licencia } from '../../src/types';
+import { escuelaNueva, escuelasPorDefecto, licenciaNueva, normalizarDocente, normalizarLicencia, ordenarAdjuntos, type Licencia } from '../../src/types';
 
 const docente = normalizarDocente({ apellido: 'Gómez', nombres: 'Juan Pablo', dni: '30123456', domicilio: 'Calle 1', escuela: 'Esc. 1', cargo: 'Maestro' });
 const base = (): Licencia => ({ ...licenciaNueva(docente), tipoId: 'corto-tratamiento', desde: '2026-10-05', hasta: '2026-10-09', dias: 5 });
@@ -41,9 +41,10 @@ describe('validación', () => {
   it('advierte documentación faltante y registro no verificado', () => {
     const tipo = buscarTipo('corto-tratamiento')!;
     const a = advertencias(base(), tipo);
-    expect(a.some((x) => x.includes('documentación'))).toBe(true);
+    expect(a).toContain('Falta adjuntar el certificado médico.');
+    expect(advertencias(base(), buscarTipo('matrimonio')!).some((x) => x.includes('documentación'))).toBe(true);
     expect(a).not.toContain('Verificar en Mesa de Entradas antes de presentar.');
-    expect(advertencias(base(), buscarTipo('perfeccionamiento')!)).toContain('Verificar en Mesa de Entradas antes de presentar.');
+    expect(advertencias(base(), buscarTipo('cargo-mayor-jerarquia')!)).toContain('Verificar en Mesa de Entradas antes de presentar.');
   });
   it('no advierte documentación en tipos que no la piden', () => {
     const a = advertencias(base(), buscarTipo('anual-ordinaria')!);
@@ -197,5 +198,37 @@ describe('Varias escuelas, firma y art. 38', () => {
   it('art. 30 (cargo electivo) es sin goce, como dice el texto oficial', () => {
     expect(buscarTipo('cargo-electivo')!.goce).toMatch(/^Sin goce/);
     expect(LICENCIAS.filter((l) => l.verificado).length).toBeGreaterThanOrEqual(30);
+  });
+});
+
+describe('Búsqueda y documentación de salud', () => {
+  const ids = (q: string) => LICENCIAS.filter((l) => coincide(l, q)).map((l) => l.id);
+  it('encuentra el art. 38 b escrito de varias formas', () => {
+    for (const q of ['38b', '38 b', '38B', 'art 38 b', 'art. 38 inc. b', 'Artículo 38 inciso b']) expect(ids(q)).toEqual(['corto-tratamiento-suplentes']);
+    expect(ids('38')).toEqual(expect.arrayContaining(['corto-tratamiento-suplentes', 'accidente-trabajo-suplentes', 'nacimiento-hijo-suplentes']));
+    expect(ids('10 c')).toEqual(expect.arrayContaining(['largo-tratamiento', 'enfermedad-critica']));
+    expect(ids('ley 9254').length).toBe(2);
+    expect(ids('suplentes').length).toBeGreaterThanOrEqual(5);
+    expect(ids('enfermedad')).toContain('corto-tratamiento');
+  });
+  it('ordena los adjuntos: certificado, código SESOP y otros', () => {
+    const a = (id: string, categoria?: 'certificado' | 'sesop' | 'otro') => ({ id, nombre: id, tipo: 'imagen' as const, mime: 'image/png', datos: '', categoria });
+    expect(ordenarAdjuntos([a('x'), a('s', 'sesop'), a('c1', 'certificado'), a('c2', 'certificado')]).map((x) => x.id)).toEqual(['c1', 'c2', 's', 'x']);
+  });
+  it('pide certificado y código del SESOP en las licencias de salud', () => {
+    const tipo = buscarTipo('corto-tratamiento-suplentes')!;
+    const l = base();
+    expect(advertencias(l, tipo)).toEqual(expect.arrayContaining(['Falta adjuntar el certificado médico.', 'Falta adjuntar el código o la constancia del SESOP.']));
+    l.adjuntos = [
+      { id: '1', nombre: 'c', tipo: 'imagen', mime: 'image/png', datos: '', categoria: 'certificado' },
+      { id: '2', nombre: 's', tipo: 'imagen', mime: 'image/png', datos: '', categoria: 'sesop' },
+    ];
+    expect(advertencias(l, tipo).some((x) => x.startsWith('Falta adjuntar'))).toBe(false);
+  });
+  it('art. 32 verificado y suplentes con los incisos e, f y h', () => {
+    expect(buscarTipo('perfeccionamiento')!.verificado).toBe(true);
+    expect(buscarTipo('nacimiento-hijo-suplentes')!.duracion).toBe('1 día hábil');
+    expect(buscarTipo('matrimonio-suplentes')!.duracion).toBe('2 días hábiles');
+    expect(buscarTipo('adopcion-suplentes')!.duracion).toBe('30 días corridos');
   });
 });
