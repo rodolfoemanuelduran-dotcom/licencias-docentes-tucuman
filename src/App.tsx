@@ -9,6 +9,8 @@ import Inicio from './screens/Inicio';
 import Informacion from './screens/Informacion';
 import MisLicencias from './screens/MisLicencias';
 import Cuenta from './screens/Cuenta';
+import Guia from './screens/Guia';
+import Disponibles from './screens/Disponibles';
 import Privacidad from './screens/Privacidad';
 import NuevaLicencia from './screens/nueva/NuevaLicencia';
 
@@ -71,15 +73,21 @@ export default function App() {
   }
 
   const ctx: Contexto = { config, recargar, docente, irA };
-  const [seccion = 'inicio', param] = ruta;
+  const [seccion = 'inicio', param, extra] = ruta;
 
   let pantalla;
   switch (seccion) {
     case 'nueva':
-      pantalla = <NuevaLicencia key={param ?? 'nueva'} ctx={ctx} id={param} onDocente={setDocente} />;
+      pantalla = <NuevaLicencia key={param ?? 'nueva'} ctx={ctx} id={param} tipoInicial={extra} onDocente={setDocente} />;
       break;
     case 'mis':
       pantalla = <MisLicencias ctx={ctx} />;
+      break;
+    case 'guia':
+      pantalla = <Guia ctx={ctx} />;
+      break;
+    case 'disponibles':
+      pantalla = <Disponibles ctx={ctx} />;
       break;
     case 'info':
       pantalla = <Informacion />;
