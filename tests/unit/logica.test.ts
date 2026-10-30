@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { PDFDocument } from 'pdf-lib';
-import { calcularDias } from '../../src/lib/dias';
+import { calcularDias, contarDias } from '../../src/lib/dias';
+import { bytesDe, planArchivos } from '../../src/lib/acciones';
+import { calcularSaldo, corresponde, saldosDisponibles } from '../../src/lib/saldos';
+import { GUIA } from '../../src/lib/guia';
 import { advertencias, validarDocente, validarLicencia } from '../../src/lib/validacion';
 import { cifrar, derivarClave, descifrar, ITERACIONES, nuevaSal } from '../../src/lib/cripto';
 import { articuloCorto, datosDelParte, generarPDF } from '../../src/lib/pdf/generarPDF';
@@ -230,5 +233,76 @@ describe('Búsqueda y documentación de salud', () => {
     expect(buscarTipo('nacimiento-hijo-suplentes')!.duracion).toBe('1 día hábil');
     expect(buscarTipo('matrimonio-suplentes')!.duracion).toBe('2 días hábiles');
     expect(buscarTipo('adopcion-suplentes')!.duracion).toBe('30 días corridos');
+  });
+});
+
+describe('PDF separados, saldos y situación de revista', () => {
+  const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+  const adj = (id: string, categoria: 'certificado' | 'sesop' | 'otro') => ({ id, nombre: id, tipo: 'imagen' as const, mime: 'image/png', datos: png, categoria });
+  const final = (tipoId: string, desde: string, hasta: string): Licencia => ({ ...base(), tipoId, desde, hasta, estado: 'final' });
+
+  it('genera un PDF por escuela, otro con el certificado y otro con el código del SESOP', async () => {
+    const l = base();
+    const a = { ...escuelaNueva(true), nombre: 'Escuela A' };
+    const b = { ...escuelaNueva(), nombre: 'Escuela B' };
+    l.docente = { ...l.docente, escuelas: [a, b] };
+    l.escuelasIds = [a.id, b.id];
+    l.copias = 2;
+    l.adjuntos = [adj('c1', 'certificado'), adj('c2', 'certificado'), adj('s', 'sesop')];
+    const plan = planArchivos(l);
+    expect(plan.map((p) => p.clave)).toEqual([`parte:${a.id}`, `parte:${b.id}`, 'certificado', 'sesop']);
+    expect(new Set(plan.map((p) => p.nombre)).size).toBe(4);
+    const paginas = await Promise.all(plan.map(async (p) => (await PDFDocument.load(await bytesDe(l, p))).getPageCount()));
+    expect(paginas).toEqual([2, 2, 2, 1]);
+  });
+  it('sin adjuntos ni escuelas sale solo el parte', () => {
+    expect(planArchivos({ ...base(), escuelasIds: [] }).map((p) => p.clave)).toEqual(['parte']);
+  });
+  it('cuenta días hábiles sin sábados ni domingos', () => {
+    expect(contarDias('2026-10-05', '2026-10-11', 'habiles')).toBe(5);
+    expect(contarDias('2026-10-05', '2026-10-11', 'corridos')).toBe(7);
+  });
+  it('resta del tope las licencias finales del año y lo cargado a mano', () => {
+    const tipo = buscarTipo('corto-tratamiento')!;
+    const ls = [final('corto-tratamiento', '2026-03-02', '2026-03-06'), final('corto-tratamiento', '2025-03-02', '2025-03-20'), { ...final('corto-tratamiento', '2026-04-01', '2026-04-10'), estado: 'borrador' as const }];
+    const s = calcularSaldo(tipo, ls, { 2026: { corto: 2 } }, '2026-10-30')!;
+    expect(s.usados).toBe(7);
+    expect(s.disponibles).toBe(23);
+  });
+  it('recorta las licencias que cruzan de un año al otro', () => {
+    const s = calcularSaldo(buscarTipo('corto-tratamiento-suplentes')!, [final('corto-tratamiento-suplentes', '2025-12-30', '2026-01-02')], {}, '2026-06-01')!;
+    expect(s.usados).toBe(2);
+  });
+  it('marca el tope mensual de asuntos particulares (art. 51 inc. f)', () => {
+    const s = calcularSaldo(buscarTipo('franq-particular')!, [final('franq-particular', '2026-10-05', '2026-10-05')], {}, '2026-10-30')!;
+    expect(s.disponibles).toBe(4);
+    expect(s.esteMes).toBe(0);
+  });
+  it('largo tratamiento suma períodos salvo que pasen más de 2 años', () => {
+    const t = buscarTipo('largo-tratamiento')!;
+    const ls = [final('largo-tratamiento', '2026-01-01', '2026-01-10'), final('largo-tratamiento', '2025-01-01', '2025-01-10'), final('largo-tratamiento', '2020-01-01', '2020-01-31')];
+    expect(calcularSaldo(t, ls, {}, '2026-10-30')!.usados).toBe(20);
+  });
+  it('filtra por situación de revista y antigüedad', () => {
+    expect(corresponde(buscarTipo('familiar-enfermo')!, 'suplente', '', '2026-10-30').corresponde).toBe(false);
+    expect(corresponde(buscarTipo('familiar-enfermo')!, 'contratado', '', '2026-10-30').corresponde).toBe(false);
+    expect(corresponde(buscarTipo('familiar-enfermo')!, 'interino', '', '2026-10-30').corresponde).toBe(true);
+    expect(corresponde(buscarTipo('corto-tratamiento-suplentes')!, 'contratado', '', '2026-10-30').corresponde).toBe(true);
+    expect(corresponde(buscarTipo('razones-particulares')!, 'titular', '2025-01-01', '2026-10-30').corresponde).toBe(false);
+    expect(corresponde(buscarTipo('razones-particulares')!, 'titular', '2020-01-01', '2026-10-30').corresponde).toBe(true);
+    expect(saldosDisponibles('suplente', [], {}, '2026-10-30').map((s) => s.cupo.grupo)).not.toContain('familiar');
+  });
+  it('el art. 51 tiene sus incisos a al f', () => {
+    const incs = LICENCIAS.filter((l) => l.articulo === '51').map((l) => l.inciso).sort();
+    expect(incs).toEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+    expect(LICENCIAS.filter((l) => coincide(l, '51 f')).map((l) => l.id)).toEqual(['franq-particular']);
+  });
+  it('toda licencia de la guía existe en el catálogo y todas indican revista', () => {
+    const ids = Object.values(GUIA).flatMap((p) => p.opciones.flatMap((o) => o.licencias ?? []));
+    for (const id of ids) expect(buscarTipo(id), id).toBeTruthy();
+    for (const p of Object.values(GUIA)) for (const o of p.opciones) if (o.ir) expect(GUIA[o.ir], o.ir).toBeTruthy();
+    expect(LICENCIAS.filter((l) => !l.revista)).toEqual([]);
+    const usados = new Set(ids);
+    expect(LICENCIAS.filter((l) => !usados.has(l.id)).map((l) => l.id)).toEqual([]);
   });
 });
