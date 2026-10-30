@@ -45,8 +45,8 @@ GitHub Pages desde `docs/` (compilado localmente, subido por la web). Para actua
 - Playwright: 5 flujos OK; el de suplente descarga 4 PDF separados y controla sus páginas; otro recorre la guía.
 - Falta probar en un celular físico: instalación, cámara y firma con el dedo.
 
-## 9. Función de pago (a decidir)
-“Mis disponibles” y la guía funcionan gratis por ahora. Cobrarlas necesita decisión del dueño del proyecto: la app no tiene servidor, así que un cobro real (por ejemplo, Mercado Pago) exige agregar un servicio que reciba el pago y valide el acceso, y eso cambia la regla “no se envía nada a ningún servidor”. Un código de desbloqueo sin servidor se puede copiar.
+## 9. Función de pago
+Decisión (30/10/2026): la guía y “Mis disponibles” quedan **gratis**. Si más adelante se quiere cobrar, hace falta un servidor que reciba el pago y valide el acceso, lo que cambia la regla de que no sale nada del dispositivo.
 
 ## 10. Lo que solo se puede cerrar fuera de la app
 - Confirmar en una escuela que el modelo del Parte de Licencias sigue vigente.
