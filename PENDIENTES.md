@@ -12,7 +12,7 @@ Según el Decreto 505/14 (MGEyJ), arts. 54 a 57 (texto oficial): toda licencia s
 - **Pendiente:** algunas escuelas piden varios originales (una publica “3 partes”) y entregar “dentro de 2 días”; el decreto dice 24 horas.
 
 ## 3. Verificación del catálogo
-**35 de 36 tipos de licencia verificados** contra textos oficiales del repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar), guardados en `referencias-oficiales/`:
+**36 de 37 tipos de licencia verificados** contra textos oficiales del repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar), guardados en `referencias-oficiales/`:
 - Decreto 505/14 (MGEyJ) del 26-3-1996 (texto original escaneado; el art. 32 se leyó sobre la imagen).
 - Decreto 500/5 (MEd) del 11-3-2009: arts. 10 inc. c y **38 inc. b** (suplentes: de 15 a 30 días con goce).
 - Decreto 1.441/5 (MEd) del 13-8-2020: maternidad, adopción y nacimiento para no gestante.
@@ -40,11 +40,15 @@ En las licencias de salud hay **dos casillas de adjuntos: certificado médico y 
 ## 7. Publicación
 GitHub Pages desde `docs/` (compilado localmente, subido por la web). Para actualizar: `npm run build` y subir `dist/` a `docs/`.
 
-## 8. Verificación realizada (25/10/2026, local)
-- Vitest: 28 pruebas OK (búsqueda “38b”, orden de adjuntos, avisos de certificado y código SESOP, varias escuelas, firma, migración de datos, art. 38).
-- Playwright: 4 flujos OK; el de suplente busca “38b”, carga el certificado en el paso 4 y el código SESOP después del parte, y controla 8 páginas en el PDF.
-- Falta probar la instalación y la firma con el dedo en un celular físico.
+## 8. Verificación realizada (30/10/2026, local)
+- Vitest: 38 pruebas OK (PDF separados, saldos por año y por tope, situación de revista, antigüedad, art. 51 a–f, guía sin licencias huérfanas).
+- Playwright: 5 flujos OK; el de suplente descarga 4 PDF separados y controla sus páginas; otro recorre la guía.
+- Falta probar en un celular físico: instalación, cámara y firma con el dedo.
 
-## 9. Lo que solo se puede cerrar fuera de la app
+## 9. Función de pago (a decidir)
+“Mis disponibles” y la guía funcionan gratis por ahora. Cobrarlas necesita decisión del dueño del proyecto: la app no tiene servidor, así que un cobro real (por ejemplo, Mercado Pago) exige agregar un servicio que reciba el pago y valide el acceso, y eso cambia la regla “no se envía nada a ningún servidor”. Un código de desbloqueo sin servidor se puede copiar.
+
+## 10. Lo que solo se puede cerrar fuera de la app
 - Confirmar en una escuela que el modelo del Parte de Licencias sigue vigente.
+- Validar con la dirección o el gremio la guía y los topes (son una orientación; los hábiles no descuentan feriados).
 - Validación legal de avisos y política de privacidad.
