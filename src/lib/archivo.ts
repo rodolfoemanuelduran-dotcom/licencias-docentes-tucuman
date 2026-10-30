@@ -17,7 +17,7 @@ export function inicialApellido(apellido: string): string {
 }
 
 /** Ej.: G_Gomez_Juan-Pablo_art10-corto-tratamiento_2026-10-22.pdf (el prefijo permite filtrar por letra). */
-export function nombreArchivo(l: Licencia): string {
+export function nombreArchivo(l: Licencia, sufijo = ''): string {
   const tipo = buscarTipo(l.tipoId);
   const t = tipo ? `art${tipo.articulo}${tipo.inciso}-${limpiar(tipo.nombre).slice(0, 30).toLowerCase()}` : 'licencia';
   const partes = [
@@ -27,7 +27,7 @@ export function nombreArchivo(l: Licencia): string {
     t,
     l.desde || l.actualizadaEn.slice(0, 10),
   ];
-  return partes.join('_') + '.pdf';
+  return partes.join('_') + (sufijo ? `_${limpiar(sufijo).toLowerCase()}` : '') + '.pdf';
 }
 
 type DirHandle = FileSystemDirectoryHandle & {

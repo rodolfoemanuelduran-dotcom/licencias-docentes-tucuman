@@ -17,6 +17,25 @@ export function calcularDias(desde: string, hasta: string): number | null {
   return Math.round((b - a) / 86_400_000) + 1;
 }
 
+/** Días entre dos fechas ISO, ambas incluidas: corridos, o hábiles (lunes a viernes, sin descontar feriados). */
+export function contarDias(desde: string, hasta: string, unidad: 'corridos' | 'habiles'): number {
+  const total = calcularDias(desde, hasta);
+  if (total === null) return 0;
+  if (unidad === 'corridos') return total;
+  const ini = aUTC(desde)!;
+  let n = 0;
+  for (let i = 0; i < total; i++) {
+    const dia = new Date(ini + i * 86_400_000).getUTCDay();
+    if (dia !== 0 && dia !== 6) n++;
+  }
+  return n;
+}
+
+/** Suma (o resta) años a una fecha ISO. */
+export function sumarAnios(iso: string, anios: number): string {
+  return `${Number(iso.slice(0, 4)) + anios}${iso.slice(4)}`;
+}
+
 export function formatearFecha(iso: string): string {
   if (!aUTC(iso)) return '';
   const [a, m, d] = iso.split('-');

@@ -1,5 +1,6 @@
 import type { Docente, Licencia, LicenciaCatalogo } from '../types';
 import { calcularDias } from './dias';
+import { corresponde } from './saldos';
 
 export type Errores = Record<string, string>;
 
@@ -45,6 +46,11 @@ export function advertencias(l: Licencia, tipo: LicenciaCatalogo | undefined): s
     a.push(`Este tipo de licencia pide documentación (${tipo.documentacion.join('; ')}) y todavía no adjuntaste nada.`);
   }
   const escuelas = l.docente.escuelas.filter((e) => l.escuelasIds.includes(e.id));
+  const hoy = l.desde || new Date().toISOString().slice(0, 10);
+  for (const e of escuelas) {
+    const c = corresponde(tipo, e.revista, e.fechaIngreso, hoy);
+    if (!c.corresponde) a.push(`Revisá esta licencia para ${e.nombre || 'tu escuela'}: ${c.motivo} Usar una licencia no prevista puede hacerte cesar en el cargo si no sos titular (art. 40).`);
+  }
   if (!escuelas.length) {
     a.push('No elegiste ninguna escuela: el parte sale con el sector del establecimiento en blanco para que lo complete la dirección.');
   } else if (escuelas.some((e) => !e.cue.trim() || !e.plazas.length)) {
