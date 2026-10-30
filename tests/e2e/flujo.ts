@@ -38,7 +38,7 @@ export async function flujoCompleto(page: Page, escritorio: boolean) {
   await page.getByRole('button', { name: /Siguiente/ }).click();
 
   // Paso 4
-  await page.locator('input[type=file]').setInputFiles({ name: 'acta.png', mimeType: 'image/png', buffer: PNG });
+  await page.getByLabel(/^Adjuntar/).setInputFiles({ name: 'acta.png', mimeType: 'image/png', buffer: PNG });
   await expect(page.getByText('acta.png')).toBeVisible();
   await page.getByRole('button', { name: /Siguiente/ }).click();
 
@@ -49,7 +49,7 @@ export async function flujoCompleto(page: Page, escritorio: boolean) {
 
   // Paso 6
   const descarga = page.waitForEvent('download');
-  await page.getByRole('button', { name: /Descargar/ }).click();
+  await page.getByRole('button', { name: /Descargar (los|el)/ }).click();
   const d = await descarga;
   expect(d.suggestedFilename()).toMatch(/^G_Gomez_Juan-Pablo_art23c.*\.pdf$/);
 

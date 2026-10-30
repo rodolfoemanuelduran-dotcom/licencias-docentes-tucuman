@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { expect, test } from '@playwright/test';
+import { expect, test, type Download } from '@playwright/test';
 import { PDFDocument } from 'pdf-lib';
 
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
@@ -66,10 +66,34 @@ test('licencia de suplente (art. 38 b) con SESOP, dos escuelas y firma dibujada'
   await page.getByLabel('Adjuntar: 2. Código o constancia del SESOP').setInputFiles({ name: 'codigo-sesop.png', mimeType: 'image/png', buffer: PNG });
   await expect(page.getByText('codigo-sesop.png')).toBeVisible();
   await page.getByLabel('Originales del parte').selectOption('3');
-  const descarga = page.waitForEvent('download');
-  await page.getByRole('button', { name: /Descargar/ }).click();
-  const d = await descarga;
-  expect(d.suggestedFilename()).toMatch(/^P_Perez_Ana_art38b/);
-  const pdf = await PDFDocument.load(readFileSync((await d.path())!));
-  expect(pdf.getPageCount()).toBe(6 + 2);
+  // Un PDF por parte (2 escuelas), uno con el certificado y otro con el código del SESOP
+  await expect(page.getByRole('heading', { name: 'Tus 4 PDF' })).toBeVisible();
+  const descargas: Download[] = [];
+  page.on('download', (d) => descargas.push(d));
+  await page.getByRole('button', { name: 'Descargar los 4 PDF' }).click();
+  await expect.poll(() => descargas.length, { timeout: 15000 }).toBe(4);
+  const paginas: Record<string, number> = {};
+  for (const d of descargas) paginas[d.suggestedFilename().replace(/^.*_2026-10-05_/, '')] = (await PDFDocument.load(readFileSync((await d.path())!))).getPageCount();
+  expect(descargas[0].suggestedFilename()).toMatch(/^P_Perez_Ana_art38b/);
+  expect(paginas).toEqual({ 'parte-escuela-a.pdf': 3, 'parte-escuela-b.pdf': 3, 'certificado.pdf': 1, 'codigo-sesop.pdf': 1 });
+});
+
+test('la guía orienta según la situación de revista y lleva al parte', async ({ page }) => {
+  await page.goto('./');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Empezar' }).click();
+  await page.getByRole('button', { name: /Qué licencia me corresponde/ }).click();
+  await page.getByLabel('Tu situación de revista').selectOption('suplente');
+  await page.getByRole('button', { name: /Estoy enfermo/ }).click();
+  await page.getByRole('button', { name: /Algo común/ }).click();
+  await expect(page.getByRole('heading', { name: 'Te corresponde esta licencia' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /suplentes y contratados/ })).toBeVisible();
+  await expect(page.getByText(/Te quedan 30 de 30 días en/)).toBeVisible();
+  await page.getByRole('button', { name: 'Empezar de nuevo' }).click();
+  await page.getByRole('button', { name: /Tengo que cuidar/ }).click();
+  await page.getByRole('button', { name: /familiar enfermo/ }).click();
+  await expect(page.getByText('No encontramos una licencia para tu situación')).toBeVisible();
+  await page.getByLabel('Tu situación de revista').selectOption('titular');
+  await page.getByRole('button', { name: 'Hacer el parte de esta licencia' }).click();
+  await expect(page.getByRole('heading', { name: 'Tus datos' })).toBeVisible();
 });
