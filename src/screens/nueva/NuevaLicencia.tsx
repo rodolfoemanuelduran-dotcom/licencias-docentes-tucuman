@@ -12,7 +12,7 @@ import VistaPreviaPDF from './VistaPreviaPDF';
 
 const TITULOS = ['Tipo de licencia', 'Tus datos', 'Detalles', 'Documentación', 'Revisión', 'Descarga'];
 
-export default function NuevaLicencia({ ctx, id, onDocente }: { ctx: Contexto; id?: string; onDocente: (d: Docente) => void }) {
+export default function NuevaLicencia({ ctx, id, tipoInicial, onDocente }: { ctx: Contexto; id?: string; tipoInicial?: string; onDocente: (d: Docente) => void }) {
   const [lic, setLic] = useState<Licencia | null>(null);
   const [errores, setErrores] = useState<Errores>({});
   const [aviso, setAviso] = useState('');
@@ -25,10 +25,12 @@ export default function NuevaLicencia({ ctx, id, onDocente }: { ctx: Contexto; i
       if (guardada) setLic(normalizarLicencia(guardada));
       else {
         const perfil = normalizarDocente(await leerRegistro<Docente>('docente', 'perfil'));
-        setLic({ ...licenciaNueva(perfil), ...(id ? { id } : {}) });
+        // Desde la guía llega el tipo ya elegido: se saltea el paso 1.
+        const elegido = tipoInicial && buscarTipo(tipoInicial) ? { tipoId: tipoInicial, paso: 2 } : {};
+        setLic({ ...licenciaNueva(perfil), ...(id ? { id } : {}), ...elegido });
       }
     })();
-  }, [id]);
+  }, [id, tipoInicial]);
 
   const cfg = useRef(ctx.config);
   cfg.current = ctx.config;

@@ -1,11 +1,11 @@
-import { useRef, useState, type DragEvent } from 'react';
-import { escuelasDeLicencia, type Adjunto, type Docente, type Escuela, type Licencia } from '../../types';
+import { useEffect, useState } from 'react';
+import { escuelasDeLicencia, type Docente, type Escuela, type Licencia } from '../../types';
 import { LICENCIAS, buscarTipo, coincide } from '../../lib/catalogo';
-import { calcularDias, formatearFecha } from '../../lib/dias';
+import { calcularDias, contarDias, formatearFecha } from '../../lib/dias';
 import { advertencias, validarLicencia, type Errores } from '../../lib/validacion';
-import { procesarArchivo } from '../../lib/imagen';
-import { compartirLicencia, descargarLicencia, imprimirLicencia, puedeCompartir } from '../../lib/acciones';
-import { nombreArchivo } from '../../lib/archivo';
+import { compartirLicencia, descargarArchivo, descargarLicencia, imprimirLicencia, planArchivos, puedeCompartir } from '../../lib/acciones';
+import { calcularSaldo, hoyISO, type UsosPrevios } from '../../lib/saldos';
+import { leerRegistro, listarRegistros } from '../../lib/db';
 import DetalleTipo, { refTipo } from '../../components/DetalleTipo';
 import { EscuelasEditor, FormPersonal } from '../../components/FormDocente';
 import FirmaPad from '../../components/FirmaPad';
@@ -149,6 +149,7 @@ export function Paso3({ lic, cambiar, errores }: PasoProps) {
           Total: {lic.dias} {lic.dias === 1 ? 'día' : 'días'} corridos
         </p>
       )}
+      <AvisoSaldo lic={lic} />
       <Campo
         etiqueta="Código de inasistencia del SESOP"
         ayuda={
@@ -168,6 +169,32 @@ export function Paso3({ lic, cambiar, errores }: PasoProps) {
       </Campo>
     </div>
   );
+}
+
+/** Muestra cuántos días quedan de esta licencia, según el historial del dispositivo. */
+function AvisoSaldo({ lic }: { lic: Licencia }) {
+  const [texto, setTexto] = useState<{ t: string; exceso: boolean } | null>(null);
+  const tipo = buscarTipo(lic.tipoId);
+  useEffect(() => {
+    let vivo = true;
+    (async () => {
+      if (!tipo?.cupo) return setTexto(null);
+      const [lista, previos] = await Promise.all([listarRegistros<Licencia>('licencia'), leerRegistro<UsosPrevios>('docente', 'usos')]);
+      const s = calcularSaldo(tipo, lista.filter((x) => x.id !== lic.id), previos ?? {}, lic.desde || hoyISO());
+      if (!vivo || !s) return;
+      const pedidos = lic.desde && lic.hasta ? contarDias(lic.desde, lic.hasta, s.cupo.unidad) : 0;
+      const unidad = s.cupo.unidad === 'habiles' ? 'días hábiles' : 'días';
+      const exceso = pedidos > s.disponibles;
+      setTexto({
+        t: `Te quedan ${s.disponibles} de ${s.cupo.cantidad} ${unidad} ${s.periodo}.${exceso ? ` Estás pidiendo ${pedidos}: superás el tope. ${s.cupo.luego ?? ''}` : ''}`,
+        exceso,
+      });
+    })();
+    return () => {
+      vivo = false;
+    };
+  }, [tipo, lic.id, lic.desde, lic.hasta]);
+  return texto ? <Aviso tipo={texto.exceso ? 'alerta' : 'info'}>{texto.t}</Aviso> : null;
 }
 
 function BloqueSesop({ lic, cambiar }: PasoProps) {
@@ -300,6 +327,7 @@ export function Paso6({ lic, alFinal, cambiar }: { lic: Licencia; alFinal: () =>
   const [msg, setMsg] = useState('');
   const [error, setError] = useState('');
   const [trabajando, setTrabajando] = useState(false);
+  const archivos = planArchivos(lic);
   async function correr(f: () => Promise<string | void>) {
     setTrabajando(true);
     setMsg('');
@@ -314,21 +342,20 @@ export function Paso6({ lic, alFinal, cambiar }: { lic: Licencia; alFinal: () =>
       setTrabajando(false);
     }
   }
+  const aviso = (destino: 'carpeta' | 'descarga', n: number) =>
+    destino === 'carpeta' ? `Guardado en tu carpeta Mis licencias (${n} PDF).` : `Listo: ${n === 1 ? 'se descargó 1 PDF' : `se descargaron ${n} PDF`}. Buscalos en tus descargas.`;
   return (
     <div className="space-y-4">
-      <Aviso>
-        Tu parte está listo. Se llamará <strong className="break-all">{nombreArchivo(lic)}</strong>
-      </Aviso>
       {buscarTipo(lic.tipoId)?.sesop?.codigo && (
         <section className="space-y-3" aria-labelledby="titulo-adjuntos-salud">
           <h3 id="titulo-adjuntos-salud" className="text-lg font-bold">
             Certificado médico y código del SESOP
           </h3>
-          <p className="text-base text-slate-700">Si todavía no los cargaste, sumalos acá: van en el mismo PDF, después de los partes.</p>
+          <p className="text-base text-slate-700">Si todavía no los cargaste, sacales una foto acá: cada uno sale en su propio PDF.</p>
           <Documentacion lic={lic} cambiar={cambiar} soloSalud />
         </section>
       )}
-      <Campo etiqueta="Originales del parte" ayuda="Muchas escuelas piden más de un original. Los adjuntos van una sola vez, al final.">
+      <Campo etiqueta="Originales del parte" ayuda="Muchas escuelas piden más de un original.">
         {(p) => (
           <select {...p} value={lic.copias} onChange={(e) => cambiar({ copias: Number(e.target.value) })}>
             <option value={1}>1 original</option>
@@ -337,15 +364,43 @@ export function Paso6({ lic, alFinal, cambiar }: { lic: Licencia; alFinal: () =>
           </select>
         )}
       </Campo>
+      <section className="space-y-2" aria-labelledby="titulo-archivos">
+        <h3 id="titulo-archivos" className="text-lg font-bold">
+          Tus {archivos.length} PDF
+        </h3>
+        <ul className="space-y-2">
+          {archivos.map((a) => (
+            <li key={a.clave} className="tarjeta flex items-center gap-3 !p-3">
+              <span className="min-w-0 flex-1">
+                <span className="block text-base font-semibold">📄 {a.titulo}</span>
+                <span className="block truncate text-sm text-slate-600">{a.nombre}</span>
+              </span>
+              <button
+                className="btn-sec !min-h-[48px] shrink-0 !px-3"
+                disabled={trabajando}
+                aria-label={`Descargar ${a.titulo}`}
+                onClick={() => correr(async () => aviso(await descargarArchivo(lic, a), 1))}
+              >
+                ⬇
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
       {msg && <Aviso>{msg}</Aviso>}
       {error && <Aviso tipo="error">{error}</Aviso>}
       <div className="grid gap-3">
         <button
           className="btn-primario"
           disabled={trabajando}
-          onClick={() => correr(async () => ((await descargarLicencia(lic)) === 'carpeta' ? 'Guardado en tu carpeta Mis licencias.' : 'PDF descargado. Buscalo en tus descargas.'))}
+          onClick={() =>
+            correr(async () => {
+              const r = await descargarLicencia(lic);
+              return aviso(r.destino, r.cantidad);
+            })
+          }
         >
-          ⬇ Descargar
+          ⬇ Descargar {archivos.length > 1 ? `los ${archivos.length} PDF` : 'el PDF'}
         </button>
         {puedeCompartir() && (
           <button className="btn-sec" disabled={trabajando} onClick={() => correr(() => compartirLicencia(lic))}>
@@ -353,7 +408,7 @@ export function Paso6({ lic, alFinal, cambiar }: { lic: Licencia; alFinal: () =>
           </button>
         )}
         <button className="btn-sec" disabled={trabajando} onClick={() => correr(() => imprimirLicencia(lic))}>
-          🖨 Imprimir
+          🖨 Imprimir todo
         </button>
       </div>
       <p className="text-sm text-slate-600">
