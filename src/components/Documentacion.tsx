@@ -14,6 +14,7 @@ function Casilla({ lic, cambiar, categoria, titulo, ayuda }: Props & { categoria
   const [error, setError] = useState('');
   const [arrastrando, setArrastrando] = useState(false);
   const input = useRef<HTMLInputElement>(null);
+  const camara = useRef<HTMLInputElement>(null);
   const idTitulo = useId();
   const propios = lic.adjuntos.filter((a) => categoriaDe(a) === categoria);
 
@@ -31,6 +32,7 @@ function Casilla({ lic, cambiar, categoria, titulo, ayuda }: Props & { categoria
     cambiar({ adjuntos: [...lic.adjuntos, ...nuevos] });
     setTrabajando(false);
     if (input.current) input.current.value = '';
+    if (camara.current) camara.current.value = '';
   }
   /** Mueve un adjunto dentro de su casilla. */
   const mover = (a: Adjunto, d: number) => {
@@ -76,9 +78,23 @@ function Casilla({ lic, cambiar, categoria, titulo, ayuda }: Props & { categoria
         aria-label={`Adjuntar: ${titulo}`}
         onChange={(e) => e.target.files && agregar(e.target.files)}
       />
-      <button className="btn-primario w-full" onClick={() => input.current?.click()} disabled={trabajando}>
-        {trabajando ? 'Procesando…' : propios.length ? 'Agregar otra foto o archivo' : 'Sacar foto o elegir archivo'}
-      </button>
+      <input
+        ref={camara}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        className="sr-only"
+        aria-label={`Sacar foto: ${titulo}`}
+        onChange={(e) => e.target.files && agregar(e.target.files)}
+      />
+      <div className="grid gap-2 sm:grid-cols-2">
+        <button className="btn-primario" onClick={() => camara.current?.click()} disabled={trabajando}>
+          {trabajando ? 'Procesando…' : propios.length ? '📷 Sacar otra foto' : '📷 Sacar foto'}
+        </button>
+        <button className="btn-sec" onClick={() => input.current?.click()} disabled={trabajando}>
+          Elegir archivo
+        </button>
+      </div>
       {error && <Aviso tipo="error">{error}</Aviso>}
       {propios.length > 0 && (
         <ol className="space-y-2">
@@ -153,8 +169,8 @@ export default function Documentacion({ lic, cambiar, soloSalud = false }: Props
         />
       )}
       <p className="text-sm text-slate-600">
-        Los adjuntos van al PDF después de los partes{salud ? ': primero el certificado, después el código del SESOP y al final los otros' : ''}. Las fotos se achican en tu
-        dispositivo antes de guardarse.
+        {salud ? 'El certificado y el código del SESOP salen cada uno en su propio PDF, separados del parte.' : 'La documentación sale en un PDF aparte del parte.'} Las fotos se
+        ajustan en tu dispositivo antes de guardarse.
       </p>
     </div>
   );

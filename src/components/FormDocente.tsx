@@ -1,4 +1,4 @@
-import { DIAS_SEMANA, MAX_ESCUELAS, MAX_PLAZAS, escuelaNueva, type DiaSemana, type Docente, type Escuela, type Plaza } from '../types';
+import { DIAS_SEMANA, MAX_ESCUELAS, MAX_PLAZAS, escuelaNueva, type DiaSemana, type Docente, type Escuela, type Plaza, type Revista } from '../types';
 import type { Errores } from '../lib/validacion';
 import { Campo } from './ui';
 
@@ -61,6 +61,22 @@ function EditorEscuela({
       <Campo etiqueta="Cargo o materias">
         {(p) => <input {...p} value={e.cargo} onChange={set('cargo')} />}
       </Campo>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Campo etiqueta="Situación de revista" ayuda="Define qué licencias te corresponden.">
+          {(p) => (
+            <select {...p} value={e.revista} onChange={(ev) => onCambio({ ...e, revista: ev.target.value as Revista | '' })}>
+              <option value="">Elegí una opción</option>
+              <option value="titular">Titular</option>
+              <option value="interino">Interino/a</option>
+              <option value="suplente">Suplente</option>
+              <option value="contratado">Contratado/a</option>
+            </select>
+          )}
+        </Campo>
+        <Campo etiqueta="Fecha de ingreso al cargo" ayuda="Para calcular la antigüedad.">
+          {(p) => <input {...p} type="date" value={e.fechaIngreso} onChange={(ev) => onCambio({ ...e, fechaIngreso: ev.target.value })} />}
+        </Campo>
+      </div>
       <label className="flex min-h-[48px] items-start gap-3 text-base">
         <input type="radio" name="escuela-principal" className="mt-1 h-6 w-6 shrink-0" checked={e.principal} onChange={onPrincipal} />
         <span>

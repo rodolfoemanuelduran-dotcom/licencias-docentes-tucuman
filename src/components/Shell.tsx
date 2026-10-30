@@ -5,6 +5,8 @@ export const SECCIONES = [
   { id: 'inicio', texto: 'Inicio', icono: '🏠' },
   { id: 'nueva', texto: 'Nueva licencia', icono: '📝' },
   { id: 'mis', texto: 'Mis licencias', icono: '📁' },
+  { id: 'guia', texto: '¿Qué licencia me corresponde?', icono: '🧭' },
+  { id: 'disponibles', texto: 'Mis disponibles', icono: '📊' },
   { id: 'info', texto: 'Información', icono: 'ℹ️' },
   { id: 'cuenta', texto: 'Cuenta', icono: '👤' },
 ];
