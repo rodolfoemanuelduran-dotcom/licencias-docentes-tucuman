@@ -15,7 +15,12 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este artículo",
     "verificado": true,
     "notas": "Es obligatoria. Si no la tomaste por razones de servicio, maternidad, largo tratamiento o accidente, se toma el mes siguiente o se acumula al año siguiente. Al cese se cobran las vacaciones no gozadas (art. 7).",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "corto-tratamiento",
@@ -49,7 +54,18 @@
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
     },
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino"
+    ],
+    "cupo": {
+      "grupo": "corto",
+      "cantidad": 30,
+      "unidad": "corridos",
+      "periodo": "anio",
+      "luego": "Agotados, las siguientes son sin goce."
+    }
   },
   {
     "id": "corto-tratamiento-suplentes",
@@ -82,7 +98,17 @@
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
     },
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "suplente"
+    ],
+    "cupo": {
+      "grupo": "corto",
+      "cantidad": 30,
+      "unidad": "corridos",
+      "periodo": "anio",
+      "luego": "Agotados, las inasistencias se justifican sin goce (art. 39)."
+    }
   },
   {
     "id": "largo-tratamiento",
@@ -116,7 +142,19 @@
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales"
     },
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ],
+    "cupo": {
+      "grupo": "largo",
+      "cantidad": 365,
+      "unidad": "corridos",
+      "periodo": "continuidad",
+      "luego": "Después, prórroga de hasta 180 días al 50 %."
+    }
   },
   {
     "id": "enfermedad-critica",
@@ -145,7 +183,12 @@
       ],
       "fuente": "Decreto 500/5 (MEd)-2009, art. 1"
     },
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "accidente-trabajo",
@@ -178,7 +221,11 @@
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales; Ley 24.557 (riesgos del trabajo)"
     },
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "titular",
+      "interino"
+    ]
   },
   {
     "id": "accidente-trabajo-suplentes",
@@ -212,7 +259,10 @@
       ],
       "fuente": "SESOP, “Requisitos y procedimientos” (sesop.gov.ar, versión archivada de marzo de 2026) y Parte de Licencias de la Dirección de Novedades Salariales; Ley 24.557 (riesgos del trabajo)"
     },
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "suplente"
+    ]
   },
   {
     "id": "maternidad",
@@ -245,7 +295,12 @@
       ],
       "fuente": "SESOP, “Licencia por maternidad” (sesop.gov.ar, versión archivada de agosto de 2025)"
     },
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "lactancia",
@@ -263,7 +318,12 @@
     "plazoPresentacion": "Según corresponda (art. 54)",
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 20, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
-    "notas": ""
+    "notas": "",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "excedencia-maternidad",
@@ -278,7 +338,11 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 21, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "titular",
+      "interino"
+    ]
   },
   {
     "id": "adopcion",
@@ -298,7 +362,11 @@
     "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 22, modificado por el Decreto 1.441/5 (MEd) del 13-8-2020 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
     "verificado": true,
     "notas": "Suplentes y contratados: ver art. 38 inc. e.",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "titular",
+      "interino"
+    ]
   },
   {
     "id": "adopcion-suplentes",
@@ -318,7 +386,10 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 38 inc. e, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este inciso",
     "verificado": true,
     "notas": "El Decreto 1.441/5-2020 amplió la adopción para el art. 22, pero no tocó este inciso.",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "suplente"
+    ]
   },
   {
     "id": "matrimonio",
@@ -335,7 +406,11 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 23 inc. a, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "Suplentes y contratados: ver art. 38 inc. f.",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino"
+    ]
   },
   {
     "id": "matrimonio-suplentes",
@@ -355,7 +430,10 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 38 inc. f, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este inciso",
     "verificado": true,
     "notas": "",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "suplente"
+    ]
   },
   {
     "id": "nacimiento-hijo",
@@ -374,7 +452,11 @@
     "fuente": "Decreto 505/14 (MGEyJ)-1996, art. 23 inc. b, modificado por el Decreto 1.441/5 (MEd) del 13-8-2020 (texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar))",
     "verificado": true,
     "notas": "Suplentes y contratados: ver art. 38 inc. h.",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino"
+    ]
   },
   {
     "id": "nacimiento-hijo-suplentes",
@@ -394,7 +476,10 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 38 inc. h, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar). No se conocen modificaciones de este inciso",
     "verificado": true,
     "notas": "El texto de 1996 habla del “docente varón”. El Decreto 1.441/5-2020 amplió a 30 días la licencia del art. 23 inc. b, pero no modificó este inciso: si sos suplente, consultá en la escuela si te reconocen el régimen nuevo.",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "suplente"
+    ]
   },
   {
     "id": "duelo",
@@ -411,7 +496,12 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 23 inc. c, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "familiar-enfermo",
@@ -442,6 +532,17 @@
         "Presentá en la escuela el Parte de Licencias con el certificado del SESOP que justifica los días."
       ],
       "fuente": "Decreto 505/14, art. 24; Guía de Trámites de Tucumán, “Atención de familiar enfermo” (Administración Pública)"
+    },
+    "revista": [
+      "titular",
+      "interino"
+    ],
+    "cupo": {
+      "grupo": "familiar",
+      "cantidad": 10,
+      "unidad": "habiles",
+      "periodo": "anio",
+      "luego": "Prorrogables hasta 30 días hábiles más sin goce."
     }
   },
   {
@@ -473,6 +574,18 @@
         "Presentá en la escuela el Parte de Licencias con la constancia del SESOP."
       ],
       "fuente": "Ley 9254, arts. 3 y 8; SESOP, listado de trámites (sesop.gov.ar)"
+    },
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ],
+    "cupo": {
+      "grupo": "ley9254",
+      "cantidad": 90,
+      "unidad": "corridos",
+      "periodo": "anio",
+      "luego": "Fuera de la provincia son 180 días. Después, hasta 60 (o 120) sin goce."
     }
   },
   {
@@ -499,7 +612,12 @@
         "Pedí el permiso ante el SESOP con la misma documentación que la licencia de la Ley 9254."
       ],
       "fuente": "Ley 9254, art. 8; SESOP, listado de trámites"
-    }
+    },
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "donacion-organos",
@@ -516,7 +634,11 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 26, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, según el informe de Inspección Médica (SESOP) (art. 57)",
+    "revista": [
+      "titular",
+      "interino"
+    ]
   },
   {
     "id": "examen-final",
@@ -532,7 +654,18 @@
     "plazoPresentacion": "Solicitud con 5 días de anticipación; comprobante dentro de los 5 días hábiles posteriores",
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 27, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
-    "notas": "Si la mesa se posterga, certificá la nueva fecha; la justificación queda en suspenso. Si no rendís por causa tuya, los días quedan injustificados."
+    "notas": "Si la mesa se posterga, certificá la nueva fecha; la justificación queda en suspenso. Si no rendís por causa tuya, los días quedan injustificados.",
+    "revista": [
+      "titular",
+      "interino"
+    ],
+    "cupo": {
+      "grupo": "examen",
+      "cantidad": 12,
+      "unidad": "habiles",
+      "periodo": "anio",
+      "luego": "Son 3 días hábiles por examen."
+    }
   },
   {
     "id": "mesa-examinadora",
@@ -548,7 +681,17 @@
     "plazoPresentacion": "Solicitud con 5 días de anticipación; certificación dentro de las 48 horas posteriores",
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 28, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
-    "notas": ""
+    "notas": "",
+    "revista": [
+      "titular",
+      "interino"
+    ],
+    "cupo": {
+      "grupo": "mesa",
+      "cantidad": 10,
+      "unidad": "habiles",
+      "periodo": "anio"
+    }
   },
   {
     "id": "congreso-pedagogico",
@@ -566,7 +709,11 @@
     "plazoPresentacion": "Solicitud con 5 días de antelación; informe sobre la actividad hasta 10 días después",
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 29, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
-    "notas": ""
+    "notas": "",
+    "revista": [
+      "titular",
+      "interino"
+    ]
   },
   {
     "id": "cargo-electivo",
@@ -585,7 +732,10 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 30, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "La copia no oficial que usaba antes la app decía “con goce”: el texto oficial dice sin goce.",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)",
+    "revista": [
+      "titular"
+    ]
   },
   {
     "id": "gremial",
@@ -604,7 +754,10 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 31, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)",
+    "revista": [
+      "titular"
+    ]
   },
   {
     "id": "perfeccionamiento",
@@ -626,7 +779,17 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 32, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar) (leído sobre la imagen del escaneo). No se conocen modificaciones de este artículo",
     "verificado": true,
     "notas": "",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)",
+    "revista": [
+      "titular"
+    ],
+    "cupo": {
+      "grupo": "perfeccionamiento",
+      "cantidad": 360,
+      "unidad": "corridos",
+      "periodo": "sexenio"
+    },
+    "antiguedad": 5
   },
   {
     "id": "cargo-mayor-jerarquia",
@@ -647,7 +810,10 @@
     "fuente": "Decreto 505/14, régimen de licencias, justificaciones y franquicias docentes (así lo cita el Parte de Licencias oficial; una copia del texto lo registra como Dcto. 505/1 del 26-3-1996), con modificatorias 200/5-1999, 500/5-2009 y 1.441/5-2020. Copias no oficiales; no contrastado con el texto oficial vigente",
     "verificado": false,
     "notas": "El Decreto 200/5 del 17-2-1999 sustituyó este artículo (según las versiones consolidadas: también cargos nacionales, provinciales o municipales, y mayor jerarquía funcional o presupuestaria). Su texto oficial no está publicado en el repositorio, por eso sigue sin verificar.",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)",
+    "revista": [
+      "titular"
+    ]
   },
   {
     "id": "conyuge-mision-oficial",
@@ -666,7 +832,10 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 34, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)",
+    "revista": [
+      "titular"
+    ]
   },
   {
     "id": "razones-particulares",
@@ -685,7 +854,18 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 35, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)",
+    "revista": [
+      "titular"
+    ],
+    "cupo": {
+      "grupo": "razones",
+      "cantidad": 180,
+      "unidad": "corridos",
+      "periodo": "quinquenio",
+      "luego": "Son 6 meses por quinquenio, sin goce: la cuenta es aproximada."
+    },
+    "antiguedad": 2
   },
   {
     "id": "deportiva",
@@ -702,89 +882,157 @@
     "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 36, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)"
+    "concede": "El área administrativa de la Secretaría de Estado de Educación, en 3 días hábiles. Solo podés usarla cuando te notifiquen que fue concedida (art. 57)",
+    "revista": [
+      "titular"
+    ]
   },
   {
     "id": "franq-meteorologico",
     "articulo": "51",
-    "inciso": "",
+    "inciso": "a",
     "nombre": "Inasistencia justificada: fenómeno meteorológico o fuerza mayor",
-    "duracion": "Según el caso",
+    "duracion": "Las inasistencias motivadas, debidamente comprobadas",
     "goce": "Con goce",
-    "requisitos": [],
+    "requisitos": [
+      "Fenómeno meteorológico o caso de fuerza mayor debidamente comprobado"
+    ],
     "documentacion": [],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51 inc. a, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "franq-sangre",
     "articulo": "51",
-    "inciso": "",
+    "inciso": "b",
     "nombre": "Inasistencia justificada: donación de sangre",
-    "duracion": "Según el caso (mínimo 90 días entre extracciones)",
+    "duracion": "El día de la donación",
     "goce": "Con goce",
-    "requisitos": [],
+    "requisitos": [
+      "Entre una extracción y otra deben pasar al menos 90 días"
+    ],
     "documentacion": [
-      "Constancia de donación"
+      "Certificado médico que acredite la donación"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51 inc. b, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ],
+    "intervalo": 90
   },
   {
     "id": "franq-prematrimonial",
     "articulo": "51",
-    "inciso": "",
+    "inciso": "c",
     "nombre": "Inasistencia justificada: examen prematrimonial",
     "duracion": "Una inasistencia",
     "goce": "Con goce",
-    "requisitos": [],
+    "requisitos": [
+      "Solo si el examen debe hacerse en tu horario de trabajo"
+    ],
     "documentacion": [
       "Constancia del examen"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51 inc. c, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
+  },
+  {
+    "id": "franq-profilaxis",
+    "articulo": "51",
+    "inciso": "d",
+    "nombre": "Inasistencia justificada: razones de profilaxis",
+    "duracion": "Hasta que el examen médico defina la situación",
+    "goce": "Con goce",
+    "requisitos": [
+      "La autoridad escolar dispone el alejamiento ante la presunción de una enfermedad, por seguridad tuya, de los alumnos o de tus compañeros",
+      "Te hacen de inmediato un examen médico: si lo aconseja, se te impone la licencia que corresponda; si no, volvés enseguida y se justifican las inasistencias"
+    ],
+    "documentacion": [],
+    "plazoPresentacion": "La dispone la autoridad escolar",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51 inc. d, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "verificado": true,
+    "notas": "",
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "franq-citacion",
     "articulo": "51",
-    "inciso": "",
+    "inciso": "e",
     "nombre": "Inasistencia justificada: citación de autoridad judicial o administrativa",
-    "duracion": "Según el caso",
+    "duracion": "El tiempo de la citación, teniendo en cuenta la distancia al lugar de comparecencia",
     "goce": "Con goce",
-    "requisitos": [],
+    "requisitos": [
+      "Citación de autoridad judicial o administrativa debidamente acreditada, que coincida con tu horario de trabajo"
+    ],
     "documentacion": [
       "Constancia de la citación"
     ],
     "plazoPresentacion": "Según corresponda (art. 54)",
-    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51 inc. e, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ]
   },
   {
     "id": "franq-particular",
     "articulo": "51",
-    "inciso": "",
+    "inciso": "f",
     "nombre": "Inasistencia justificada: asuntos particulares",
-    "duracion": "Máximo una por mes y cinco por año",
+    "duracion": "Máximo 1 por mes y 5 por año",
     "goce": "Con goce",
     "requisitos": [
       "A criterio de la superioridad: razones atendibles y debidamente fundadas"
     ],
     "documentacion": [],
     "plazoPresentacion": "Con 2 días de anticipación si es previsible",
-    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
+    "fuente": "Decreto 505/14 (MGEyJ) del 26-3-1996, art. 51 inc. f, texto oficial en el repositorio de leyes y decretos de Tucumán (rig.tucuman.gov.ar)",
     "verificado": true,
     "notas": "",
-    "concede": "El superior inmediato (dirección de la escuela) (art. 57)"
+    "concede": "El superior inmediato (dirección de la escuela) (art. 57)",
+    "revista": [
+      "titular",
+      "interino",
+      "suplente"
+    ],
+    "cupo": {
+      "grupo": "particular51",
+      "cantidad": 5,
+      "unidad": "habiles",
+      "periodo": "anio",
+      "mensual": 1,
+      "luego": "Máximo 1 por mes."
+    }
   }
 ]
