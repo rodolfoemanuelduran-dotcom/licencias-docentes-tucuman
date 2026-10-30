@@ -43,8 +43,8 @@ export default function MisLicencias({ ctx }: { ctx: Contexto }) {
   async function bajar(l: Licencia) {
     setMsg('');
     try {
-      const donde = await descargarLicencia(l);
-      setMsg(donde === 'carpeta' ? 'Guardado en tu carpeta Mis licencias.' : 'PDF descargado.');
+      const r = await descargarLicencia(l);
+      setMsg(r.destino === 'carpeta' ? `Guardado en tu carpeta Mis licencias (${r.cantidad} PDF).` : `Se descargaron ${r.cantidad} PDF.`);
     } catch {
       setMsg('No se pudo generar el PDF.');
     }

@@ -7,6 +7,8 @@ import type { Licencia } from '../types';
 const BOTONES = [
   { id: 'nueva', texto: 'Nueva licencia', sub: 'Completá el parte y descargá el PDF', icono: '📝' },
   { id: 'mis', texto: 'Mis licencias', sub: 'Tu historial en este dispositivo', icono: '📁' },
+  { id: 'guia', texto: '¿Qué licencia me corresponde?', sub: 'Respondé unas preguntas y te orienta', icono: '🧭' },
+  { id: 'disponibles', texto: 'Mis disponibles', sub: 'Cuántos días te quedan de cada licencia', icono: '📊' },
   { id: 'info', texto: 'Información', sub: 'Tipos de licencia, requisitos y documentación', icono: 'ℹ️' },
   { id: 'cuenta', texto: 'Cuenta', sub: 'Tus datos, seguridad y copia de seguridad', icono: '👤' },
 ];
