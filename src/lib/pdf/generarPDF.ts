@@ -1,5 +1,5 @@
 import { PDFDocument } from 'pdf-lib';
-import { escuelaNueva, escuelasDeLicencia, normalizarLicencia, ordenarAdjuntos, type Escuela, type Licencia } from '../../types';
+import { escuelaNueva, escuelasDeLicencia, normalizarLicencia, ordenarAdjuntos, type Adjunto, type Escuela, type Licencia } from '../../types';
 import { buscarTipo } from '../catalogo';
 import { formatearFecha } from '../dias';
 import { agregarAdjuntos } from './adjuntos';
@@ -33,18 +33,39 @@ export function datosDelParte(entrada: Licencia, escuela?: Escuela): DatosParte 
   };
 }
 
-/** Un parte por cada escuela elegida (o uno en blanco si no hay), repetido según los originales pedidos, y luego los adjuntos. */
+async function nuevoDocumento(titulo: string): Promise<PDFDocument> {
+  const doc = await PDFDocument.create();
+  doc.setTitle(titulo);
+  doc.setProducer('Licencias Docentes Tucumán (herramienta independiente)');
+  return doc;
+}
+
+async function dibujarPartes(doc: PDFDocument, l: Licencia, e: Escuela | undefined): Promise<void> {
+  const datos = datosDelParte(l, e);
+  const copias = Math.min(3, Math.max(1, l.copias || 1));
+  for (let i = 0; i < copias; i++) await dibujarParte(doc, datos);
+}
+
+/** PDF con el parte de una escuela, repetido según los originales pedidos. */
+export async function generarParte(licencia: Licencia, escuela?: Escuela): Promise<Uint8Array> {
+  const doc = await nuevoDocumento('Parte de Licencias');
+  await dibujarPartes(doc, normalizarLicencia(licencia), escuela);
+  return doc.save();
+}
+
+/** PDF con un grupo de adjuntos (por ejemplo, las fotos del certificado médico). */
+export async function generarAdjuntos(adjuntos: Adjunto[], titulo: string): Promise<Uint8Array> {
+  const doc = await nuevoDocumento(titulo);
+  await agregarAdjuntos(doc, adjuntos);
+  return doc.save();
+}
+
+/** Todo en un solo PDF: para la vista previa y para imprimir de una vez. */
 export async function generarPDF(licencia: Licencia): Promise<Uint8Array> {
   const l = normalizarLicencia(licencia);
-  const doc = await PDFDocument.create();
-  doc.setTitle('Parte de Licencias');
-  doc.setProducer('Licencias Docentes Tucumán (herramienta independiente)');
+  const doc = await nuevoDocumento('Parte de Licencias');
   const escuelas = escuelasDeLicencia(l);
-  const copias = Math.min(3, Math.max(1, l.copias || 1));
-  for (const e of escuelas.length ? escuelas : [undefined]) {
-    const datos = datosDelParte(l, e);
-    for (let i = 0; i < copias; i++) await dibujarParte(doc, datos);
-  }
+  for (const e of escuelas.length ? escuelas : [undefined]) await dibujarPartes(doc, l, e);
   await agregarAdjuntos(doc, ordenarAdjuntos(l.adjuntos));
   return doc.save();
 }
