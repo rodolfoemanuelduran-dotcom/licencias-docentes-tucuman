@@ -21,6 +21,26 @@ export interface LicenciaCatalogo {
   sesop?: GuiaSesop;
   /** Quién concede la licencia (art. 57). */
   concede?: string;
+  /** Situaciones de revista que pueden usarla (arts. 3, 37 y 38). */
+  revista?: Revista[];
+  /** Tope que se puede llevar en cuenta. */
+  cupo?: Cupo;
+  /** Días mínimos entre un uso y otro. */
+  intervalo?: number;
+  /** Años de antigüedad en el cargo que exige. */
+  antiguedad?: number;
+}
+
+export type Revista = 'titular' | 'interino' | 'suplente' | 'contratado';
+
+export interface Cupo {
+  /** Licencias que comparten el mismo tope. */
+  grupo: string;
+  cantidad: number;
+  unidad: 'corridos' | 'habiles';
+  periodo: 'anio' | 'continuidad' | 'quinquenio' | 'sexenio';
+  mensual?: number;
+  luego?: string;
 }
 
 export interface Plaza {
@@ -44,6 +64,10 @@ export interface Escuela {
   horas: Record<DiaSemana, string>;
   /** Escuela de mayor antigüedad: ahí se presenta el pedido (art. 54 inc. e). */
   principal: boolean;
+  /** Situación de revista en esta escuela. */
+  revista: Revista | '';
+  /** Fecha de ingreso al cargo, para calcular antigüedad. */
+  fechaIngreso: string;
 }
 
 export interface Docente {
@@ -113,7 +137,7 @@ export const MAX_ESCUELAS = 5;
 const HORAS_VACIAS: Record<DiaSemana, string> = { lunes: '', martes: '', miercoles: '', jueves: '', viernes: '' };
 
 export function escuelaNueva(principal = false): Escuela {
-  return { id: crypto.randomUUID(), nombre: '', cue: '', legajo: '', cargo: '', plazas: [], horas: { ...HORAS_VACIAS }, principal };
+  return { id: crypto.randomUUID(), nombre: '', cue: '', legajo: '', cargo: '', plazas: [], horas: { ...HORAS_VACIAS }, principal, revista: '', fechaIngreso: '' };
 }
 
 export const DOCENTE_VACIO: Docente = { apellido: '', nombres: '', dni: '', domicilio: '', escuelas: [], firma: '' };
@@ -128,6 +152,8 @@ function normalizarEscuela(e: Partial<Escuela>, i: number): Escuela {
     plazas: Array.isArray(e.plazas) ? e.plazas : [],
     horas: { ...HORAS_VACIAS, ...(e.horas ?? {}) },
     principal: !!e.principal,
+    revista: e.revista ?? '',
+    fechaIngreso: e.fechaIngreso ?? '',
   };
 }
 
