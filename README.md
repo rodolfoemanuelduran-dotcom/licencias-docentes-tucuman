@@ -75,15 +75,9 @@ src/screens/               pantallas; nueva/ tiene los seis pasos y la vista pre
 - Interfaz en español rioplatense (voseo).
 - Cambiar la plantilla del PDF: reemplazar solo `plantillaParte.ts` (mismo contrato `dibujarParte`).
 
-### Despliegue en GitHub Pages (listo para usar)
+### Despliegue en GitHub Pages
 
-El proyecto usa rutas relativas (`base: './'`), así que funciona en `https://USUARIO.github.io/REPOSITORIO/`.
-
-1. Subí el proyecto a un repositorio de GitHub (rama `main`).
-2. En el repositorio: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. El flujo `.github/workflows/pages.yml` corre las pruebas, compila y publica en cada push a `main`. La dirección final aparece en la pestaña **Actions** y en Settings → Pages.
-
-GitHub Pages no permite encabezados HTTP personalizados; la política de seguridad (CSP) queda aplicada por la etiqueta `<meta>` de `index.html`. Para aplicar los encabezados completos usá Netlify o Cloudflare Pages.
+Pages publica la carpeta `docs/` de la rama `main` (Settings → Pages → Deploy from a branch). Para actualizar: `npm run build` y subir el contenido de `dist/` a `docs/`, primero `docs/assets` y después `docs/index.html` y `docs/sw.js`. No debe haber otro flujo de publicación: dos publicadores se pisan entre sí.
 
 ### Despliegue (Netlify o Cloudflare Pages)
 
