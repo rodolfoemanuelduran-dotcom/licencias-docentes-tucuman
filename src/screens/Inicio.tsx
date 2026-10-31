@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Contexto } from '../App';
 import { listarRegistros } from '../lib/db';
 import { buscarTipo } from '../lib/catalogo';
+import { VERSION } from '../lib/actualizacion';
 import type { Licencia } from '../types';
 
 const BOTONES = [
@@ -49,6 +50,7 @@ export default function Inicio({ ctx }: { ctx: Contexto }) {
           </button>
         ))}
       </div>
+      <p className="text-center text-sm text-slate-600">Versión del {VERSION}</p>
     </div>
   );
 }

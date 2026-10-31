@@ -14,6 +14,7 @@ import {
 import { carpetaElegida, carpetaSoportada, elegirCarpeta } from '../lib/archivo';
 import FormDocente from '../components/FormDocente';
 import FirmaPad from '../components/FirmaPad';
+import { VERSION, forzarActualizacion } from '../lib/actualizacion';
 import { Aviso, Campo, Confirmar, Modal } from '../components/ui';
 
 function Seccion({ titulo, children }: { titulo: string; children: React.ReactNode }) {
@@ -272,6 +273,23 @@ export default function Cuenta({ ctx, onDocente, onBloquear }: { ctx: Contexto; 
             Restaurar una copia
           </button>
         </div>
+      </Seccion>
+
+      <Seccion titulo="Actualización">
+        <p className="text-base">
+          Versión del <strong>{VERSION}</strong>. La app se actualiza sola cuando hay internet. Si ves algo viejo, tocá el botón: tus datos y licencias no se borran.
+        </p>
+        <button
+          className="btn-sec w-full"
+          disabled={trabajando}
+          onClick={() =>
+            correr(async () => {
+              await forzarActualizacion();
+            })
+          }
+        >
+          Actualizar la app ahora
+        </button>
       </Seccion>
 
       <Seccion titulo="Privacidad y borrado">
