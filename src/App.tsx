@@ -29,10 +29,11 @@ export default function App() {
 
   const recargar = useCallback(async () => {
     const c = await leerConfig();
-    setConfig(c);
+    // Primero los datos: las pantallas se dibujan cuando hay config y Cuenta toma el docente al abrirse.
     if (!c.cifrado) {
       setDocente(normalizarDocente(await leerRegistro<Docente>('docente', 'perfil')));
     }
+    setConfig(c);
   }, []);
 
   useEffect(() => {
@@ -65,8 +66,8 @@ export default function App() {
     return (
       <Desbloqueo
         onListo={async () => {
-          setBloqueada(false);
           setDocente(normalizarDocente(await leerRegistro<Docente>('docente', 'perfil')));
+          setBloqueada(false);
         }}
       />
     );
