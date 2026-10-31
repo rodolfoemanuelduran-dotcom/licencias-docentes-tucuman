@@ -4,6 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   base: './',
+  define: { __VERSION__: JSON.stringify(new Date().toLocaleDateString('es-AR', { timeZone: 'America/Argentina/Tucuman' })) },
   plugins: [
     react(),
     VitePWA({

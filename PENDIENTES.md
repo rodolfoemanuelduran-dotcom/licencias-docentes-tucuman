@@ -25,7 +25,7 @@ Personal suplente y contratado (art. 38): incisos b, c, e, f y h cargados y veri
 ## 4. SESOP
 Pasos tomados de la web del SESOP (copias archivadas) y del Parte de Licencias. El **Decreto 1543/1** que cita el parte (código de inasistencia y certificado del centro más cercano, con sello) no está publicado en ningún lado accesible; el requisito queda respaldado por el propio formulario oficial. La app no se conecta con el SESOP.
 
-En las licencias de salud hay **dos casillas de adjuntos: certificado médico y código o constancia del SESOP** (en el paso 4 y después de llenar el parte). En el PDF van detrás de los partes, en ese orden.
+En las licencias de salud hay **dos casillas de adjuntos: certificado médico y código o constancia del SESOP** (en el paso 4 y después de llenar el parte). Cada uno sale en su propio PDF, separado del parte.
 
 ## 5. Validación legal
 - Avisos “herramienta independiente, no oficial” y “Verificar en Mesa de Entradas”.
@@ -40,9 +40,12 @@ En las licencias de salud hay **dos casillas de adjuntos: certificado médico y 
 ## 7. Publicación
 GitHub Pages desde `docs/` (compilado localmente, subido por la web). Para actualizar: `npm run build` y subir `dist/` a `docs/`.
 
+## 7 bis. Actualizaciones
+La app busca versión nueva al abrir, al volver de segundo plano y cada 30 minutos, y se recarga sola. La versión se ve en Inicio y en Cuenta, donde está el botón “Actualizar la app ahora”. Las copias instaladas antes de esta versión solo se actualizan abriéndolas de cero con internet.
+
 ## 8. Verificación realizada (30/10/2026, local)
 - Vitest: 38 pruebas OK (PDF separados, saldos por año y por tope, situación de revista, antigüedad, art. 51 a–f, guía sin licencias huérfanas).
-- Playwright: 5 flujos OK; el de suplente descarga 4 PDF separados y controla sus páginas; otro recorre la guía.
+- Playwright: 6 flujos OK; el de suplente descarga 4 PDF separados y controla sus páginas; otro recorre la guía.
 - Falta probar en un celular físico: instalación, cámara y firma con el dedo.
 
 ## 9. Función de pago
